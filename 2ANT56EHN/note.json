@@ -1,0 +1,411 @@
+{
+  "paragraphs": [
+    {
+      "title": "",
+      "text": "%md\n## Sample Hive notebook\n#### Sample Hive notebook using public Australian Dataset to see where tax payer money is being invested\nby [Ned Shawa](https://twitter.com/nedshawa)",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": false,
+        "title": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336500253_-1002611007",
+      "id": "20150522-161500_567870758",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eSample Hive notebook\u003c/h2\u003e\n\u003ch4\u003eSample Hive notebook using public Australian Dataset to see where tax payer money is being invested\u003c/h4\u003e\n\u003cp\u003eby \u003ca href\u003d\"https://twitter.com/nedshawa\"\u003eNed Shawa\u003c/a\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 22, 2015 4:15:00 PM",
+      "dateStarted": "May 24, 2015 4:57:00 AM",
+      "dateFinished": "May 24, 2015 4:57:01 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Download Spending Dataset into HDFS",
+      "text": "%sh\n\n#remove existing copies of dataset from HDFS\nhadoop fs -rm  /tmp/expenses.csv\n\n#fetch the dataset\nwget https://data.gov.au/dataset/f84b9baf-c1c1-437c-8c1e-654b2829848c/resource/88399d53-d55c-466c-8f4a-6cb965d24d6d/download/healthexpenditurebyareaandsource.csv -O /tmp/expenses.csv\n\n#remove header\nsed -i \u00271d\u0027 /tmp/expenses.csv\n#remove empty fields\nsed -i \"s/,,,,,//g\" /tmp/expenses.csv\nsed -i \u0027/^\\s*$/d\u0027 /tmp/expenses.csv\n\n#put data into HDFS\nhadoop fs -put /tmp/expenses.csv /tmp\nhadoop fs -ls -h /tmp/expenses.csv\nrm /tmp/expenses.csv",
+      "dateUpdated": "Sep 16, 2015 12:10:50 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432435692793_-656524754",
+      "id": "20150524-024812_14038061",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "15/09/16 00:10:53 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval \u003d 360 minutes, Emptier interval \u003d 0 minutes.\nMoved: \u0027hdfs://sandbox.hortonworks.com:8020/tmp/expenses.csv\u0027 to trash at: hdfs://sandbox.hortonworks.com:8020/user/zeppelin/.Trash/Current\n--2015-09-16 00:10:53--  https://data.gov.au/dataset/f84b9baf-c1c1-437c-8c1e-654b2829848c/resource/88399d53-d55c-466c-8f4a-6cb965d24d6d/download/healthexpenditurebyareaandsource.csv\nResolving data.gov.au... 54.252.191.23\nConnecting to data.gov.au|54.252.191.23|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 469727 (459K) [text/csv]\nSaving to: “/tmp/expenses.csv”\n\n     0K .......... .......... .......... .......... .......... 10%  127K 3s\n    50K .......... .......... .......... .......... .......... 21%  130K 3s\n   100K .......... .......... .......... .......... .......... 32%  261K 2s\n   150K .......... .......... .......... .......... .......... 43%  271K 1s\n   200K .......... .......... .......... .......... .......... 54% 1.62M 1s\n   250K .......... .......... .......... .......... .......... 65%  294K 1s\n   300K .......... .......... .......... .......... .......... 76% 2.18M 0s\n   350K .......... .......... .......... .......... .......... 87%  294K 0s\n   400K .......... .......... .......... .......... .......... 98% 1.49M 0s\n   450K ........                                              100% 79.3M\u003d1.6s\n\n2015-09-16 00:10:56 (290 KB/s) - “/tmp/expenses.csv” saved [469727/469727]\n\n-rw-r--r--   1 zeppelin hdfs    456.4 K 2015-09-16 00:10 /tmp/expenses.csv\n"
+      },
+      "dateCreated": "May 24, 2015 2:48:12 AM",
+      "dateStarted": "Sep 16, 2015 12:10:50 AM",
+      "dateFinished": "Sep 16, 2015 12:11:00 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%hive\ndrop table if exists `health_table`",
+      "dateUpdated": "Sep 16, 2015 12:11:45 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336558969_-1454413485",
+      "id": "20150522-161558_1909354726",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "The query did not generate a result set!"
+      },
+      "dateCreated": "May 22, 2015 4:15:58 PM",
+      "dateStarted": "Sep 16, 2015 12:11:45 AM",
+      "dateFinished": "Sep 16, 2015 12:11:46 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Create Hive table",
+      "text": "%hive\nCREATE TABLE `health_table` (\n`year` string ,\n`state` string ,\n`category` string ,\n`funding_src1` string, \n`funding_src2` string,\n`spending` int)\nROW FORMAT DELIMITED FIELDS TERMINATED BY \u0027,\u0027 STORED AS TextFile",
+      "dateUpdated": "Sep 16, 2015 12:11:47 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336840654_-795725012",
+      "id": "20150522-162040_1668201074",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "The query did not generate a result set!"
+      },
+      "dateCreated": "May 22, 2015 4:20:40 PM",
+      "dateStarted": "Sep 16, 2015 12:11:47 AM",
+      "dateFinished": "Sep 16, 2015 12:11:48 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Load dataset into Hive table",
+      "text": "%hive\nload data \ninpath \u0027/tmp/expenses.csv\u0027\ninto table health_table\n\n\n\n\n",
+      "dateUpdated": "Sep 16, 2015 12:11:49 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336851811_251207393",
+      "id": "20150522-162051_1380818401",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "The query did not generate a result set!"
+      },
+      "dateCreated": "May 22, 2015 4:20:51 PM",
+      "dateStarted": "Sep 16, 2015 12:11:50 AM",
+      "dateFinished": "Sep 16, 2015 12:11:50 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Grant permissions",
+      "text": "%hive\nselect count(*) from  health_table ",
+      "dateUpdated": "Sep 16, 2015 12:11:52 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "table",
+          "height": 94.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "_c0",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "_c0",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336891075_1548827516",
+      "id": "20150522-162131_633343543",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "_c0\n6778\t\n"
+      },
+      "dateCreated": "May 22, 2015 4:21:31 PM",
+      "dateStarted": "Sep 16, 2015 12:11:52 AM",
+      "dateFinished": "Sep 16, 2015 12:12:05 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Spending (In Billions) By State",
+      "text": "%hive\nselect state, sum(spending)/1000 SpendinginBillions\nfrom health_table \ngroup by state\norder by SpendinginBillions desc\n",
+      "dateUpdated": "Sep 16, 2015 12:12:08 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "pieChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "state",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "yAxis": {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorHide": false,
+        "title": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336931752_-2131048882",
+      "id": "20150522-162211_901354365",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "state\tspendinginbillions\nNSW\t482.366\t\nVIC\t360.217\t\nQLD\t289.676\t\nWA\t149.887\t\nSA\t114.623\t\nTAS\t34.294\t\nACT\t28.26\t\nNT\t18.915\t\n"
+      },
+      "dateCreated": "May 22, 2015 4:22:11 PM",
+      "dateStarted": "Sep 16, 2015 12:12:08 AM",
+      "dateFinished": "Sep 16, 2015 12:12:10 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Spending (In Billions) By Year",
+      "text": "%hive\nselect year,sum(spending)/1000 SpendinginBillions \nfrom health_table \ngroup by year \norder by SpendinginBillions\n",
+      "dateUpdated": "Sep 16, 2015 12:12:13 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [
+            {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "yAxis": {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336928914_1496763821",
+      "id": "20150522-162208_1582578207",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "year\tspendinginbillions\n1997-98\t65.705\t\n1998-99\t69.54\t\n1999-00\t73.084\t\n2000-01\t78.687\t\n2001-02\t82.895\t\n2002-03\t87.702\t\n2003-04\t90.617\t\n2004-05\t96.503\t\n2005-06\t99.076\t\n2006-07\t104.979\t\n2007-08\t112.106\t\n2008-09\t119.757\t\n2009-10\t124.767\t\n2010-11\t132.572\t\n2011-12\t140.248\t\n"
+      },
+      "dateCreated": "May 22, 2015 4:22:08 PM",
+      "dateStarted": "Sep 16, 2015 12:12:13 AM",
+      "dateFinished": "Sep 16, 2015 12:12:15 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Spending (In Billions) By Category",
+      "text": "%hive\nselect category, sum(spending)/1000 SpendinginBillions from health_table \ngroup by category \norder by SpendinginBillions desc\n",
+      "dateUpdated": "Sep 16, 2015 12:12:17 AM",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "table",
+          "height": 314.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "category",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "yAxis": {
+              "name": "spendinginbillions",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432339795361_-2072970183",
+      "id": "20150522-170955_851199732",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "category\tspendinginbillions\nPublic hospitals\t445.845\t\nMedical services\t272.507\t\nPrivate hospitals\t121.022\t\nBenefit-paid pharmaceuticals\t104.221\t\nDental services\t90.786\t\nCommunity health\t75.765\t\nCapital expenditure\t72.698\t\nAll other medications\t70.508\t\nOther health practitioners\t51.382\t\nAdministration\t41.029\t\nResearch\t40.074\t\nAids and appliances\t37.155\t\nPatient transport services\t28.174\t\nPublic health\t27.072\t\nMedical expense tax rebate\t0.0\t\n"
+      },
+      "dateCreated": "May 22, 2015 5:09:55 PM",
+      "dateStarted": "Sep 16, 2015 12:12:17 AM",
+      "dateFinished": "Sep 16, 2015 12:12:18 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432336512635_1681797393",
+      "id": "20150522-161512_786502438",
+      "dateCreated": "May 22, 2015 4:15:12 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Australian Dataset (Hive example)",
+  "id": "2ANT56EHN",
+  "angularObjects": {
+    "2AXUXE7A9": [],
+    "2B1P1J6X4": [],
+    "2AYCK83A1": [],
+    "2AY66AR62": [],
+    "2AZY7SK5X": [],
+    "2B2AQQQ7N": [],
+    "2AYWB3BA1": [],
+    "2AXT7J3FG": [],
+    "2B1D1JB16": [],
+    "2B1NQA695": [],
+    "2AYJJKX36": [],
+    "2B2A28N6P": [],
+    "2AZK5TPRQ": [],
+    "2AYXR7WZE": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

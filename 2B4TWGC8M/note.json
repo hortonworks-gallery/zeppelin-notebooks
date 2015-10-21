@@ -1,0 +1,423 @@
+{
+  "paragraphs": [
+    {
+      "text": "import magellan.{Point, Polygon, PolyLine}\nimport magellan.coord.NAD83\nimport org.apache.spark.sql.magellan.MagellanContext\nimport org.apache.spark.sql.magellan.dsl.expressions._\nimport org.apache.spark.sql.Row\nimport org.apache.spark.sql.types._",
+      "dateUpdated": "Oct 21, 2015 8:08:33 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440092130_1110348593",
+      "id": "20151021-080812_605865139",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import magellan.{Point, Polygon, PolyLine}\nimport magellan.coord.NAD83\nimport org.apache.spark.sql.magellan.MagellanContext\nimport org.apache.spark.sql.magellan.dsl.expressions._\nimport org.apache.spark.sql.Row\nimport org.apache.spark.sql.types._\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:08:12 AM",
+      "dateStarted": "Oct 21, 2015 8:08:33 AM",
+      "dateFinished": "Oct 21, 2015 8:08:35 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class UberRecord(tripId: String, timestamp: String, point: Point)",
+      "dateUpdated": "Oct 21, 2015 8:08:48 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440113738_-484789699",
+      "id": "20151021-080833_1323347800",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class UberRecord\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:08:33 AM",
+      "dateStarted": "Oct 21, 2015 8:08:48 AM",
+      "dateFinished": "Oct 21, 2015 8:08:48 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val uber \u003d sc.textFile(\"/uber.tsv\").map { line \u003d\u003e\nval parts \u003d line.split(\"\\t\" )\nval tripId \u003d parts(0)\nval timestamp \u003d parts(1)\nval point \u003d Point(parts(3).toDouble, parts(2).toDouble)\nUberRecord(tripId, timestamp, point)\n}.\nrepartition(100).\ntoDF().\ncache()",
+      "dateUpdated": "Oct 21, 2015 8:09:17 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440128685_-234471406",
+      "id": "20151021-080848_729642312",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "uber: org.apache.spark.sql.DataFrame \u003d [tripId: string, timestamp: string, point: poin]\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:08:48 AM",
+      "dateStarted": "Oct 21, 2015 8:09:17 AM",
+      "dateFinished": "Oct 21, 2015 8:09:17 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val magellanContext \u003d new MagellanContext(sc)",
+      "dateUpdated": "Oct 21, 2015 8:09:31 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440140325_-1659581332",
+      "id": "20151021-080900_1112437015",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "magellanContext: org.apache.spark.sql.magellan.MagellanContext \u003d org.apache.spark.sql.magellan.MagellanContext@496f1495\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:09:00 AM",
+      "dateStarted": "Oct 21, 2015 8:09:31 AM",
+      "dateFinished": "Oct 21, 2015 8:09:31 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val neighborhoods \u003d magellanContext.read.format(\"magellan\").\nload(\"/neighborhoods\").\nselect($\"polygon\", $\"metadata\").\ncache()",
+      "dateUpdated": "Oct 21, 2015 8:09:59 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440171544_1945192409",
+      "id": "20151021-080931_281898278",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "neighborhoods: org.apache.spark.sql.DataFrame \u003d [polygon: pol, metadata: map\u003cstring,string\u003e]\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:09:31 AM",
+      "dateStarted": "Oct 21, 2015 8:09:59 AM",
+      "dateFinished": "Oct 21, 2015 8:09:59 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "neighborhoods.select(explode($\"metadata\").as(Seq(\"k\", \"v\"))).show(5)",
+      "dateUpdated": "Oct 21, 2015 8:10:09 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440185987_-804977404",
+      "id": "20151021-080945_1330980387",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+----------+--------------------+\n|         k|                   v|\n+----------+--------------------+\n|neighborho|Twin Peaks       ...|\n|neighborho|Pacific Heights  ...|\n|neighborho|Visitacion Valley...|\n|neighborho|Potrero Hill     ...|\n|neighborho|Crocker Amazon   ...|\n+----------+--------------------+\n\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:09:45 AM",
+      "dateStarted": "Oct 21, 2015 8:10:09 AM",
+      "dateFinished": "Oct 21, 2015 8:10:10 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "neighborhoods.\njoin(uber).\nwhere($\"point\" within $\"polygon\").\nselect($\"tripId\", $\"timestamp\", explode($\"metadata\").as(Seq(\"k\", \"v\"))).\nwithColumnRenamed(\"v\", \"neighborhood\").\ndrop(\"k\").\nshow(5)",
+      "dateUpdated": "Oct 21, 2015 8:10:20 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440209587_1902362688",
+      "id": "20151021-081009_570116241",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------+---------+------------+\n|tripId|timestamp|neighborhood|\n+------+---------+------------+\n+------+---------+------------+\n\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:10:09 AM",
+      "dateStarted": "Oct 21, 2015 8:10:20 AM",
+      "dateFinished": "Oct 21, 2015 8:10:28 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val transformer: Point \u003d\u003e Point \u003d (point: Point) \u003d\u003e {\nval from \u003d new NAD83(Map(\"zone\" -\u003e 403)).from()\nval p \u003d point.transform(from)\nnew Point(3.28084 * p.x, 3.28084 * p.y)\n}",
+      "dateUpdated": "Oct 21, 2015 8:10:42 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440220764_-922078987",
+      "id": "20151021-081020_167250911",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "transformer: magellan.Point \u003d\u003e magellan.Point \u003d \u003cfunction1\u003e\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:10:20 AM",
+      "dateStarted": "Oct 21, 2015 8:10:42 AM",
+      "dateFinished": "Oct 21, 2015 8:10:42 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val uberTransformed \u003d uber.\nwithColumn(\"nad83\", $\"point\".transform(transformer)).\ncache()",
+      "dateUpdated": "Oct 21, 2015 8:10:53 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440242411_2145954714",
+      "id": "20151021-081042_1983405488",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "uberTransformed: org.apache.spark.sql.DataFrame \u003d [tripId: string, timestamp: string, point: poin, nad83: poin]\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:10:42 AM",
+      "dateStarted": "Oct 21, 2015 8:10:53 AM",
+      "dateFinished": "Oct 21, 2015 8:10:53 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val joined \u003d neighborhoods.\njoin(uberTransformed).\nwhere($\"nad83\" within $\"polygon\").\nselect($\"tripId\", $\"timestamp\", explode($\"metadata\").as(Seq(\"k\", \"v\"))).\nwithColumnRenamed(\"v\", \"neighborhood\").\ndrop(\"k\").\ncache()",
+      "dateUpdated": "Oct 21, 2015 8:11:02 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440253040_-455332599",
+      "id": "20151021-081053_1128907682",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "joined: org.apache.spark.sql.DataFrame \u003d [tripId: string, timestamp: string, neighborhood: string]\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:10:53 AM",
+      "dateStarted": "Oct 21, 2015 8:11:02 AM",
+      "dateFinished": "Oct 21, 2015 8:11:02 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "joined.show(5)",
+      "dateUpdated": "Oct 21, 2015 8:11:13 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440262325_976100231",
+      "id": "20151021-081102_231185976",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+------+--------------------+--------------------+\n|tripId|           timestamp|        neighborhood|\n+------+--------------------+--------------------+\n| 00002|2007-01-06T06:23:...|Marina           ...|\n| 00006|2007-01-04T01:04:...|Marina           ...|\n| 00008|2007-01-03T00:59:...|Castro/Upper Mark...|\n| 00011|2007-01-06T09:08:...|Russian Hill     ...|\n| 00014|2007-01-02T05:18:...|Mission          ...|\n+------+--------------------+--------------------+\n\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:11:02 AM",
+      "dateStarted": "Oct 21, 2015 8:11:13 AM",
+      "dateFinished": "Oct 21, 2015 8:11:14 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "joined.\ngroupBy($\"neighborhood\").\nagg(countDistinct(\"tripId\").\nas(\"trips\")).\norderBy(col(\"trips\").desc).\nshow(5)",
+      "dateUpdated": "Oct 21, 2015 8:11:25 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440273534_-1857575419",
+      "id": "20151021-081113_1220870628",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+--------------------+-----+\n|        neighborhood|trips|\n+--------------------+-----+\n|South of Market  ...| 9891|\n|Western Addition ...| 6794|\n|Downtown/Civic Ce...| 6697|\n|Financial Distric...| 6038|\n|Mission          ...| 5620|\n+--------------------+-----+\n\n"
+      },
+      "dateCreated": "Oct 21, 2015 8:11:13 AM",
+      "dateStarted": "Oct 21, 2015 8:11:25 AM",
+      "dateFinished": "Oct 21, 2015 8:11:42 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1445440285513_-845270414",
+      "id": "20151021-081125_2064619705",
+      "dateCreated": "Oct 21, 2015 8:11:25 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "magellan-blog",
+  "id": "2B4TWGC8M",
+  "angularObjects": {
+    "2B1XG1J5R": [],
+    "2B4UZTC3K": [],
+    "2B49VKZN2": [],
+    "2B2DD8YM6": [],
+    "2B1K5H6VJ": [],
+    "2B1E4MPZ7": [],
+    "2B2NK2XYN": [],
+    "2B2Q15E25": [],
+    "2B41XH4JD": [],
+    "2B3RZ5QND": [],
+    "2B3ZCYJHZ": [],
+    "2B1845PW7": [],
+    "2B2Y89QPF": [],
+    "2B1R2XTUE": []
+  },
+  "config": {},
+  "info": {}
+}

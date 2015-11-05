@@ -14,3 +14,6 @@
 | Twitter sentiment analysis using Spark Streaming | Spark streaming | [json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/2B522V3X8/note.json) | [view](https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvcnRvbndvcmtzLWdhbGxlcnkvemVwcGVsaW4tbm90ZWJvb2tzL21hc3Rlci8yQjUyMlYzWDgvbm90ZS5qc29u) | [Guilherme Braccialli](https://github.com/gbraccialli) | |
 | PySpark tutorial: Analyzing network intrusion dataset with Python and Spark  | PySpark | [json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/2B48PF7SN/note.json) | [view](https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvcnRvbndvcmtzLWdhbGxlcnkvemVwcGVsaW4tbm90ZWJvb2tzL21hc3Rlci8yQjQ4UEY3U04vbm90ZS5qc29u) | [Saptak Sen](https://github.com/saptak) | |
 
+##### Update your zeppelin with latest notebooks:
+  - If you are using hortonworks sandbox, you can execute command below to get latest notebooks: `curl -sSL https://raw.githubusercontent.com/gbraccialli/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -E sh`
+  - Please note that if you have changed or created your own notebooks they will be moved to a folder: /opt/incubator-zeppelin/notebook/old_yyyyMMdd-HHmmss, you can copy them back to /opt/incubator-zeppelin/notebook/ directory

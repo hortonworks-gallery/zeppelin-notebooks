@@ -186,7 +186,7 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%sql\n\n--using SQL to min window data, with scala function and python function\n\nselect from_unixtime(createdAt) as created, screenName, sentiment(text) as sentiment, wordcount(text) as wordcount, text  from tweets\n",
+      "text": "%sql\n\n--using SQL to mix window data, with scala function and python function\n\nselect from_unixtime(createdAt) as created, screenName, sentiment(text) as sentiment, wordcount(text) as wordcount, text  from tweets\n",
       "dateUpdated": "Nov 3, 2015 1:55:35 AM",
       "config": {
         "colWidth": 12.0,

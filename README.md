@@ -16,5 +16,5 @@
 
 ##### Update your zeppelin with latest notebooks:
   - If you are using hortonworks sandbox, you can execute command below to get latest notebooks: </br>
-  `curl -sSL https://raw.githubusercontent.com/gbraccialli/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -E sh`
+  `curl -sSL https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -E sh`
   - Please note that if you have changed or created your own notebooks they will be moved to a folder: /opt/incubator-zeppelin/notebook/old_yyyyMMdd-HHmmss, you can copy them back to /opt/incubator-zeppelin/notebook/ directory

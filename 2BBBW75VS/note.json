@@ -634,7 +634,7 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch4\u003eIncremental import of data into Hive from RDBMS\u003c/h4\u003e\n\u003cp\u003eNow that we did the one time bulk import, next we will setup an incremental sqoop job\u003c/p\u003e\n\u003cp\u003eFirst we create password file containing it1 user\u0027s password in HDFS. This is done to allow invocations of the job to be automated/scheduled (without having to manually pass the password )\u003c/p\u003e\n"
+        "msg": "\u003ch4\u003eIncremental import of data into Hive from RDBMS\u003c/h4\u003e\n\u003cp\u003eNow that we did the one time bulk import, next we will setup an incremental sqoop job\u003c/p\u003e\n\u003cp\u003eFirst we create password file containing zeppelin user\u0027s PostGres password in HDFS. This is done to allow invocations of the job to be automated/scheduled (without having to manually pass the password )\u003c/p\u003e\n"
       },
       "dateCreated": "Jan 13, 2016 2:48:22 PM",
       "dateStarted": "Jan 13, 2016 2:52:56 PM",

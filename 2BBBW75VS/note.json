@@ -609,7 +609,7 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n\n#### Incremental import of data into Hive from RDBMS\n\nNow that we did the one time bulk import, next we will setup an incremental sqoop job\n\nFirst we create password file containing it1 user\u0027s password in HDFS. This is done to allow invocations of the job to be automated/scheduled (without having to manually pass the password )",
+      "text": "%md\n\n#### Incremental import of data into Hive from RDBMS\n\nNow that we did the one time bulk import, next we will setup an incremental sqoop job\n\nFirst we create password file containing zeppelin user\u0027s PostGres password in HDFS. This is done to allow invocations of the job to be automated/scheduled (without having to manually pass the password )",
       "dateUpdated": "Jan 13, 2016 2:52:58 PM",
       "config": {
         "colWidth": 12.0,

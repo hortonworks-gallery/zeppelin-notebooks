@@ -1,0 +1,1469 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n#Hortonworks Blog - Predicting Airline Delays\n\nThis notebook is based on Blog posts below, by [Ofer Mendelevitch](http://hortonworks.com/blog/author/ofermend/)\n[http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/](http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/)\n[http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/](http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/)",
+      "dateUpdated": "Jan 26, 2016 6:56:20 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453834308164_195465260",
+      "id": "20160126-185148_1042529576",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eHortonworks Blog - Predicting Airline Delays\u003c/h1\u003e\n\u003cp\u003eThis notebook is based on Blog posts below, by \u003ca href\u003d\"http://hortonworks.com/blog/author/ofermend/\"\u003eOfer Mendelevitch\u003c/a\u003e\n\u003cbr  /\u003e\u003ca href\u003d\"http://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/\"\u003ehttp://hortonworks.com/blog/data-science-apacheh-hadoop-predicting-airline-delays/\u003c/a\u003e\n\u003cbr  /\u003e\u003ca href\u003d\"http://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/\"\u003ehttp://hortonworks.com/blog/data-science-hadoop-spark-scala-part-2/\u003c/a\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 6:51:48 PM",
+      "dateStarted": "Jan 26, 2016 6:56:18 PM",
+      "dateFinished": "Jan 26, 2016 6:56:19 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n#Before you start\n\n1. Make sure you increased amount of memory in your VirtualBox or VMWare for Sandbox, minimum 12GB, if you are running Sandbox in Azure, proceed to step 2.\n\n\n2. Add more memory to YARN using script below:\n```shell\ncurl -sSL https://gist.githubusercontent.com/gbraccialli/16c7f14e9370548db873/raw/ | sudo -E sh\n```\n",
+      "dateUpdated": "Jan 26, 2016 6:57:28 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453833938713_1460381726",
+      "id": "20160126-184538_2119765870",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eBefore you start\u003c/h1\u003e\n\u003col\u003e\n\u003cli\u003e\u003cp\u003eMake sure you increased amount of memory in your VirtualBox or VMWare for Sandbox, minimum 12GB, if you are running Sandbox in Azure, proceed to step 2.\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003eAdd more memory to YARN using script below:\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"shell\"\u003ecurl -sSL https://gist.githubusercontent.com/gbraccialli/16c7f14e9370548db873/raw/ | sudo -E sh\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 6:45:38 PM",
+      "dateStarted": "Jan 26, 2016 6:57:27 PM",
+      "dateFinished": "Jan 26, 2016 6:57:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n#Download data sets",
+      "dateUpdated": "Jan 26, 2016 1:42:51 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815763060_-1568252849",
+      "id": "20160126-134243_825560167",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eDownload data sets\u003c/h1\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:42:43 PM",
+      "dateStarted": "Jan 26, 2016 1:42:50 PM",
+      "dateFinished": "Jan 26, 2016 1:42:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n\nwget http://stat-computing.org/dataexpo/2009/2007.csv.bz2 -O /tmp/flights_2007.csv.bz2\nwget http://stat-computing.org/dataexpo/2009/2008.csv.bz2 -O /tmp/flights_2008.csv.bz2\n\nwget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2007.csv.gz -O /tmp/weather_2007.csv.gz\nwget ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/by_year/2008.csv.gz -O /tmp/weather_2008.csv.gz\n\n",
+      "dateUpdated": "Jan 26, 2016 4:58:53 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/sh",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453805843495_-186074015",
+      "id": "20160126-105723_924675048",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Process exited with an error: 143 (Exit value: 143)"
+      },
+      "dateCreated": "Jan 26, 2016 10:57:23 AM",
+      "dateStarted": "Jan 26, 2016 4:46:47 PM",
+      "dateFinished": "Jan 26, 2016 4:56:47 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n\n#remove existing copies of dataset from HDFS\nhadoop fs -rm -r -f /tmp/airflightsdelays\nhadoop fs -mkdir /tmp/airflightsdelays\n\n#put data into HDFS\nhadoop fs -put /tmp/flights_200*.bz2 /tmp/airflightsdelays/\nhadoop fs -put /tmp/weather_200*.gz /tmp/airflightsdelays/\nhadoop fs -ls -h /tmp/airflightsdelays/\n",
+      "dateUpdated": "Jan 26, 2016 6:43:39 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453820140253_1688529977",
+      "id": "20160126-145540_1053413176",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "16/01/26 18:43:51 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval \u003d 360 minutes, Emptier interval \u003d 0 minutes.\nMoved: \u0027hdfs://sandbox.hortonworks.com:8020/tmp/airflightsdelays\u0027 to trash at: hdfs://sandbox.hortonworks.com:8020/user/zeppelin/.Trash/Current\nFound 4 items\n-rw-r--r--   3 zeppelin hdfs    115.6 M 2016-01-26 18:44 /tmp/airflightsdelays/flights_2007.csv.bz2\n-rw-r--r--   3 zeppelin hdfs    108.5 M 2016-01-26 18:44 /tmp/airflightsdelays/flights_2008.csv.bz2\n-rw-r--r--   3 zeppelin hdfs    188.5 M 2016-01-26 18:44 /tmp/airflightsdelays/weather_2007.csv.gz\n-rw-r--r--   3 zeppelin hdfs    197.6 M 2016-01-26 18:44 /tmp/airflightsdelays/weather_2008.csv.gz\n"
+      },
+      "dateCreated": "Jan 26, 2016 2:55:40 PM",
+      "dateStarted": "Jan 26, 2016 6:43:40 PM",
+      "dateFinished": "Jan 26, 2016 6:44:24 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n#Declare dependencies/libraries",
+      "dateUpdated": "Jan 26, 2016 1:43:27 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815796004_-1173839254",
+      "id": "20160126-134316_1861771053",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eDeclare dependencies/libraries\u003c/h1\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:43:16 PM",
+      "dateStarted": "Jan 26, 2016 1:43:26 PM",
+      "dateFinished": "Jan 26, 2016 1:43:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%dep\n\nz.reset()\nz.load(\"joda-time:joda-time:2.9.1\")\n",
+      "dateUpdated": "Jan 26, 2016 6:57:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453807224338_1734588084",
+      "id": "20160126-112024_45559114",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res0: org.apache.zeppelin.spark.dep.Dependency \u003d org.apache.zeppelin.spark.dep.Dependency@7580ea08\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:20:24 AM",
+      "dateStarted": "Jan 26, 2016 6:57:46 PM",
+      "dateFinished": "Jan 26, 2016 6:58:03 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n# Data Science with Hadoop - Predicting airline delays - Spark and ML-Lib\n\n## Introduction\n\nIn this demo, we demonstrate how to build a predictive model with Hadoop, this time we\u0027ll use [Apache Spark](https://spark.apache.org/) and [ML-Lib](http://spark.apache.org/docs/1.1.0/mllib-guide.html). \n\nWe will show how to use Apache Spark via its Scala API to generate our feature matrix and also use ML-Lib (Spark\u0027s machine learning library) to build and evaluate our classification models.\n\nRecall from part 1 that we are constructing a predictive model for flight delays. Our source dataset resides [here](http://stat-computing.org/dataexpo/2009/the-data.html), and includes details about flights in the US from the years 1987-2008. We have also enriched the data with [weather information](http://www.ncdc.noaa.gov/cdo-web/datasets/), where we find daily temperatures (min/max), wind speed, snow conditions and precipitation. \n\nWe will build a supervised learning model to predict flight delays for flights leaving O\u0027Hare International airport (ORD). We will use the year 2007 data to build the model, and test its validity using data from 2008.\n\n# Pre-processing with Hadoop and Spark\n\n[Apache Spark](https://spark.apache.org/)\u0027s basic data abstraction is that of an RDD (resilient distributed dataset), which is a fault-tolerant collection of elements that can be operated on in parallel across your Hadoop cluster. \n\nSpark\u0027s API (available in Scala, Python or Java) supports a variety of transformations such as map() and flatMap(), filter(), join(), and others to create and manipulate RDDs. For a full description of the API please check the [Spark API programming guide]( http://spark.apache.org/docs/1.1.0/programming-guide.html). \n\nSimilar to the Scikit-learn demo, in our first iteration we generate the following features for each flight:\n* **month**: winter months should have more delays than summer months\n* **day of month**: this is likely not a very predictive variable, but let\u0027s keep it in anyway\n* **day of week**: weekend vs. weekday\n* **hour of the day**: later hours tend to have more delays\n* **Distance**: interesting to see if this variable is a good predictor of delay\n* **Days from nearest holiday**: number of days from the nearest US holiday\n\nWe will use Spark RDDs to perform the same pre-processing, transforming the raw flight delay dataset into the two feature matrices: data_2007 (our training set) and data_2008 (our test set).\n\nThe case class *DelayRec* that encapsulates a flight delay record represents the feature vector, and its methods do most of the heavy lifting: \n1. to_date() is a helper method to convert year/month/day to a string\n1. gen_features(row) takes a row of inputs and generates a key/value tuple where the key is the date string (output of *to_date*) and the value is the feature value. We don\u0027t use the key in this iteraion, but we will use it in the second iteration to join with the weather data.\n1. the get_hour() method extracts the 2-digit hour portion of the departure time\n1. The days_from_nearest_holiday() method computes the minimum distance (in days) of the provided year/month/date from any holiday in the list *holidays*.\n\nWith DelayRec in place, our processing takes on the following steps (in the function *prepFlightDelays*):\n1. We read the raw input file with Spark\u0027s *SparkContext.textFile* method, resulting in an RDD\n1. Each row is parsed with *CSVReader* into fields, and populated into a *DelayRec* object\n1. We then perform a sequence of RDD transformations on the input RDD to make sure we only have rows that correspond to flights that did not get cancelled and originated from ORD.\n\nFinally, we use the *gen_features* method to generate the final feature vector per row, as a set of doubles.",
+      "dateUpdated": "Jan 26, 2016 6:58:11 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815704181_-999822193",
+      "id": "20160126-134144_123607936",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eData Science with Hadoop - Predicting airline delays - Spark and ML-Lib\u003c/h1\u003e\n\u003ch2\u003eIntroduction\u003c/h2\u003e\n\u003cp\u003eIn this demo, we demonstrate how to build a predictive model with Hadoop, this time we\u0027ll use \u003ca href\u003d\"https://spark.apache.org/\"\u003eApache Spark\u003c/a\u003e and \u003ca href\u003d\"http://spark.apache.org/docs/1.1.0/mllib-guide.html\"\u003eML-Lib\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eWe will show how to use Apache Spark via its Scala API to generate our feature matrix and also use ML-Lib (Spark\u0027s machine learning library) to build and evaluate our classification models.\u003c/p\u003e\n\u003cp\u003eRecall from part 1 that we are constructing a predictive model for flight delays. Our source dataset resides \u003ca href\u003d\"http://stat-computing.org/dataexpo/2009/the-data.html\"\u003ehere\u003c/a\u003e, and includes details about flights in the US from the years 1987-2008. We have also enriched the data with \u003ca href\u003d\"http://www.ncdc.noaa.gov/cdo-web/datasets/\"\u003eweather information\u003c/a\u003e, where we find daily temperatures (min/max), wind speed, snow conditions and precipitation.\u003c/p\u003e\n\u003cp\u003eWe will build a supervised learning model to predict flight delays for flights leaving O\u0027Hare International airport (ORD). We will use the year 2007 data to build the model, and test its validity using data from 2008.\u003c/p\u003e\n\u003ch1\u003ePre-processing with Hadoop and Spark\u003c/h1\u003e\n\u003cp\u003e\u003ca href\u003d\"https://spark.apache.org/\"\u003eApache Spark\u003c/a\u003e\u0027s basic data abstraction is that of an RDD (resilient distributed dataset), which is a fault-tolerant collection of elements that can be operated on in parallel across your Hadoop cluster.\u003c/p\u003e\n\u003cp\u003eSpark\u0027s API (available in Scala, Python or Java) supports a variety of transformations such as map() and flatMap(), filter(), join(), and others to create and manipulate RDDs. For a full description of the API please check the \u003ca href\u003d\"http://spark.apache.org/docs/1.1.0/programming-guide.html\"\u003eSpark API programming guide\u003c/a\u003e.\u003c/p\u003e\n\u003cp\u003eSimilar to the Scikit-learn demo, in our first iteration we generate the following features for each flight:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003emonth\u003c/strong\u003e: winter months should have more delays than summer months\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eday of month\u003c/strong\u003e: this is likely not a very predictive variable, but let\u0027s keep it in anyway\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eday of week\u003c/strong\u003e: weekend vs. weekday\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003ehour of the day\u003c/strong\u003e: later hours tend to have more delays\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eDistance\u003c/strong\u003e: interesting to see if this variable is a good predictor of delay\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eDays from nearest holiday\u003c/strong\u003e: number of days from the nearest US holiday\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eWe will use Spark RDDs to perform the same pre-processing, transforming the raw flight delay dataset into the two feature matrices: data_2007 (our training set) and data_2008 (our test set).\u003c/p\u003e\n\u003cp\u003eThe case class \u003cem\u003eDelayRec\u003c/em\u003e that encapsulates a flight delay record represents the feature vector, and its methods do most of the heavy lifting:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eto_date() is a helper method to convert year/month/day to a string\u003c/li\u003e\n\u003cli\u003egen_features(row) takes a row of inputs and generates a key/value tuple where the key is the date string (output of \u003cem\u003eto_date\u003c/em\u003e) and the value is the feature value. We don\u0027t use the key in this iteraion, but we will use it in the second iteration to join with the weather data.\u003c/li\u003e\n\u003cli\u003ethe get_hour() method extracts the 2-digit hour portion of the departure time\u003c/li\u003e\n\u003cli\u003eThe days_from_nearest_holiday() method computes the minimum distance (in days) of the provided year/month/date from any holiday in the list \u003cem\u003eholidays\u003c/em\u003e.\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eWith DelayRec in place, our processing takes on the following steps (in the function \u003cem\u003eprepFlightDelays\u003c/em\u003e):\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eWe read the raw input file with Spark\u0027s \u003cem\u003eSparkContext.textFile\u003c/em\u003e method, resulting in an RDD\u003c/li\u003e\n\u003cli\u003eEach row is parsed with \u003cem\u003eCSVReader\u003c/em\u003e into fields, and populated into a \u003cem\u003eDelayRec\u003c/em\u003e object\u003c/li\u003e\n\u003cli\u003eWe then perform a sequence of RDD transformations on the input RDD to make sure we only have rows that correspond to flights that did not get cancelled and originated from ORD.\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eFinally, we use the \u003cem\u003egen_features\u003c/em\u003e method to generate the final feature vector per row, as a set of doubles.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:41:44 PM",
+      "dateStarted": "Jan 26, 2016 6:58:06 PM",
+      "dateFinished": "Jan 26, 2016 6:58:07 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.rdd._\nimport scala.collection.JavaConverters._\nimport au.com.bytecode.opencsv.CSVReader\n\nimport java.io._\nimport org.joda.time._\nimport org.joda.time.format._\nimport org.joda.time.format.DateTimeFormat\nimport org.joda.time.DateTime\nimport org.joda.time.Days\n\n\ncase class DelayRec(year: String,\n                    month: String,\n                    dayOfMonth: String,\n                    dayOfWeek: String,\n                    crsDepTime: String,\n                    depDelay: String,\n                    origin: String,\n                    distance: String,\n                    cancelled: String) {\n\n    val holidays \u003d List(\"01/01/2007\", \"01/15/2007\", \"02/19/2007\", \"05/28/2007\", \"06/07/2007\", \"07/04/2007\",\n      \"09/03/2007\", \"10/08/2007\" ,\"11/11/2007\", \"11/22/2007\", \"12/25/2007\",\n      \"01/01/2008\", \"01/21/2008\", \"02/18/2008\", \"05/22/2008\", \"05/26/2008\", \"07/04/2008\",\n      \"09/01/2008\", \"10/13/2008\" ,\"11/11/2008\", \"11/27/2008\", \"12/25/2008\")\n\n    def gen_features: (String, Array[Double]) \u003d {\n      val values \u003d Array(\n        depDelay.toDouble,\n        month.toDouble,\n        dayOfMonth.toDouble,\n        dayOfWeek.toDouble,\n        get_hour(crsDepTime).toDouble,\n        distance.toDouble,\n        days_from_nearest_holiday(year.toInt, month.toInt, dayOfMonth.toInt)\n      )\n      new Tuple2(to_date(year.toInt, month.toInt, dayOfMonth.toInt), values)\n    }\n\n    def get_hour(depTime: String) : String \u003d \"%04d\".format(depTime.toInt).take(2)\n    def to_date(year: Int, month: Int, day: Int) \u003d \"%04d%02d%02d\".format(year, month, day)\n\n    def days_from_nearest_holiday(year:Int, month:Int, day:Int): Int \u003d {\n      val sampleDate \u003d new DateTime(year, month, day, 0, 0)\n\n      holidays.foldLeft(3000) { (r, c) \u003d\u003e\n        val holiday \u003d DateTimeFormat.forPattern(\"MM/dd/yyyy\").parseDateTime(c)\n        val distance \u003d Math.abs(Days.daysBetween(holiday, sampleDate).getDays)\n        math.min(r, distance)\n      }\n    }\n  }\n\n// function to do a preprocessing step for a given file\ndef prepFlightDelays(infile: String): RDD[DelayRec] \u003d {\n    val data \u003d sc.textFile(infile)\n\n    data.map { line \u003d\u003e\n      val reader \u003d new CSVReader(new StringReader(line))\n      reader.readAll().asScala.toList.map(rec \u003d\u003e DelayRec(rec(0),rec(1),rec(2),rec(3),rec(5),rec(15),rec(16),rec(18),rec(21)))\n    }.map(list \u003d\u003e list(0))\n    .filter(rec \u003d\u003e rec.year !\u003d \"Year\")\n    .filter(rec \u003d\u003e rec.cancelled \u003d\u003d \"0\")\n    .filter(rec \u003d\u003e rec.origin \u003d\u003d \"ORD\")\n}\n\nval data_2007tmp \u003d prepFlightDelays(\"/tmp/airflightsdelays/flights_2007.csv.bz2\")\nval data_2007 \u003d data_2007tmp.map(rec \u003d\u003e rec.gen_features._2)\nval data_2008 \u003d prepFlightDelays(\"/tmp/airflightsdelays/flights_2008.csv.bz2\").map(rec \u003d\u003e rec.gen_features._2)\n\ndata_2007tmp.toDF().registerTempTable(\"data_2007tmp\")\n\ndata_2007.take(5).map(x \u003d\u003e x mkString \",\").foreach(println)",
+      "dateUpdated": "Jan 26, 2016 6:59:47 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806329440_-894892047",
+      "id": "20160126-110529_1047309575",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.rdd._\nimport scala.collection.JavaConverters._\nimport au.com.bytecode.opencsv.CSVReader\nimport java.io._\nimport org.joda.time._\nimport org.joda.time.format._\nimport org.joda.time.format.DateTimeFormat\nimport org.joda.time.DateTime\nimport org.joda.time.Days\ndefined class DelayRec\nprepFlightDelays: (infile: String)org.apache.spark.rdd.RDD[DelayRec]\ndata_2007tmp: org.apache.spark.rdd.RDD[DelayRec] \u003d MapPartitionsRDD[13] at filter at \u003cconsole\u003e:74\ndata_2007: org.apache.spark.rdd.RDD[Array[Double]] \u003d MapPartitionsRDD[14] at map at \u003cconsole\u003e:67\ndata_2008: org.apache.spark.rdd.RDD[Array[Double]] \u003d MapPartitionsRDD[22] at map at \u003cconsole\u003e:65\n-8.0,1.0,25.0,4.0,11.0,719.0,10.0\n41.0,1.0,28.0,7.0,15.0,925.0,13.0\n45.0,1.0,29.0,1.0,20.0,316.0,14.0\n-9.0,1.0,17.0,3.0,19.0,719.0,2.0\n180.0,1.0,12.0,5.0,17.0,316.0,3.0\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:05:29 AM",
+      "dateStarted": "Jan 26, 2016 6:59:47 PM",
+      "dateFinished": "Jan 26, 2016 7:00:11 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n##Lets explore data using SQL and visualizations",
+      "dateUpdated": "Jan 26, 2016 6:59:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453833417973_-1867465277",
+      "id": "20160126-183657_824042363",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eLets explore data using SQL and visualizations\u003c/h2\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 6:36:57 PM",
+      "dateStarted": "Jan 26, 2016 6:37:36 PM",
+      "dateFinished": "Jan 26, 2016 6:37:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nselect dayofWeek, case when depDelay \u003e 15 then \u0027delayed\u0027 else \u0027ok\u0027 en , count(1)\nfrom data_2007tmp \ngroup by dayofweek , case when depDelay \u003e 15 then \u0027delayed\u0027 else \u0027ok\u0027 end ",
+      "dateUpdated": "Jan 26, 2016 7:05:56 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "dayofWeek",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "_c2",
+              "index": 2.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [
+            {
+              "name": "_c1",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "scatter": {
+            "xAxis": {
+              "name": "dayofWeek",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "_c1",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453833460728_-474412103",
+      "id": "20160126-183740_1845217434",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "dayofWeek\t_c1\t_c2\n4\tdelayed\t16716\n4\tok\t35680\n5\tdelayed\t16267\n5\tok\t36823\n6\tdelayed\t10924\n1\tdelayed\t16983\n6\tok\t34261\n7\tdelayed\t14942\n1\tok\t36815\n2\tdelayed\t14990\n7\tok\t35455\n2\tok\t37023\n3\tdelayed\t15315\n3\tok\t36975\n"
+      },
+      "dateCreated": "Jan 26, 2016 6:37:40 PM",
+      "dateStarted": "Jan 26, 2016 7:00:21 PM",
+      "dateFinished": "Jan 26, 2016 7:02:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n\nselect cast( cast(crsDepTime as int) / 100 as int) as hour,  case when depDelay \u003e 15 then \u0027delayed\u0027 else \u0027ok\u0027 end as delay, count(1) as count\nfrom  data_2007tmp \ngroup by  cast( cast(crsDepTime as int) / 100 as int),  case when depDelay \u003e 15 then \u0027delayed\u0027 else \u0027ok\u0027 end\n",
+      "dateUpdated": "Jan 26, 2016 7:09:54 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "hour",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "count",
+              "index": 2.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [
+            {
+              "name": "delay",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "scatter": {
+            "xAxis": {
+              "name": "hour",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "delay",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453834939621_612216193",
+      "id": "20160126-190219_871979116",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "hour\tdelay\tcount\n18\tdelayed\t9222\n12\tok\t13244\n13\tdelayed\t7891\n7\tok\t19420\n18\tok\t12644\n8\tdelayed\t4007\n19\tdelayed\t9738\n13\tok\t20922\n14\tdelayed\t6345\n8\tok\t20450\n19\tok\t12774\n9\tdelayed\t6398\n20\tdelayed\t10582\n14\tok\t13250\n15\tdelayed\t7707\n9\tok\t23768\n20\tok\t13791\n10\tdelayed\t5427\n21\tdelayed\t5427\n15\tok\t14597\n5\tdelayed\t82\n16\tdelayed\t8585\n10\tok\t17864\n21\tok\t8048\n11\tdelayed\t5314\n5\tok\t832\n22\tdelayed\t862\n16\tok\t14886\n6\tdelayed\t1966\n17\tdelayed\t8696\n11\tok\t15675\n22\tok\t1637\n12\tdelayed\t4595\n6\tok\t15826\n17\tok\t13404\n7\tdelayed\t3293\n"
+      },
+      "dateCreated": "Jan 26, 2016 7:02:19 PM",
+      "dateStarted": "Jan 26, 2016 7:08:16 PM",
+      "dateFinished": "Jan 26, 2016 7:09:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n## Modeling with Spark and ML-Lib\n\nWith the data_2007 dataset (which we\u0027ll use for training) and the data_2008 dataset (which we\u0027ll use for validation) as RDDs, we now build a predictive model using Spark\u0027s [ML-Lib](http://spark.apache.org/docs/1.1.0/mllib-guide.html) machine learning library.\n\nML-Lib is Spark’s scalable machine learning library, which includes various learning algorithms and utilities, including classification, regression, clustering, collaborative filtering, dimensionality reduction, and others. \n\nIf you compare ML-Lib to Scikit-learn, at the moment ML-Lib lacks a few important algorithms like Random Forest or Gradient Boosted Trees. Having said that, we see a strong pace of innovation from the ML-Lib community and expect more algorithms and other features to be added soon (for example, Random Forest is being actively [worked on](https://github.com/apache/spark/pull/2435), and will likely be available in the next release).\n\nTo use ML-Lib\u0027s machine learning algorithms, first we parse our feature matrices into RDDs of *LabeledPoint* objects (for both the training and test datasets). *LabeledPoint* is ML-Lib\u0027s abstraction for a feature vector accompanied by a label. We consider flight delays of 15 minutes or more as \"delays\" and mark it with a label of 1.0, and under 15 minutes as \"non-delay\" and mark it with a label of 0.0. \n\nWe also use ML-Lib\u0027s *StandardScaler* class to normalize our feature values for both training and validation sets. This is important because of ML-Lib\u0027s use of Stochastic Gradient Descent, which is known to perform best if feature vectors are normalized.",
+      "dateUpdated": "Jan 26, 2016 1:43:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815815597_1552137351",
+      "id": "20160126-134335_22080011",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eModeling with Spark and ML-Lib\u003c/h2\u003e\n\u003cp\u003eWith the data_2007 dataset (which we\u0027ll use for training) and the data_2008 dataset (which we\u0027ll use for validation) as RDDs, we now build a predictive model using Spark\u0027s \u003ca href\u003d\"http://spark.apache.org/docs/1.1.0/mllib-guide.html\"\u003eML-Lib\u003c/a\u003e machine learning library.\u003c/p\u003e\n\u003cp\u003eML-Lib is Spark’s scalable machine learning library, which includes various learning algorithms and utilities, including classification, regression, clustering, collaborative filtering, dimensionality reduction, and others.\u003c/p\u003e\n\u003cp\u003eIf you compare ML-Lib to Scikit-learn, at the moment ML-Lib lacks a few important algorithms like Random Forest or Gradient Boosted Trees. Having said that, we see a strong pace of innovation from the ML-Lib community and expect more algorithms and other features to be added soon (for example, Random Forest is being actively \u003ca href\u003d\"https://github.com/apache/spark/pull/2435\"\u003eworked on\u003c/a\u003e, and will likely be available in the next release).\u003c/p\u003e\n\u003cp\u003eTo use ML-Lib\u0027s machine learning algorithms, first we parse our feature matrices into RDDs of \u003cem\u003eLabeledPoint\u003c/em\u003e objects (for both the training and test datasets). \u003cem\u003eLabeledPoint\u003c/em\u003e is ML-Lib\u0027s abstraction for a feature vector accompanied by a label. We consider flight delays of 15 minutes or more as \u0026ldquo;delays\u0026rdquo; and mark it with a label of 1.0, and under 15 minutes as \u0026ldquo;non-delay\u0026rdquo; and mark it with a label of 0.0.\u003c/p\u003e\n\u003cp\u003eWe also use ML-Lib\u0027s \u003cem\u003eStandardScaler\u003c/em\u003e class to normalize our feature values for both training and validation sets. This is important because of ML-Lib\u0027s use of Stochastic Gradient Descent, which is known to perform best if feature vectors are normalized.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:43:35 PM",
+      "dateStarted": "Jan 26, 2016 1:43:54 PM",
+      "dateFinished": "Jan 26, 2016 1:43:54 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.feature.StandardScaler\n\ndef parseData(vals: Array[Double]): LabeledPoint \u003d {\n  LabeledPoint(if (vals(0)\u003e\u003d15) 1.0 else 0.0, Vectors.dense(vals.drop(1)))\n}\n\n// Prepare training set\nval parsedTrainData \u003d data_2007.map(parseData)\nparsedTrainData.cache\nval scaler \u003d new StandardScaler(withMean \u003d true, withStd \u003d true).fit(parsedTrainData.map(x \u003d\u003e x.features))\nval scaledTrainData \u003d parsedTrainData.map(x \u003d\u003e LabeledPoint(x.label, scaler.transform(Vectors.dense(x.features.toArray))))\nscaledTrainData.cache\n\n// Prepare test/validation set\nval parsedTestData \u003d data_2008.map(parseData)\nparsedTestData.cache\nval scaledTestData \u003d parsedTestData.map(x \u003d\u003e LabeledPoint(x.label, scaler.transform(Vectors.dense(x.features.toArray))))\nscaledTestData.cache\n\nscaledTrainData.take(3).map(x \u003d\u003e (x.label, x.features)).foreach(println)",
+      "dateUpdated": "Jan 26, 2016 2:10:18 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806769475_-1419256657",
+      "id": "20160126-111249_801843407",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.feature.StandardScaler\nparseData: (vals: Array[Double])org.apache.spark.mllib.regression.LabeledPoint\nparsedTrainData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[16] at map at \u003cconsole\u003e:55\nres13: parsedTrainData.type \u003d MapPartitionsRDD[16] at map at \u003cconsole\u003e:55\nscaler: org.apache.spark.mllib.feature.StandardScalerModel \u003d org.apache.spark.mllib.feature.StandardScalerModel@42cbe733\nscaledTrainData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[19] at map at \u003cconsole\u003e:57\nres14: scaledTrainData.type \u003d MapPartitionsRDD[19] at map at \u003cconsole\u003e:57\nparsedTestData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[20] at map at \u003cconsole\u003e:55\nres17: parsedTestData.type \u003d MapPartitionsRDD[20] at map at \u003cconsole\u003e:55\nscaledTestData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[21] at map at \u003cconsole\u003e:61\nres18: scaledTestData.type \u003d MapPartitionsRDD[21] at map at \u003cconsole\u003e:61\n(0.0,[-1.6160463330366575,1.0549272994666263,0.032170263537363505,-0.5189244175441295,0.03408393342430758,-0.28016830994662073])\n(1.0,[-1.6160463330366575,1.3961052168540613,1.5354307758475592,0.36243209841210283,0.43165511884343594,-0.02327388743731743])\n(1.0,[-1.6160463330366575,1.5098311893165395,-1.4710902487728321,1.4641277433573934,-0.743688822516997,0.062357586732450336])\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:12:49 AM",
+      "dateStarted": "Jan 26, 2016 2:10:18 PM",
+      "dateFinished": "Jan 26, 2016 2:12:24 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nNote that we use the RDD *cache* method to ensure that these computed RDDs (parsedTrainData, scaledTrainData, parsedTestData and scaledTestData) are cached in memory by Spark and not re-computed with each iteration of stochastic gradient descent.\n\nWe also the *Metrics* class for evaluation of classification metrics: precision, recall, accuracy and the F1-measure",
+      "dateUpdated": "Jan 26, 2016 1:44:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815847791_843676709",
+      "id": "20160126-134407_893276678",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNote that we use the RDD \u003cem\u003ecache\u003c/em\u003e method to ensure that these computed RDDs (parsedTrainData, scaledTrainData, parsedTestData and scaledTestData) are cached in memory by Spark and not re-computed with each iteration of stochastic gradient descent.\u003c/p\u003e\n\u003cp\u003eWe also the \u003cem\u003eMetrics\u003c/em\u003e class for evaluation of classification metrics: precision, recall, accuracy and the F1-measure\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:44:07 PM",
+      "dateStarted": "Jan 26, 2016 1:44:11 PM",
+      "dateFinished": "Jan 26, 2016 1:44:11 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\n// Function to compute evaluation metrics\ndef eval_metrics(labelsAndPreds: RDD[(Double, Double)]) : Tuple2[Array[Double], Array[Double]] \u003d {\n    val tp \u003d labelsAndPreds.filter(r \u003d\u003e r._1\u003d\u003d1 \u0026\u0026 r._2\u003d\u003d1).count.toDouble\n    val tn \u003d labelsAndPreds.filter(r \u003d\u003e r._1\u003d\u003d0 \u0026\u0026 r._2\u003d\u003d0).count.toDouble\n    val fp \u003d labelsAndPreds.filter(r \u003d\u003e r._1\u003d\u003d1 \u0026\u0026 r._2\u003d\u003d0).count.toDouble\n    val fn \u003d labelsAndPreds.filter(r \u003d\u003e r._1\u003d\u003d0 \u0026\u0026 r._2\u003d\u003d1).count.toDouble\n\n    val precision \u003d tp / (tp+fp)\n    val recall \u003d tp / (tp+fn)\n    val F_measure \u003d 2*precision*recall / (precision+recall)\n    val accuracy \u003d (tp+tn) / (tp+tn+fp+fn)\n    new Tuple2(Array(tp, tn, fp, fn), Array(precision, recall, F_measure, accuracy))\n}\n\nimport org.apache.spark.rdd._\nimport org.apache.spark.rdd.RDD\n\nclass Metrics(labelsAndPreds: RDD[(Double, Double)]) extends java.io.Serializable {\n\n    private def filterCount(lftBnd:Int,rtBnd:Int):Double \u003d labelsAndPreds\n                                                           .map(x \u003d\u003e (x._1.toInt, x._2.toInt))\n                                                           .filter(_ \u003d\u003d (lftBnd,rtBnd)).count()\n\n    lazy val tp \u003d filterCount(1,1)  // true positives\n    lazy val tn \u003d filterCount(0,0)  // true negatives\n    lazy val fp \u003d filterCount(0,1)  // false positives\n    lazy val fn \u003d filterCount(1,0)  // false negatives\n\n    lazy val precision \u003d tp / (tp+fp)\n    lazy val recall \u003d tp / (tp+fn)\n    lazy val F1 \u003d 2*precision*recall / (precision+recall)\n    lazy val accuracy \u003d (tp+tn) / (tp+tn+fp+fn)\n}",
+      "dateUpdated": "Jan 26, 2016 2:58:37 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806783573_-1125461739",
+      "id": "20160126-111303_373848071",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "eval_metrics: (labelsAndPreds: org.apache.spark.rdd.RDD[(Double, Double)])(Array[Double], Array[Double])\nimport org.apache.spark.rdd._\nimport org.apache.spark.rdd.RDD\ndefined class Metrics\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:13:03 AM",
+      "dateStarted": "Jan 26, 2016 2:58:37 PM",
+      "dateFinished": "Jan 26, 2016 2:58:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nML-Lib supports a few algorithms for supervised learning, among those are Linear Regression and Logistic Regression, Naive Bayes, Decision Tree, SVM, Random Forest and Gradient Boosted Trees. We will demonstrate the use of Logistic Regression, Decision Tree and Random Forest.\n\nLet\u0027s see how to build these models with ML-Lib:",
+      "dateUpdated": "Jan 26, 2016 1:55:43 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815855273_-2135049276",
+      "id": "20160126-134415_537440182",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eML-Lib supports a few algorithms for supervised learning, among those are Linear Regression and Logistic Regression, Naive Bayes, Decision Tree, SVM, Random Forest and Gradient Boosted Trees. We will demonstrate the use of Logistic Regression, Decision Tree and Random Forest.\u003c/p\u003e\n\u003cp\u003eLet\u0027s see how to build these models with ML-Lib:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:44:15 PM",
+      "dateStarted": "Jan 26, 2016 1:44:26 PM",
+      "dateFinished": "Jan 26, 2016 1:44:26 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark \n\nimport org.apache.spark.mllib.classification.LogisticRegressionWithSGD\n\n// Build the Logistic Regression model\nval model_lr \u003d LogisticRegressionWithSGD.train(scaledTrainData, numIterations\u003d100)\n\n// Predict\nval labelsAndPreds_lr \u003d scaledTestData.map { point \u003d\u003e\n    val pred \u003d model_lr.predict(point.features)\n    (pred, point.label)\n}\nval m_lr \u003d eval_metrics(labelsAndPreds_lr)._2\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\".format(m_lr(0), m_lr(1), m_lr(2), m_lr(3)))\n",
+      "dateUpdated": "Jan 26, 2016 2:15:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806804858_-1669481360",
+      "id": "20160126-111324_1100040136",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.classification.LogisticRegressionWithSGD\nmodel_lr: org.apache.spark.mllib.classification.LogisticRegressionModel \u003d org.apache.spark.mllib.classification.LogisticRegressionModel: intercept \u003d 0.0, numFeatures \u003d 6, numClasses \u003d 2, threshold \u003d 0.5\nlabelsAndPreds_lr: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[225] at map at \u003cconsole\u003e:70\nm_lr: Array[Double] \u003d Array(0.37364831953239164, 0.643027788256004, 0.4726505337420478, 0.5916261593057585)\nprecision \u003d 0.37, recall \u003d 0.64, F1 \u003d 0.47, accuracy \u003d 0.59\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:13:24 AM",
+      "dateStarted": "Jan 26, 2016 2:15:44 PM",
+      "dateFinished": "Jan 26, 2016 2:18:01 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nLet\u0027s inspect the feature weights from this model:",
+      "dateUpdated": "Jan 26, 2016 1:46:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815973399_1218638320",
+      "id": "20160126-134613_233099598",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eLet\u0027s inspect the feature weights from this model:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:46:13 PM",
+      "dateStarted": "Jan 26, 2016 1:46:24 PM",
+      "dateFinished": "Jan 26, 2016 1:46:25 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "println(model_lr.weights)",
+      "dateUpdated": "Jan 26, 2016 2:51:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453815995596_1785773523",
+      "id": "20160126-134635_1124548361",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[-0.05853381854183226,0.006414916916192362,-0.03848401341104848,0.41060777495363165,0.05420780154644833,-0.0013592202581950504]\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:46:35 PM",
+      "dateStarted": "Jan 26, 2016 2:51:58 PM",
+      "dateFinished": "Jan 26, 2016 2:51:58 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nWe have built a model using Logistic Regression with SGD using 100 iterations, and then used it to predict flight delays over the validation set to measure performance: precision, recall, F1 and accuracy. \n\nNext, let\u0027s try the Support Vector Machine:",
+      "dateUpdated": "Jan 26, 2016 1:56:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453816001347_-1902814182",
+      "id": "20160126-134641_1463115936",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eWe have built a model using Logistic Regression with SGD using 100 iterations, and then used it to predict flight delays over the validation set to measure performance: precision, recall, F1 and accuracy.\u003c/p\u003e\n\u003cp\u003eNext, let\u0027s try the Support Vector Machine:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:46:41 PM",
+      "dateStarted": "Jan 26, 2016 1:56:00 PM",
+      "dateFinished": "Jan 26, 2016 1:56:00 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.classification.SVMWithSGD\n\n// Build the SVM model\nval svmAlg \u003d new SVMWithSGD()\nsvmAlg.optimizer.setNumIterations(100)\n                .setRegParam(1.0)\n                .setStepSize(1.0)\nval model_svm \u003d svmAlg.run(scaledTrainData)\n\n// Predict\nval labelsAndPreds_svm \u003d scaledTestData.map { point \u003d\u003e\n        val pred \u003d model_svm.predict(point.features)\n        (pred, point.label)\n}\nval m_svm \u003d eval_metrics(labelsAndPreds_svm)._2\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\".format(m_svm(0), m_svm(1), m_svm(2), m_svm(3)))",
+      "dateUpdated": "Jan 26, 2016 2:52:01 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806830510_999198308",
+      "id": "20160126-111350_883085981",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.classification.SVMWithSGD\nsvmAlg: org.apache.spark.mllib.classification.SVMWithSGD \u003d org.apache.spark.mllib.classification.SVMWithSGD@24ff54a2\nres38: svmAlg.optimizer.type \u003d org.apache.spark.mllib.optimization.GradientDescent@33c6e64a\nmodel_svm: org.apache.spark.mllib.classification.SVMModel \u003d org.apache.spark.mllib.classification.SVMModel: intercept \u003d 0.0, numFeatures \u003d 6, numClasses \u003d 2, threshold \u003d 0.0\nlabelsAndPreds_svm: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[433] at map at \u003cconsole\u003e:73\nm_svm: Array[Double] \u003d Array(0.37355395035508465, 0.6432059181021836, 0.47262312184568234, 0.5914681060447917)\nprecision \u003d 0.37, recall \u003d 0.64, F1 \u003d 0.47, accuracy \u003d 0.59\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:13:50 AM",
+      "dateStarted": "Jan 26, 2016 2:52:01 PM",
+      "dateFinished": "Jan 26, 2016 2:52:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nNext, let\u0027s try a Decision Tree model:\n",
+      "dateUpdated": "Jan 26, 2016 1:57:03 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453816045377_-1631541016",
+      "id": "20160126-134725_425762042",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNext, let\u0027s try a Decision Tree model:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:47:25 PM",
+      "dateStarted": "Jan 26, 2016 1:57:02 PM",
+      "dateFinished": "Jan 26, 2016 1:57:03 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.tree.DecisionTree\n\n// Build the Decision Tree model\nval numClasses \u003d 2\nval categoricalFeaturesInfo \u003d Map[Int, Int]()\nval impurity \u003d \"gini\"\nval maxDepth \u003d 10\nval maxBins \u003d 100\nval model_dt \u003d DecisionTree.trainClassifier(parsedTrainData, numClasses, categoricalFeaturesInfo, impurity, maxDepth, maxBins)\n\n// Predict\nval labelsAndPreds_dt \u003d parsedTestData.map { point \u003d\u003e\n    val pred \u003d model_dt.predict(point.features)\n    (pred, point.label)\n}\nval m_dt \u003d eval_metrics(labelsAndPreds_dt)._2\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\".format(m_dt(0), m_dt(1), m_dt(2), m_dt(3)))",
+      "dateUpdated": "Jan 26, 2016 2:52:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806849360_-1435710560",
+      "id": "20160126-111409_574051782",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.tree.DecisionTree\nnumClasses: Int \u003d 2\ncategoricalFeaturesInfo: scala.collection.immutable.Map[Int,Int] \u003d Map()\nimpurity: String \u003d gini\nmaxDepth: Int \u003d 10\nmaxBins: Int \u003d 100\nmodel_dt: org.apache.spark.mllib.tree.model.DecisionTreeModel \u003d DecisionTreeModel classifier of depth 10 with 1837 nodes\nlabelsAndPreds_dt: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[472] at map at \u003cconsole\u003e:76\nm_dt: Array[Double] \u003d Array(0.40609609558786197, 0.2514250387694371, 0.3105686532102017, 0.6823039990457161)\nprecision \u003d 0.41, recall \u003d 0.25, F1 \u003d 0.31, accuracy \u003d 0.68\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:14:09 AM",
+      "dateStarted": "Jan 26, 2016 2:52:27 PM",
+      "dateFinished": "Jan 26, 2016 2:52:42 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nFinally, let\u0027s try the new Random Forest implementation. A Random Forest is an ensemble method that uses Decision Trees as the underlying \"weak\" classifier. Let\u0027s see how it works with Spark:\n\n",
+      "dateUpdated": "Jan 26, 2016 2:53:43 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453806869515_-1951258761",
+      "id": "20160126-111429_978527957",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eFinally, let\u0027s try the new Random Forest implementation. A Random Forest is an ensemble method that uses Decision Trees as the underlying \u0026ldquo;weak\u0026rdquo; classifier. Let\u0027s see how it works with Spark:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:14:29 AM",
+      "dateStarted": "Jan 26, 2016 1:56:36 PM",
+      "dateFinished": "Jan 26, 2016 1:56:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.configuration.Strategy\n\nval treeStrategy \u003d Strategy.defaultStrategy(\"Classification\")\nval numTrees \u003d 100 \nval featureSubsetStrategy \u003d \"auto\" // Let the algorithm choose\nval model_rf \u003d RandomForest.trainClassifier(parsedTrainData, treeStrategy, numTrees, featureSubsetStrategy, seed \u003d 123)\n\n// Predict\nval labelsAndPreds_rf \u003d parsedTestData.map { point \u003d\u003e\n    val pred \u003d model_rf.predict(point.features)\n    (point.label, pred)\n}\nval m_rf \u003d new Metrics(labelsAndPreds_rf)\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\"\n        .format(m_rf.precision, m_rf.recall, m_rf.F1, m_rf.accuracy))",
+      "dateUpdated": "Jan 26, 2016 4:47:20 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453807165952_-475317653",
+      "id": "20160126-111925_1859203454",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.configuration.Strategy\ntreeStrategy: org.apache.spark.mllib.tree.configuration.Strategy \u003d org.apache.spark.mllib.tree.configuration.Strategy@33b30769\nnumTrees: Int \u003d 100\nfeatureSubsetStrategy: String \u003d auto\nmodel_rf: org.apache.spark.mllib.tree.model.RandomForestModel \u003d \nTreeEnsembleModel classifier with 100 trees\n\nlabelsAndPreds_rf: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[554] at map at \u003cconsole\u003e:83\nm_rf: Metrics \u003d $iwC$$iwC$Metrics@327522bf\nprecision \u003d 0.48, recall \u003d 0.14, F1 \u003d 0.22, accuracy \u003d 0.71\n"
+      },
+      "dateCreated": "Jan 26, 2016 11:19:25 AM",
+      "dateStarted": "Jan 26, 2016 4:47:20 PM",
+      "dateFinished": "Jan 26, 2016 4:54:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\nNote that overall accuracy of decision tree is higher than logistic regression, and Random Forest has the highest accuracy overall.  ",
+      "dateUpdated": "Jan 26, 2016 4:54:29 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453816644165_-1825949769",
+      "id": "20160126-135724_211958092",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNote that overall accuracy of decision tree is higher than logistic regression, and Random Forest has the highest accuracy overall.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 1:57:24 PM",
+      "dateStarted": "Jan 26, 2016 4:54:27 PM",
+      "dateFinished": "Jan 26, 2016 4:54:28 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n## Building a richer model with flight delays, weather data using Apache Spark and ML-Lib\n\nAnother common path to improve accuracy is by bringing in new types of data - enriching our dataset - and generating more features, thus achieving better predictive performance overall for our model.  Our idea is to layer-in weather data. We can get this data from a publicly available dataset here:  http://www.ncdc.noaa.gov/cdo-web/datasets/\n\nWe will look at daily temperatures (min/max), wind speed, snow conditions and precipitation in the flight origin airport (ORD). Clearly, weather conditions in the destination airport also affect delays, but for simplicity of this demo we just include weather at the origin (ORD).\n\nTo accomplish this with Apache Spark, we rewrite our previous *preprocess_spark* function to extract the same base features from the flight delay dataset, and also join those with five variables from the weather datasets: minimum and maximum temperature for the day, precipitation, snow and wind speed. Let\u0027s see how this is accomplished.",
+      "dateUpdated": "Jan 26, 2016 4:57:07 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453820656966_-36936379",
+      "id": "20160126-150416_1572405220",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eBuilding a richer model with flight delays, weather data using Apache Spark and ML-Lib\u003c/h2\u003e\n\u003cp\u003eAnother common path to improve accuracy is by bringing in new types of data - enriching our dataset - and generating more features, thus achieving better predictive performance overall for our model.  Our idea is to layer-in weather data. We can get this data from a publicly available dataset here:  http://www.ncdc.noaa.gov/cdo-web/datasets/\u003c/p\u003e\n\u003cp\u003eWe will look at daily temperatures (min/max), wind speed, snow conditions and precipitation in the flight origin airport (ORD). Clearly, weather conditions in the destination airport also affect delays, but for simplicity of this demo we just include weather at the origin (ORD).\u003c/p\u003e\n\u003cp\u003eTo accomplish this with Apache Spark, we rewrite our previous \u003cem\u003epreprocess_spark\u003c/em\u003e function to extract the same base features from the flight delay dataset, and also join those with five variables from the weather datasets: minimum and maximum temperature for the day, precipitation, snow and wind speed. Let\u0027s see how this is accomplished.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 3:04:16 PM",
+      "dateStarted": "Jan 26, 2016 4:57:04 PM",
+      "dateFinished": "Jan 26, 2016 4:57:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.SparkContext._\nimport scala.collection.JavaConverters._\nimport au.com.bytecode.opencsv.CSVReader\nimport java.io._\n\n// function to do a preprocessing step for a given file\n\ndef preprocess_spark(delay_file: String, weather_file: String): RDD[Array[Double]] \u003d { \n  // Read wether data\n  val delayRecs \u003d prepFlightDelays(delay_file).map{ rec \u003d\u003e \n        val features \u003d rec.gen_features\n        (features._1, features._2)\n  }\n\n  // Read weather data into RDDs\n  val station_inx \u003d 0\n  val date_inx \u003d 1\n  val metric_inx \u003d 2\n  val value_inx \u003d 3\n\n  def filterMap(wdata:RDD[Array[String]], metric:String):RDD[(String,Double)] \u003d {\n    wdata.filter(vals \u003d\u003e vals(metric_inx) \u003d\u003d metric).map(vals \u003d\u003e (vals(date_inx), vals(value_inx).toDouble))\n  }\n\n  val wdata \u003d sc.textFile(weather_file).map(line \u003d\u003e line.split(\",\"))\n                    .filter(vals \u003d\u003e vals(station_inx) \u003d\u003d \"USW00094846\")\n  val w_tmin \u003d filterMap(wdata,\"TMIN\")\n  val w_tmax \u003d filterMap(wdata,\"TMAX\")\n  val w_prcp \u003d filterMap(wdata,\"PRCP\")\n  val w_snow \u003d filterMap(wdata,\"SNOW\")\n  val w_awnd \u003d filterMap(wdata,\"AWND\")\n\n  delayRecs.join(w_tmin).map(vals \u003d\u003e (vals._1, vals._2._1 ++ Array(vals._2._2)))\n           .join(w_tmax).map(vals \u003d\u003e (vals._1, vals._2._1 ++ Array(vals._2._2)))\n           .join(w_prcp).map(vals \u003d\u003e (vals._1, vals._2._1 ++ Array(vals._2._2)))\n           .join(w_snow).map(vals \u003d\u003e (vals._1, vals._2._1 ++ Array(vals._2._2)))\n           .join(w_awnd).map(vals \u003d\u003e vals._2._1 ++ Array(vals._2._2))\n}\n\nval data_2007 \u003d preprocess_spark(\"/tmp/airflightsdelays/flights_2007.csv.bz2\", \"/tmp/airflightsdelays/weather_2007.csv.gz\")\nval data_2008 \u003d preprocess_spark(\"/tmp/airflightsdelays/flights_2008.csv.bz2\", \"/tmp/airflightsdelays/weather_2008.csv.gz\")\n\ndata_2007.take(5).map(x \u003d\u003e x mkString \",\").foreach(println)",
+      "dateUpdated": "Jan 26, 2016 5:07:09 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827271404_1914194739",
+      "id": "20160126-165431_1775141609",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.SparkContext._\nimport scala.collection.JavaConverters._\nimport au.com.bytecode.opencsv.CSVReader\nimport java.io._\npreprocess_spark: (delay_file: String, weather_file: String)org.apache.spark.rdd.RDD[Array[Double]]\ndata_2007: org.apache.spark.rdd.RDD[Array[Double]] \u003d MapPartitionsRDD[604] at map at \u003cconsole\u003e:105\ndata_2008: org.apache.spark.rdd.RDD[Array[Double]] \u003d MapPartitionsRDD[646] at map at \u003cconsole\u003e:105\n-2.0,7.0,19.0,4.0,6.0,925.0,15.0,172.0,283.0,41.0,0.0,53.0\n78.0,7.0,19.0,4.0,19.0,316.0,15.0,172.0,283.0,41.0,0.0,53.0\n115.0,7.0,19.0,4.0,12.0,925.0,15.0,172.0,283.0,41.0,0.0,53.0\n8.0,7.0,19.0,4.0,17.0,316.0,15.0,172.0,283.0,41.0,0.0,53.0\n2.0,7.0,19.0,4.0,8.0,316.0,15.0,172.0,283.0,41.0,0.0,53.0\n"
+      },
+      "dateCreated": "Jan 26, 2016 4:54:31 PM",
+      "dateStarted": "Jan 26, 2016 5:07:09 PM",
+      "dateFinished": "Jan 26, 2016 5:33:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nNote that the minimum and maximum temparature variables from the weather dataset are measured here in Celsius and multiplied by 10. So for example -139.0 would translate into -13.9 Celsius.",
+      "dateUpdated": "Jan 26, 2016 5:36:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827681772_1637897935",
+      "id": "20160126-170121_101244359",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNote that the minimum and maximum temparature variables from the weather dataset are measured here in Celsius and multiplied by 10. So for example -139.0 would translate into -13.9 Celsius.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:01:21 PM",
+      "dateStarted": "Jan 26, 2016 5:36:31 PM",
+      "dateFinished": "Jan 26, 2016 5:36:33 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n## Modeling with weather data\n\nWe are going to repeat the previous models of Logist Regression, decision tree and Random Forest with our enriched feature set. As before, we create an RDD of *LabeledPoint* objects, and normalize our dataset with ML-Lib\u0027s *StandardScaler*:",
+      "dateUpdated": "Jan 26, 2016 5:37:00 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827694629_-1995069745",
+      "id": "20160126-170134_1079378135",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eModeling with weather data\u003c/h2\u003e\n\u003cp\u003eWe are going to repeat the previous models of Logist Regression, decision tree and Random Forest with our enriched feature set. As before, we create an RDD of \u003cem\u003eLabeledPoint\u003c/em\u003e objects, and normalize our dataset with ML-Lib\u0027s \u003cem\u003eStandardScaler\u003c/em\u003e:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:01:34 PM",
+      "dateStarted": "Jan 26, 2016 5:36:59 PM",
+      "dateFinished": "Jan 26, 2016 5:36:59 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark \n\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.feature.StandardScaler\n\ndef parseData(vals: Array[Double]): LabeledPoint \u003d {\n  LabeledPoint(if (vals(0)\u003e\u003d15) 1.0 else 0.0, Vectors.dense(vals.drop(1)))\n}\n\n// Prepare training set\nval parsedTrainData \u003d data_2007.map(parseData)\nval scaler \u003d new StandardScaler(withMean \u003d true, withStd \u003d true).fit(parsedTrainData.map(x \u003d\u003e x.features))\nval scaledTrainData \u003d parsedTrainData.map(x \u003d\u003e LabeledPoint(x.label, scaler.transform(Vectors.dense(x.features.toArray))))\nparsedTrainData.cache\nscaledTrainData.cache\n\n// Prepare test/validation set\nval parsedTestData \u003d data_2008.map(parseData)\nval scaledTestData \u003d parsedTestData.map(x \u003d\u003e LabeledPoint(x.label, scaler.transform(Vectors.dense(x.features.toArray))))\nparsedTestData.cache\nscaledTestData.cache\n\nscaledTrainData.take(5).map(x \u003d\u003e (x.label, x.features)).foreach(println)",
+      "dateUpdated": "Jan 26, 2016 5:37:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827692372_-2060492383",
+      "id": "20160126-170132_96277418",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.feature.StandardScaler\nparseData: (vals: Array[Double])org.apache.spark.mllib.regression.LabeledPoint\nparsedTrainData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[647] at map at \u003cconsole\u003e:84\nscaler: org.apache.spark.mllib.feature.StandardScalerModel \u003d org.apache.spark.mllib.feature.StandardScalerModel@77a4ca34\nscaledTrainData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[650] at map at \u003cconsole\u003e:86\nres84: parsedTrainData.type \u003d MapPartitionsRDD[647] at map at \u003cconsole\u003e:84\nres85: scaledTrainData.type \u003d MapPartitionsRDD[650] at map at \u003cconsole\u003e:86\nparsedTestData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[651] at map at \u003cconsole\u003e:84\nscaledTestData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] \u003d MapPartitionsRDD[652] at map at \u003cconsole\u003e:90\nres88: parsedTestData.type \u003d MapPartitionsRDD[651] at map at \u003cconsole\u003e:84\nres89: scaledTestData.type \u003d MapPartitionsRDD[652] at map at \u003cconsole\u003e:90\n(0.0,[0.14633563504589683,0.3725714646917398,0.032170263537391594,-1.620620062489411,0.43165511884345636,0.14798906090220898,1.0272999137423273,0.9817236583596287,0.30285423341256756,-0.18954644258233166,0.5456137506493653])\n(1.0,[0.14633563504589683,0.3725714646917398,0.032170263537391594,1.243788614368326,-0.7436888225169699,0.14798906090220898,1.0272999137423273,0.9817236583596287,0.30285423341256756,-0.18954644258233166,0.5456137506493653])\n(1.0,[0.14633563504589683,0.3725714646917398,0.032170263537391594,-0.29858528855507077,0.43165511884345636,0.14798906090220898,1.0272999137423273,0.9817236583596287,0.30285423341256756,-0.18954644258233166,0.5456137506493653])\n(0.0,[0.14633563504589683,0.3725714646917398,0.032170263537391594,0.8031103563902127,-0.7436888225169699,0.14798906090220898,1.0272999137423273,0.9817236583596287,0.30285423341256756,-0.18954644258233166,0.5456137506493653])\n(0.0,[0.14633563504589683,0.3725714646917398,0.032170263537391594,-1.1799418045112975,-0.7436888225169699,0.14798906090220898,1.0272999137423273,0.9817236583596287,0.30285423341256756,-0.18954644258233166,0.5456137506493653])\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:01:32 PM",
+      "dateStarted": "Jan 26, 2016 5:37:04 PM",
+      "dateFinished": "Jan 26, 2016 5:37:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nNext, let\u0027s build a Logistic Regression  model using this enriched feature matrix:",
+      "dateUpdated": "Jan 26, 2016 5:37:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827689714_1584249272",
+      "id": "20160126-170129_806893289",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNext, let\u0027s build a Logistic Regression  model using this enriched feature matrix:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:01:29 PM",
+      "dateStarted": "Jan 26, 2016 5:37:37 PM",
+      "dateFinished": "Jan 26, 2016 5:37:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.classification.LogisticRegressionWithSGD\n\n// Build the Logistic Regression model\nval model_lr \u003d LogisticRegressionWithSGD.train(scaledTrainData, numIterations\u003d100)\n\n// Predict\nval labelsAndPreds_lr \u003d scaledTestData.map { point \u003d\u003e\n    val pred \u003d model_lr.predict(point.features)\n    (point.label, pred)\n}\nval m_lr \u003d new Metrics(labelsAndPreds_lr)\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\"\n        .format(m_lr.precision, m_lr.recall, m_lr.F1, m_lr.accuracy))",
+      "dateUpdated": "Jan 26, 2016 5:37:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827753089_271009331",
+      "id": "20160126-170233_386400294",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.classification.LogisticRegressionWithSGD\nmodel_lr: org.apache.spark.mllib.classification.LogisticRegressionModel \u003d org.apache.spark.mllib.classification.LogisticRegressionModel: intercept \u003d 0.0, numFeatures \u003d 11, numClasses \u003d 2, threshold \u003d 0.5\nlabelsAndPreds_lr: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[856] at map at \u003cconsole\u003e:99\nm_lr: Metrics \u003d $iwC$$iwC$Metrics@2766b2be\nprecision \u003d 0.40, recall \u003d 0.68, F1 \u003d 0.50, accuracy \u003d 0.62\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:02:33 PM",
+      "dateStarted": "Jan 26, 2016 5:37:41 PM",
+      "dateFinished": "Jan 26, 2016 5:42:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nprintln(model_lr.weights)",
+      "dateUpdated": "Jan 26, 2016 5:43:09 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827751288_-1677590606",
+      "id": "20160126-170231_229886921",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "[-0.0023684464565371694,0.016891943836661507,-0.020679886362179378,0.4317699266403653,0.048776796693585714,0.010757280271067543,0.038908526807304666,-0.16241489291366537,0.28799143349675,0.24616290912691677,0.15172847369008813]\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:02:31 PM",
+      "dateStarted": "Jan 26, 2016 5:43:09 PM",
+      "dateFinished": "Jan 26, 2016 5:43:09 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nNow let\u0027s try the decision tree:",
+      "dateUpdated": "Jan 26, 2016 5:45:49 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827749521_1622800783",
+      "id": "20160126-170229_1313948736",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eNow let\u0027s try the decision tree:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:02:29 PM",
+      "dateStarted": "Jan 26, 2016 5:45:49 PM",
+      "dateFinished": "Jan 26, 2016 5:45:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.tree.DecisionTree\n\n// Build the Decision Tree model\nval numClasses \u003d 2\nval categoricalFeaturesInfo \u003d Map[Int, Int]()\nval impurity \u003d \"gini\"\nval maxDepth \u003d 10\nval maxBins \u003d 100\nval model_dt \u003d DecisionTree.trainClassifier(parsedTrainData, numClasses, categoricalFeaturesInfo, impurity, maxDepth, maxBins)\n\n// Predict\nval labelsAndPreds_dt \u003d parsedTestData.map { point \u003d\u003e\n    val pred \u003d model_dt.predict(point.features)\n    (point.label, pred)\n}\nval m_dt \u003d new Metrics(labelsAndPreds_dt)\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\"\n        .format(m_dt.precision, m_dt.recall, m_dt.F1, m_dt.accuracy))",
+      "dateUpdated": "Jan 26, 2016 5:45:55 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827801012_-345312434",
+      "id": "20160126-170321_239192730",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.tree.DecisionTree\nnumClasses: Int \u003d 2\ncategoricalFeaturesInfo: scala.collection.immutable.Map[Int,Int] \u003d Map()\nimpurity: String \u003d gini\nmaxDepth: Int \u003d 10\nmaxBins: Int \u003d 100\nmodel_dt: org.apache.spark.mllib.tree.model.DecisionTreeModel \u003d DecisionTreeModel classifier of depth 10 with 1871 nodes\nlabelsAndPreds_dt: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[899] at map at \u003cconsole\u003e:104\nm_dt: Metrics \u003d $iwC$$iwC$Metrics@7a8501c5\nprecision \u003d 0.51, recall \u003d 0.32, F1 \u003d 0.40, accuracy \u003d 0.72\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:03:21 PM",
+      "dateStarted": "Jan 26, 2016 5:45:55 PM",
+      "dateFinished": "Jan 26, 2016 5:46:07 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nAnd finally, let\u0027s try the Random Forest model:",
+      "dateUpdated": "Jan 26, 2016 5:48:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827804102_-401855198",
+      "id": "20160126-170324_364277621",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eAnd finally, let\u0027s try the Random Forest model:\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:03:24 PM",
+      "dateStarted": "Jan 26, 2016 5:48:26 PM",
+      "dateFinished": "Jan 26, 2016 5:48:28 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n\nimport org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.configuration.Strategy\n\nval treeStrategy \u003d Strategy.defaultStrategy(\"Classification\")\nval model_rf \u003d RandomForest.trainClassifier(parsedTrainData, treeStrategy, \n                                            numTrees \u003d 100, featureSubsetStrategy \u003d \"auto\", seed \u003d 125)\n\n// Predict\nval labelsAndPreds_rf \u003d parsedTestData.map { point \u003d\u003e\n    val pred \u003d model_rf.predict(point.features)\n    (point.label, pred)\n}\nval m_rf \u003d new Metrics(labelsAndPreds_rf)\nprintln(\"precision \u003d %.2f, recall \u003d %.2f, F1 \u003d %.2f, accuracy \u003d %.2f\"\n        .format(m_rf.precision, m_rf.recall, m_rf.F1, m_rf.accuracy))",
+      "dateUpdated": "Jan 26, 2016 5:48:30 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827806563_128713535",
+      "id": "20160126-170326_2085582197",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.configuration.Strategy\ntreeStrategy: org.apache.spark.mllib.tree.configuration.Strategy \u003d org.apache.spark.mllib.tree.configuration.Strategy@2dd26591\nmodel_rf: org.apache.spark.mllib.tree.model.RandomForestModel \u003d \nTreeEnsembleModel classifier with 100 trees\n\nlabelsAndPreds_rf: org.apache.spark.rdd.RDD[(Double, Double)] \u003d MapPartitionsRDD[942] at map at \u003cconsole\u003e:102\nm_rf: Metrics \u003d $iwC$$iwC$Metrics@7b7857fa\nprecision \u003d 0.59, recall \u003d 0.34, F1 \u003d 0.43, accuracy \u003d 0.74\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:03:26 PM",
+      "dateStarted": "Jan 26, 2016 5:48:30 PM",
+      "dateFinished": "Jan 26, 2016 5:55:26 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nAs expected, the improved feature set increased the accuracy of our model for both SVM and Decision Tree models.",
+      "dateUpdated": "Jan 26, 2016 5:04:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827836125_-989553948",
+      "id": "20160126-170356_1071433801",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eAs expected, the improved feature set increased the accuracy of our model for both SVM and Decision Tree models.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:03:56 PM",
+      "dateStarted": "Jan 26, 2016 5:04:23 PM",
+      "dateFinished": "Jan 26, 2016 5:04:25 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n## Summary\n\nIn this IPython notebook we have demonstrated how to build a predictive model in Scala with Apache Hadoop, Apache Spark and its machine learning library: ML-Lib. \n\nWe have used Apache Spark on our HDP cluster to perform various types of data pre-processing and feature engineering tasks. We then applied a few ML-Lib machine learning algorithms such as support vector machines and decision tree to the resulting datasets and showed how through iterations we continuously add new and improved features resulting in better model performance.",
+      "dateUpdated": "Jan 26, 2016 5:57:21 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453827834237_-1740583801",
+      "id": "20160126-170354_1443133917",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eSummary\u003c/h2\u003e\n\u003cp\u003eIn this IPython notebook we have demonstrated how to build a predictive model in Scala with Apache Hadoop, Apache Spark and its machine learning library: ML-Lib.\u003c/p\u003e\n\u003cp\u003eWe have used Apache Spark on our HDP cluster to perform various types of data pre-processing and feature engineering tasks. We then applied a few ML-Lib machine learning algorithms such as support vector machines and decision tree to the resulting datasets and showed how through iterations we continuously add new and improved features resulting in better model performance.\u003c/p\u003e\n"
+      },
+      "dateCreated": "Jan 26, 2016 5:03:54 PM",
+      "dateStarted": "Jan 26, 2016 5:57:21 PM",
+      "dateFinished": "Jan 26, 2016 5:57:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1453831482516_267580823",
+      "id": "20160126-180442_1308451960",
+      "dateCreated": "Jan 26, 2016 6:04:42 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Predicting airline delays",
+  "id": "2BB5CUPUW",
+  "angularObjects": {
+    "2B4TK4DB6": [],
+    "2B72XMR3J": [],
+    "2B5QK8QNW": [],
+    "2B6BYXCS2": [],
+    "2B6F7M32X": [],
+    "2B8526U3F": [],
+    "2B7STQ8WR": [],
+    "2B7GM2ZKJ": [],
+    "2B733VH5X": [],
+    "2B4MMHXGM": [],
+    "2B6KRZ442": [],
+    "2B6HPBD6K": [],
+    "2B55NJDT1": [],
+    "2B6DPE5TU": []
+  },
+  "config": {},
+  "info": {}
+}

@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "text": "%md\n## Single view demo\n\n#### Goal\n\nDemonstrate how [Apache Hive](http://hortonworks.com/hadoop/hive/) on [HDP Sandbox](http://hortonworks.com/sandbox) can help retailer get a single view of a product by combining data from different sources and run interative queries against the data. In this case, the data sources are:\n  - ETL/CRM data from EDW/DB - ingested using [Apache Sqoop](http://hortonworks.com/hadoop/sqoop/)\n  - Web traffic data - ingested using [HDF](http://hortonworks.com/hdf)\n  - Social media data - ingested using [HDF](http://hortonworks.com/hdf)\n  \n#### Steps\n\n0. Pre-reqs: Setup and import retail data set into DB/EDW (in this case: Postgres)\n1. Use Sqoop to import CRM/ERP data from DB/EDW into Hive\n2. Use HDF to import related tweets into Hive\n3. Use HDF to import simulated web traffic logs into Hive\n4. Use Hive to analyze tables to populate statistics\n5. Use Hive to correlate the data from multiple data sources\n\nNote: this is a simplified version of the demo. A more realistic self-lab of this content is available that:\n  - runs the steps as either IT user (for setup) or marketing user (as business user running queries)\n  - uses Ranger to setup authorization policies and audit\n\n\nMore details available at [https://github.com/abajwa-hw/single-view-demo](https://github.com/abajwa-hw/single-view-demo)\n",
-      "dateUpdated": "Jan 15, 2016 4:11:26 AM",
+      "dateUpdated": "Jan 25, 2016 3:51:10 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -15,7 +15,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true
+        "editorHide": true,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -29,14 +30,14 @@
         "msg": "\u003ch2\u003eSingle view demo\u003c/h2\u003e\n\u003ch4\u003eGoal\u003c/h4\u003e\n\u003cp\u003eDemonstrate how \u003ca href\u003d\"http://hortonworks.com/hadoop/hive/\"\u003eApache Hive\u003c/a\u003e on \u003ca href\u003d\"http://hortonworks.com/sandbox\"\u003eHDP Sandbox\u003c/a\u003e can help retailer get a single view of a product by combining data from different sources and run interative queries against the data. In this case, the data sources are:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eETL/CRM data from EDW/DB - ingested using \u003ca href\u003d\"http://hortonworks.com/hadoop/sqoop/\"\u003eApache Sqoop\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eWeb traffic data - ingested using \u003ca href\u003d\"http://hortonworks.com/hdf\"\u003eHDF\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eSocial media data - ingested using \u003ca href\u003d\"http://hortonworks.com/hdf\"\u003eHDF\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4\u003eSteps\u003c/h4\u003e\n\u003col\u003e\n\u003cli\u003ePre-reqs: Setup and import retail data set into DB/EDW (in this case: Postgres)\u003c/li\u003e\n\u003cli\u003eUse Sqoop to import CRM/ERP data from DB/EDW into Hive\u003c/li\u003e\n\u003cli\u003eUse HDF to import related tweets into Hive\u003c/li\u003e\n\u003cli\u003eUse HDF to import simulated web traffic logs into Hive\u003c/li\u003e\n\u003cli\u003eUse Hive to analyze tables to populate statistics\u003c/li\u003e\n\u003cli\u003eUse Hive to correlate the data from multiple data sources\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eNote: this is a simplified version of the demo. A more realistic self-lab of this content is available that:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eruns the steps as either IT user (for setup) or marketing user (as business user running queries)\u003c/li\u003e\n\u003cli\u003euses Ranger to setup authorization policies and audit\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eMore details available at \u003ca href\u003d\"https://github.com/abajwa-hw/single-view-demo\"\u003ehttps://github.com/abajwa-hw/single-view-demo\u003c/a\u003e\u003c/p\u003e\n"
       },
       "dateCreated": "Jan 13, 2016 1:47:43 PM",
-      "dateStarted": "Jan 15, 2016 4:11:24 AM",
-      "dateFinished": "Jan 15, 2016 4:11:25 AM",
+      "dateStarted": "Jan 25, 2016 3:51:07 PM",
+      "dateFinished": "Jan 25, 2016 3:51:12 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%md\n#### 1. Pre-requisites\nBefore running this notebook:\n- run below as root to give zeppelin sudo priviledge\n```\necho \"zeppelin  ALL\u003d(ALL) NOPASSWD: ALL\" \u003e\u003e /etc/sudoers\n```\n- run below to enable zeppelin to log in to postgres\n```\necho \"host all all 127.0.0.1/32 md5\" \u003e\u003e /var/lib/pgsql/data/pg_hba.conf\n```",
-      "dateUpdated": "Jan 15, 2016 4:04:51 AM",
+      "text": "%md\n#### 1. Pre-requisites\nBefore running this notebook:\n1. *Not required on HDP Sandbox as it already has these set*\nEnable [Hive transactions](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions) by setting below via Ambari \u003e Hive \u003e Config:\n```\nhive.support.concurrency \u003d true\nhive.enforce.bucketing \u003d true \nhive.exec.dynamic.partition.mode \u003d nonstrict\nhive.txn.manager \u003d org.apache.hadoop.hive.ql.lockmgr.DbTxnManager\nhive.compactor.initiator.on \u003d true\n```\n2. Run below as root to give zeppelin sudo priviledge\n```\necho \"zeppelin  ALL\u003d(ALL) NOPASSWD: ALL\" \u003e\u003e /etc/sudoers\n```\n3. Run below to enable zeppelin to log in to postgres\n```\necho \"host all all 127.0.0.1/32 md5\" \u003e\u003e /var/lib/pgsql/data/pg_hba.conf\n```",
+      "dateUpdated": "Jan 25, 2016 4:41:25 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -49,7 +50,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/markdown",
-        "editorHide": true
+        "editorHide": true,
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -60,18 +62,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch4\u003e1. Pre-requisites\u003c/h4\u003e\n\u003cp\u003eBefore running this notebook:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003erun below as root to give zeppelin sudo priviledge\u003cpre\u003e\u003ccode\u003eecho \"zeppelin  ALL\u003d(ALL) NOPASSWD: ALL\" \u0026gt;\u0026gt; /etc/sudoers\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003erun below to enable zeppelin to log in to postgres\u003cpre\u003e\u003ccode\u003eecho \"host all all 127.0.0.1/32 md5\" \u0026gt;\u0026gt; /var/lib/pgsql/data/pg_hba.conf\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"
+        "msg": "\u003ch4\u003e1. Pre-requisites\u003c/h4\u003e\n\u003cp\u003eBefore running this notebook:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003cem\u003eNot required on HDP Sandbox as it already has these set\u003c/em\u003e\n\u003cbr  /\u003eEnable \u003ca href\u003d\"https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions\"\u003eHive transactions\u003c/a\u003e by setting below via Ambari \u003e Hive \u003e Config:\u003cpre\u003e\u003ccode\u003ehive.support.concurrency \u003d true\nhive.enforce.bucketing \u003d true \nhive.exec.dynamic.partition.mode \u003d nonstrict\nhive.txn.manager \u003d org.apache.hadoop.hive.ql.lockmgr.DbTxnManager\nhive.compactor.initiator.on \u003d true\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003eRun below as root to give zeppelin sudo priviledge\u003cpre\u003e\u003ccode\u003eecho \"zeppelin  ALL\u003d(ALL) NOPASSWD: ALL\" \u0026gt;\u0026gt; /etc/sudoers\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003cli\u003eRun below to enable zeppelin to log in to postgres\u003cpre\u003e\u003ccode\u003eecho \"host all all 127.0.0.1/32 md5\" \u0026gt;\u0026gt; /var/lib/pgsql/data/pg_hba.conf\n\u003c/code\u003e\u003c/pre\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n"
       },
       "dateCreated": "Jan 13, 2016 1:48:47 PM",
-      "dateStarted": "Jan 15, 2016 4:04:51 AM",
-      "dateFinished": "Jan 15, 2016 4:04:58 AM",
+      "dateStarted": "Jan 25, 2016 4:41:11 PM",
+      "dateFinished": "Jan 25, 2016 4:41:13 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Restart postgres",
-      "text": "%sh\nsudo service ambari stop\nsudo service postgresql stop\nsudo service postgresql start\nsudo service ambari start",
-      "dateUpdated": "Jan 15, 2016 4:01:06 AM",
+      "text": "%sh\n# on sandbox, use \u0027service ambari stop/start\u0027\n# on cluster, use \u0027service ambari-server stop/start\u0027\ncount\u003d$(chkconfig --list | grep ambari | wc -l)\nif [ $count -eq 3 ]\nthen\n    ambari_svc\u003d\"ambari\" \nelse\n    ambari_svc\u003d\"ambari-server\"\nfi\n\nsudo service $ambari_svc stop\nsudo service postgresql stop\nsudo service postgresql start\nsudo service $ambari_svc start",
+      "dateUpdated": "Jan 25, 2016 4:45:59 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -96,11 +98,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "Stopping Ganglia\n/etc/init.d/ambari: line 30: /etc/init.d/hdp-gmetad: No such file or directory\n/etc/init.d/ambari: line 31: /etc/init.d/hdp-gmond: No such file or directory\nStopping Nagios\n/etc/init.d/ambari: line 34: /etc/init.d/nagios: No such file or directory\nStopping Ambari server\nUsing python  /usr/bin/python2.6\nStopping ambari-server\nAmbari Server stopped\nStopping Ambari agent\nVerifying Python version compatibility...\nUsing python  /usr/bin/python2.6\nFound ambari-agent PID: 3306\ntput: unknown terminal \"unknown\"\nERROR: ambari-agent not running. Stale PID File at: /var/run/ambari-agent/ambari-agent.pid\ntput: unknown terminal \"unknown\"\nRemoving PID file at /var/run/ambari-agent/ambari-agent.pid\ntput: unknown terminal \"unknown\"\nambari-agent successfully stopped\ntput: unknown terminal \"unknown\"\nStopping postgresql service: [  OK  ]\r\nStarting postgresql service: [  OK  ]\r\nStarting Ambari...                                \nStarting Ambari server                                    [\u001b[32;01m  OK  \u001b[0m]\nStarting Ambari agent                                     [\u001b[33;01mWARNINGS\u001b[0m]\ntput: unknown terminal \"unknown\"\ntput: unknown terminal \"unknown\"\n"
+        "msg": "Using python  /usr/bin/python2\nStopping ambari-server\nAmbari Server stopped\nStopping postgresql service: [  OK  ]\r\nStarting postgresql service: [  OK  ]\r\nUsing python  /usr/bin/python2\nStarting ambari-server\nAmbari Server running with administrator privileges.\nOrganizing resource files at /var/lib/ambari-server/resources...\nServer PID at: /var/run/ambari-server/ambari-server.pid\nServer out at: /var/log/ambari-server/ambari-server.out\nServer log at: /var/log/ambari-server/ambari-server.log\nWaiting for server start....................\nAmbari Server \u0027start\u0027 completed successfully.\n"
       },
       "dateCreated": "Jan 13, 2016 1:32:56 PM",
-      "dateStarted": "Jan 14, 2016 7:34:17 PM",
-      "dateFinished": "Jan 14, 2016 7:34:47 PM",
+      "dateStarted": "Jan 25, 2016 4:45:08 PM",
+      "dateFinished": "Jan 25, 2016 4:45:31 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -2072,20 +2074,19 @@
   "name": "Single view demo",
   "id": "2BBBW75VS",
   "angularObjects": {
-    "2B9J9AG77": [],
-    "2B9197Y7N": [],
-    "2BAMPNH5S": [],
-    "2B8PX9Y3V": [],
-    "2B83K5NNQ": [],
-    "2B8SQ8CKH": [],
-    "2BAKC1UDY": [],
-    "2BASH2ZUV": [],
-    "2BAKH58W6": [],
-    "2B9UHFK8D": [],
-    "2B9158ZC5": [],
-    "2BB1QCMMU": [],
-    "2BBCGNRY2": [],
-    "2BAB2EA4M": []
+    "2B7F4FCUK": [],
+    "2BAQ51HXT": [],
+    "2BA7KYDMT": [],
+    "2B9D378MS": [],
+    "2B957C8BV": [],
+    "2B7R9VVDD": [],
+    "2B8Z47RWN": [],
+    "2B8M9X85U": [],
+    "2B9QTFYPE": [],
+    "2B832U35Z": [],
+    "2B9H1N56N": [],
+    "2B798S1PR": [],
+    "2B9FECQUD": []
   },
   "config": {
     "looknfeel": "default"

@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "text": "%md\n## Predicting Likelihood of Building Exceeding Threshold Temperatures",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -14,7 +14,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -34,8 +35,42 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "text": "%md\nYour machines know things. From connected cars, to equipment in the field, to machines on the assembly line floor—sensors stream low-cost, always-on data. Hadoop makes it easier for you to store and refine that data and identify meaningful patterns, providing you with the insight to make proactive business decisions using predictive analytics.\n\nIn this video, we show how Hadoop can be used to analyze heating, ventilation and air conditioning data to maintain ideal office temperatures and minimize expenses.\n\nUsing the data cleansing and transformation mentioned in the tutorial below, we can further our analysis by applying Logistic Regression to the generated data. We will then be able to predict based on features of the building and the heating system, what buildings have a likelihood of exceeding target temperature.\n\n/\n* Click on Image below to recap:\n\n/\n\n [![Image](http://i3.ytimg.com/vi/Op_5MmG7hIw/hqdefault.jpg)](http://www.youtube.com/watch?v\u003dOp_5MmG7hIw)\n",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1454615001599_944357167",
+      "id": "20160204-194321_1627027446",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eYour machines know things. From connected cars, to equipment in the field, to machines on the assembly line floor—sensors stream low-cost, always-on data. Hadoop makes it easier for you to store and refine that data and identify meaningful patterns, providing you with the insight to make proactive business decisions using predictive analytics.\u003c/p\u003e\n\u003cp\u003eIn this video, we show how Hadoop can be used to analyze heating, ventilation and air conditioning data to maintain ideal office temperatures and minimize expenses.\u003c/p\u003e\n\u003cp\u003eUsing the data cleansing and transformation mentioned in the tutorial below, we can further our analysis by applying Logistic Regression to the generated data. We will then be able to predict based on features of the building and the heating system, what buildings have a likelihood of exceeding target temperature.\u003c/p\u003e\n\u003cp\u003e/\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eClick on Image below to recap:\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e/\u003c/p\u003e\n\u003cp\u003e\u003ca href\u003d\"http://www.youtube.com/watch?v\u003dOp_5MmG7hIw\"\u003e\u003cimg src\u003d\"http://i3.ytimg.com/vi/Op_5MmG7hIw/hqdefault.jpg\" alt\u003d\"Image\" /\u003e\u003c/a\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "Feb 4, 2016 7:43:21 PM",
+      "dateStarted": "Feb 4, 2016 8:12:13 PM",
+      "dateFinished": "Feb 4, 2016 8:12:13 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "text": "%sh\n\nwget http://s3.amazonaws.com/hw-sandbox/tutorial14/SensorFiles.zip\nunzip SensorFiles.zip\nhadoop fs -mkdir -p /user/zeppelin/SensorDemo\nhadoop fs -copyFromLocal -f SensorFiles/HVAC.csv /user/zeppelin/SensorDemo/\nhadoop fs -tail /user/zeppelin/SensorDemo/HVAC.csv",
-      "dateUpdated": "Feb 3, 2016 12:39:28 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -47,7 +82,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/sh",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -67,8 +103,8 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "val sqlContext \u003d new org.apache.spark.sql.SQLContext(sc)\n\nval eventsFile \u003d sc.textFile(\"hdfs:///user/zeppelin/SensorDemo/HVAC.csv\")\n\ncase class Event(Date: String, \n                Time: String, \n                TargetTemp: Float, \n                ActualTemp: Float, \n                System: String, \n                SystemAge: Int, \n                BuildingID: String)\n\n\n\nval eventsRDD \u003d eventsFile.mapPartitionsWithIndex { (idx, iter) \u003d\u003e if (idx \u003d\u003d 0) iter.drop(1) else iter }.map(s\u003d\u003e s.split(\",\")).map( \n    s \u003d\u003e Event(s(0),\n            s(1), \n            s(2).toFloat, \n            s(3).toFloat, \n            s(4), \n            s(5).toInt, \n            s(6)\n        )\n    )\n\neventsRDD.count\n\neventsRDD.toDF().registerTempTable(\"tempSeries\")",
-      "dateUpdated": "Feb 3, 2016 1:02:29 AM",
+      "text": "/* Let\u0027s start by creating a RDD for the data we just imported. Once an RDD is created we can create Temporary Table with Schema that allows us to run SparkSQL. The results of SQL queries are DataFrames and support all the normal RDD operations.*/\n\nval sqlContext \u003d new org.apache.spark.sql.SQLContext(sc)\n\nval eventsFile \u003d sc.textFile(\"hdfs:///user/zeppelin/SensorDemo/HVAC.csv\")\n\ncase class Event(Date: String, \n                Time: String, \n                TargetTemp: Float, \n                ActualTemp: Float, \n                System: String, \n                SystemAge: Int, \n                BuildingID: String)\n\n\n\nval eventsRDD \u003d eventsFile.mapPartitionsWithIndex { (idx, iter) \u003d\u003e if (idx \u003d\u003d 0) iter.drop(1) else iter }.map(s\u003d\u003e s.split(\",\")).map( \n    s \u003d\u003e Event(s(0),\n            s(1), \n            s(2).toFloat, \n            s(3).toFloat, \n            s(4), \n            s(5).toInt, \n            s(6)\n        )\n    )\n\neventsRDD.count\n\neventsRDD.toDF().registerTempTable(\"tempSeries\")",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -80,7 +116,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -101,7 +138,7 @@
     },
     {
       "text": "%sql\n\nselect * from tempSeries",
-      "dateUpdated": "Feb 3, 2016 1:02:36 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "lineChart",
@@ -141,7 +178,8 @@
           }
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -162,7 +200,7 @@
     },
     {
       "text": "%sql\n\nselect BuildingId, Date, (ActualTemp-TargetTemp) AS TempDIFF from tempSeries order by BuildingId ",
-      "dateUpdated": "Feb 3, 2016 1:02:42 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "stackedAreaChart",
@@ -198,7 +236,8 @@
           }
         },
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -219,7 +258,7 @@
     },
     {
       "text": "%sql \n\nselect a.BuildingId, count(a.TempDIFF) from (\n    select BuildingId, (ActualTemp-TargetTemp) as TempDIFF from tempSeries LIMIT 1000) a\n    WHERE a.TempDIFF \u003e 0 GROUP BY BuildingId ",
-      "dateUpdated": "Feb 3, 2016 1:02:45 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "multiBarChart",
@@ -249,7 +288,8 @@
           }
         },
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -270,7 +310,7 @@
     },
     {
       "text": "%pyspark\n\n#You must now load the data (hvac.csv), parse it, and use it to train the model. For this, you define a function that checks whether the actual temperature of the building is greater than the target temperature. If the actual temperature is greater, the building is hot, denoted by the value 1.0. If the actual temperature is lesser, the building is cold, denoted by the value 0.0.\n\n# List the structure of data for better understanding. Because the data will be\n# loaded as an array, this structure makes it easy to understand what each element\n# in the array corresponds to\n\n# 0 Date\n# 1 Time\n# 2 TargetTemp\n# 3 ActualTemp\n# 4 System\n# 5 SystemAge\n# 6 BuildingID\n\n\nfrom pyspark.ml import Pipeline\nfrom pyspark.ml.classification import LogisticRegression\nfrom pyspark.ml.feature import HashingTF, Tokenizer\nfrom pyspark.sql import Row, SQLContext\n\nimport os\nimport sys\nfrom pyspark import SparkConf\nfrom pyspark import SparkContext\nfrom pyspark.sql import SQLContext\nfrom pyspark.sql.types import *\n\nfrom pyspark.mllib.classification import LogisticRegressionWithSGD\nfrom pyspark.mllib.regression import LabeledPoint\nfrom numpy import array\n\nLabeledDocument \u003d Row(\"BuildingID\", \"SystemInfo\", \"label\")\n\n# Define a function that parses the raw CSV file and returns an object of type LabeledDocument\n\ndef parseDocument(line):\n    values \u003d [str(x) for x in line.split(\u0027,\u0027)]\n    if (values[3] \u003e values[2]):\n        hot \u003d 1.0\n    else:\n        hot \u003d 0.0        \n\n    textValue \u003d str(values[4]) + \" \" + str(values[5])\n\n    return LabeledDocument((values[6]), textValue, hot)\n\n# Load the raw HVAC.csv file, parse it using the function\ndata \u003d sc.textFile(\"hdfs:///user/zeppelin/SensorDemo/HVAC.csv\")\n\ndocuments \u003d data.filter(lambda s: \"Date\" not in s).map(parseDocument)\ntraining \u003d documents.toDF()\n",
-      "dateUpdated": "Feb 3, 2016 1:08:26 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -282,7 +322,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -303,7 +344,7 @@
     },
     {
       "text": "%pyspark\n\n#Prepare a data set to run the trained model against. To do so, we would pass on a system ID and system age (denoted as SystemInfo in the training output), and the model would predict whether the building with that system ID and system age would be hotter (denoted by 1.0) or cooler (denoted by 0.0).\n\ntokenizer \u003d Tokenizer(inputCol\u003d\"SystemInfo\", outputCol\u003d\"words\")\nhashingTF \u003d HashingTF(inputCol\u003dtokenizer.getOutputCol(), outputCol\u003d\"features\")\nlr \u003d LogisticRegression(maxIter\u003d10, regParam\u003d0.01)\npipeline \u003d Pipeline(stages\u003d[tokenizer, hashingTF, lr])",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -315,7 +356,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -336,7 +378,7 @@
     },
     {
       "text": "%pyspark\n\nmodel \u003d pipeline.fit(training)\n#training.show()\ntraining.registerTempTable(\"eventStaging\")\n",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -347,7 +389,8 @@
           "groups": [],
           "scatter": {}
         },
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -368,7 +411,7 @@
     },
     {
       "text": "%sql\n\nselect * from eventStaging",
-      "dateUpdated": "Feb 3, 2016 12:43:10 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "multiBarChart",
@@ -403,7 +446,8 @@
           }
         },
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -424,7 +468,7 @@
     },
     {
       "text": "%pyspark\n\n# SystemInfo here is a combination of system ID followed by system age\nDocument \u003d Row(\"id\", \"SystemInfo\")\ntest \u003d sc.parallelize([(1L, \"20 25\"),\n              (2L, \"4 15\"),\n              (3L, \"16 9\"),\n              (4L, \"9 22\"),\n              (5L, \"17 10\"),\n              (6L, \"7 22\")]) \\\n    .map(lambda x: Document(*x)).toDF() \n    ",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -436,7 +480,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -457,7 +502,7 @@
     },
     {
       "text": "%pyspark\n\n#Prepare a data set to run the trained model against. To do so, we would pass on a system ID and system age (denoted as SystemInfo in the training output), and the model would predict whether the building with that system ID and system age would be hotter (denoted by 1.0) or cooler (denoted by 0.0).\n\n\n# Make predictions on test documents and print columns of interest\nprediction \u003d model.transform(test)\nselected \u003d prediction.select(\"SystemInfo\", \"prediction\", \"probability\")\nfor row in selected.collect():\n    print row",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -469,7 +514,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -490,7 +536,7 @@
     },
     {
       "text": "%pyspark\n\nselected.registerTempTable(\"predictedEvents\")",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "table",
@@ -502,7 +548,8 @@
           "scatter": {}
         },
         "editorMode": "ace/mode/scala",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -523,7 +570,7 @@
     },
     {
       "text": "%sql\n\nselect * from predictedEvents",
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
       "config": {
         "graph": {
           "mode": "multiBarChart",
@@ -558,7 +605,8 @@
           }
         },
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0
+        "colWidth": 12.0,
+        "editorHide": true
       },
       "settings": {
         "params": {},
@@ -578,8 +626,20 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "dateUpdated": "Feb 3, 2016 12:39:13 AM",
-      "config": {},
+      "dateUpdated": "Feb 4, 2016 8:12:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
       "settings": {
         "params": {},
         "forms": {}
@@ -591,7 +651,7 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Sensors & Machines Predictive Analysis",
+  "name": "Sensors \u0026 Machines Predictive Analysis",
   "id": "2BAVUZ7NA",
   "angularObjects": {
     "2BARDA96R": [],

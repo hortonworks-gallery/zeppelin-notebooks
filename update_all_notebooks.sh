@@ -6,4 +6,4 @@ rm -rf zeppelin-notebooks/
 git clone https://github.com/hortonworks-gallery/zeppelin-notebooks.git
 /bin/mv -f zeppelin-notebooks/* ./
 chown -R zeppelin:hadoop *
-sudo -u zeppelin /usr/hdp/current/zeppelin-server/lib/bin/zeppelin-daemon.sh restart
+/usr/hdp/current/zeppelin-server/lib/bin/zeppelin-daemon.sh restart

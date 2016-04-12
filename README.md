@@ -4,6 +4,10 @@
   `curl -sSL https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -u zeppelin -E sh`
   - Please note that if you have changed or created your own notebooks they will be moved to a folder: /opt/incubator-zeppelin/notebook/old_yyyyMMdd-HHmmss, you can copy them back to /opt/incubator-zeppelin/notebook/ directory
 
+##### Importing specific notebooks:
+Copy the "JSON" link URL from the table below and paste it into Zeppelin's import from URL tool.
+![Import UI](/screenshots/import.png?raw=true)
+
 ##### Demos:
 
 | Description	| Components | Code	| View	| Author | Comments	|

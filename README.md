@@ -1,4 +1,8 @@
 ## Demo notebooks for Apache Zeppelin
+##### Update your zeppelin with latest notebooks:
+  - If you are using hortonworks sandbox, you can execute command below to get latest notebooks: </br>
+  `curl -sSL https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -u zeppelin -E sh`
+  - Please note that if you have changed or created your own notebooks they will be moved to a folder: /opt/incubator-zeppelin/notebook/old_yyyyMMdd-HHmmss, you can copy them back to /opt/incubator-zeppelin/notebook/ directory
 
 ##### Demos:
 
@@ -21,7 +25,3 @@
 | Lab 102: Intro to Spark with Scala | Spark SQL | [json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/2BJVW65WS/note.json) | view | [Robert Hryniewicz](https://github.com/roberthryniewicz) | Intro to Spark SQL using Airlines Dataset
 | HDFS Space Usage Visualization | HDFS / D3.js | [json](https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/2BFAUAD4F/note.json) | [view](https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2dicmFjY2lhbGxpL0hkZnNVdGlscy9tYXN0ZXIvemVwcGVsaW4vbm90ZS5qc29u) | [Guilherme Braccialli](https://github.com/gbraccialli) | A D3.js Sunburst visualization to explore HDFS space utilization and other metadata info, [more details](https://github.com/gbraccialli/HdfsUtils/)
 
-##### Update your zeppelin with latest notebooks:
-  - If you are using hortonworks sandbox, you can execute command below to get latest notebooks: </br>
-  `curl -sSL https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/update_all_notebooks.sh | sudo -u zeppelin -E sh`
-  - Please note that if you have changed or created your own notebooks they will be moved to a folder: /opt/incubator-zeppelin/notebook/old_yyyyMMdd-HHmmss, you can copy them back to /opt/incubator-zeppelin/notebook/ directory

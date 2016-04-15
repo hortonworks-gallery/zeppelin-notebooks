@@ -8,6 +8,14 @@
 Copy the "json" link URL from the table below and paste it into Zeppelin's import from URL tool.
 ![Import UI](/screenshots/import.png?raw=true)
 
+##### Adding notebooks:
+You can add notebooks by making Github pull request, but we request you also update the table below by adding a record for your notebook. To generate the 'view' link for the notebook:
+
+1. Uploading the notebook into this repo and obtain the url (e.g. https://github.com/hortonworks-gallery/zeppelin-notebooks/blob/master/2A94M5J1Z/note.json)
+2. Generate a link to preview the notebook by pasting url above into ZeppelinHub viewer (https://www.zeppelinhub.com/viewer) and copying the url of the notebook
+3. Include the preview link under the 'View' link in table below
+
+
 ##### Demos:
 
 | Description	| Components | Code	| View	| Author | Comments	|

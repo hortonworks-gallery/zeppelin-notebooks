@@ -1,4 +1,10 @@
-cd /usr/hdp/current/zeppelin-server/lib/notebook
+if [ -d "$DIRECTORY" ]; then
+  NOTES_DIR="/usr/hdp/current/zeppelin-server/notebook"
+else
+  NOTES_DIR="/usr/hdp/current/zeppelin-server/lib/notebook"
+fi
+
+cd $NOTES_DIR
 OLD_DIR=`date +%Y%m%d-%H%M%S`
 mkdir old_${OLD_DIR}
 mv 2* old_${OLD_DIR}/

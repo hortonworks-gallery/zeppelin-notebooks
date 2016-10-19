@@ -1,4 +1,4 @@
-if [ -d "$DIRECTORY" ]; then
+if [ -d "/usr/hdp/current/zeppelin-server/notebook" ]; then
   NOTES_DIR="/usr/hdp/current/zeppelin-server/notebook"
 else
   NOTES_DIR="/usr/hdp/current/zeppelin-server/lib/notebook"

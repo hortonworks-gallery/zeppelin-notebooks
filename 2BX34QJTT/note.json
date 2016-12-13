@@ -17387,7 +17387,7 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "AON Demo with Logistic Regression",
+  "name": "Demos / Spark / ML / Earthquake Demo with Logistic Regression",
   "id": "2BX34QJTT",
   "angularObjects": {},
   "config": {

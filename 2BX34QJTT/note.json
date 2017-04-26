@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "title": "First some do some clean up steps and load seismology data into hadoop.",
-      "text": "%sh\ncd /tmp\nif [ -e /tmp/GEM-GHEC-v1.txt ]\nthen\n    rm -f /tmp/GEM-GHEC-v1.txt\nfi\nif [ -e /tmp/isc-gem-cat.zip ]\nthen\n    rm -f /tmp/isc-gem-cat.zip\nfi\nif [ -e /tmp/isc-gem-cat.csv ]\nthen\n    rm -f /tmp/isc-gem-cat.csv\nfi \n\nif hadoop fs -stat /tmp/isc-gem-cat.csv\nthen\n   hadoop fs -rm  /tmp/isc-gem-cat.csv\nfi\nif hadoop fs -stat /tmp/GEM-GHEC-v1.txt\nthen\n   hadoop fs -rm  /tmp/GEM-GHEC-v1.txt\nfi\n\nwget http://www.emidius.eu/GEH/download/GEM-GHEC-v1.txt\nwget http://colossus.iris.washington.edu/iscgem/download/isc-gem-cat.zip\nunzip isc-gem-cat.zip\nhadoop fs -put GEM-GHEC-v1.txt /tmp\nhadoop fs -put isc-gem-cat.csv /tmp\necho \"done\"",
+      "text": "%sh\ncd /tmp\nif [ -e /tmp/GEM-GHEC-v1.txt ]\nthen\n    rm -f /tmp/GEM-GHEC-v1.txt\nfi\nif [ -e /tmp/isc-gem-cat.zip ]\nthen\n    rm -f /tmp/isc-gem-cat.zip\nfi\nif [ -e /tmp/isc-gem-cat.csv ]\nthen\n    rm -f /tmp/isc-gem-cat.csv\nfi \n\nif hadoop fs -stat /tmp/isc-gem-cat.csv\nthen\n   hadoop fs -rm  /tmp/isc-gem-cat.csv\nfi\nif hadoop fs -stat /tmp/GEM-GHEC-v1.txt\nthen\n   hadoop fs -rm  /tmp/GEM-GHEC-v1.txt\nfi\n\nwget https://dl.dropboxusercontent.com/u/114020/zeppelin-snapshots/datasets/earthquake/GEM-GHEC-v1.txt\nwget https://dl.dropboxusercontent.com/u/114020/zeppelin-snapshots/datasets/earthquake/isc-gem-cat.zip\nunzip isc-gem-cat.zip\nhadoop fs -put GEM-GHEC-v1.txt /tmp\nhadoop fs -put isc-gem-cat.csv /tmp\necho \"done\"",
       "user": "zeppelin",
       "dateUpdated": "Oct 20, 2016 12:30:44 AM",
       "config": {

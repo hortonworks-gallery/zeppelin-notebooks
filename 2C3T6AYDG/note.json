@@ -4,11 +4,11 @@
       "title": "Accessing US Customers fails with an Access Control violation",
       "text": "%jdbc(hive)\nselect * from hortoniabank.us_customers limit 10",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "Oct 14, 2017 2:14:34 AM",
+      "dateUpdated": "2017-12-07T23:54:27+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/text",
-        "colWidth": 6.0,
+        "editorMode": "ace/mode/sql",
+        "colWidth": 6,
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -21,14 +21,14 @@
               "keys": [
                 {
                   "name": "ww_customers.gender",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "ww_customers.title",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -36,12 +36,12 @@
               "scatter": {
                 "xAxis": {
                   "name": "ww_customers.gender",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "ww_customers.title",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -49,7 +49,7 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
+          "language": "sql",
           "editOnDblClick": false
         }
       },
@@ -62,7 +62,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:262)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:248)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:300)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:241)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:649)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:733)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:323)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:226)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:470)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:457)\n\tat sun.reflect.GeneratedMethodAccessor66.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy48.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:313)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1317)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1302)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1221)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1215)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
           }
         ]
       },
@@ -74,21 +74,23 @@
       "apps": [],
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160923-074955_889514713",
-      "dateCreated": "Nov 28, 2016 5:26:50 PM",
-      "dateStarted": "Oct 14, 2017 2:14:34 AM",
-      "dateFinished": "Oct 14, 2017 2:14:37 AM",
+      "dateCreated": "2016-11-28T17:26:50+0000",
+      "dateStarted": "2017-12-07T23:54:27+0000",
+      "dateFinished": "2017-12-07T23:54:28+0000",
       "status": "ERROR",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:409"
     },
     {
-      "title": "Customers by country",
+      "title": "Customers by country - can only see EU customer data",
       "text": "%jdbc(hive)\nselect * from \n(select countryfull, count(*) num_customers from hortoniabank.ww_customers\ngroup by countryfull) s\norder by num_customers desc\nlimit 5",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "Oct 14, 2017 2:14:51 AM",
+      "dateUpdated": "2017-12-07T23:54:33+0000",
       "config": {
         "tableHide": false,
-        "colWidth": 6.0,
-        "editorMode": "ace/mode/text",
+        "colWidth": 6,
+        "editorMode": "ace/mode/sql",
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -101,14 +103,14 @@
               "keys": [
                 {
                   "name": "s.countryfull",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "s.num_customers",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -116,12 +118,12 @@
               "scatter": {
                 "xAxis": {
                   "name": "s.countryfull",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "s.num_customers",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -129,7 +131,7 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
+          "language": "sql",
           "editOnDblClick": false
         }
       },
@@ -198,12 +200,12 @@
         "columnNames": [
           {
             "name": "s.countryfull",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "s.num_customers",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           }
         ],
@@ -233,21 +235,22 @@
       "apps": [],
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160925-072311_300749908",
-      "dateCreated": "Nov 28, 2016 5:26:50 PM",
-      "dateStarted": "Oct 14, 2017 2:14:52 AM",
-      "dateFinished": "Oct 14, 2017 2:15:06 AM",
+      "dateCreated": "2016-11-28T17:26:50+0000",
+      "dateStarted": "2017-12-07T23:54:33+0000",
+      "dateFinished": "2017-12-07T23:54:49+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:410"
     },
     {
       "title": "Row Level Security - Customer data filtered to EU persons only based on location",
       "text": "%jdbc(hive)\nselect distinct(country) from hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "Oct 14, 2017 2:15:15 AM",
+      "dateUpdated": "2017-12-07T23:54:54+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/text",
-        "colWidth": 12.0,
+        "editorMode": "ace/mode/sql",
+        "colWidth": 12,
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -255,7 +258,7 @@
           {
             "graph": {
               "mode": "table",
-              "height": 300.0,
+              "height": 300,
               "optionOpen": false,
               "keys": [],
               "values": [],
@@ -265,7 +268,7 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
+          "language": "sql",
           "editOnDblClick": false
         }
       },
@@ -377,7 +380,7 @@
         "columnNames": [
           {
             "name": "country",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           }
         ],
@@ -438,25 +441,27 @@
       "apps": [],
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160923-075040_806201705",
-      "dateCreated": "Nov 28, 2016 5:26:50 PM",
-      "dateStarted": "Oct 14, 2017 2:15:15 AM",
-      "dateFinished": "Oct 14, 2017 2:15:18 AM",
+      "dateCreated": "2016-11-28T17:26:50+0000",
+      "dateStarted": "2017-12-07T23:54:54+0000",
+      "dateFinished": "2017-12-07T23:54:55+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:411"
     },
     {
+      "title": "HR analyst can see unmasked records - but only for EU customers",
       "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers LIMIT 50",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "Oct 14, 2017 2:15:39 AM",
+      "dateUpdated": "2017-12-07T23:54:59+0000",
       "config": {
-        "colWidth": 12.0,
+        "colWidth": 12,
         "enabled": true,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/sql",
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 300.0,
+              "height": 300,
               "optionOpen": false,
               "keys": [],
               "values": [],
@@ -466,9 +471,10 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
+          "language": "sql",
           "editOnDblClick": false
-        }
+        },
+        "title": true
       },
       "settings": {
         "params": {},
@@ -2015,47 +2021,47 @@
         "columnNames": [
           {
             "name": "surname",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "streetaddress",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           },
           {
             "name": "country",
-            "index": 2.0,
+            "index": 2,
             "aggr": "sum"
           },
           {
             "name": "age",
-            "index": 3.0,
+            "index": 3,
             "aggr": "sum"
           },
           {
             "name": "password",
-            "index": 4.0,
+            "index": 4,
             "aggr": "sum"
           },
           {
             "name": "nationalid",
-            "index": 5.0,
+            "index": 5,
             "aggr": "sum"
           },
           {
             "name": "ccnumber",
-            "index": 6.0,
+            "index": 6,
             "aggr": "sum"
           },
           {
             "name": "mrn",
-            "index": 7.0,
+            "index": 7,
             "aggr": "sum"
           },
           {
             "name": "birthday",
-            "index": 8.0,
+            "index": 8,
             "aggr": "sum"
           }
         ],
@@ -2615,18 +2621,23 @@
       "apps": [],
       "jobName": "paragraph_1484095493257_2022483872",
       "id": "20170111-004453_2103984184",
-      "dateCreated": "Jan 11, 2017 12:44:53 AM",
-      "dateStarted": "Oct 14, 2017 2:15:39 AM",
-      "dateFinished": "Oct 14, 2017 2:15:43 AM",
+      "dateCreated": "2017-01-11T00:44:53+0000",
+      "dateStarted": "2017-12-07T23:54:59+0000",
+      "dateFinished": "2017-12-07T23:55:00+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:412"
     },
     {
+      "title": "HR analyst can access table tagged with DATA_QUALITY (even though it's score < 60%)",
+      "text": "%jdbc(hive)\nselect * from cost_savings.claim_savings limit 5",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2017-12-07T23:55:32+0000",
       "config": {
-        "colWidth": 12.0,
+        "colWidth": 12,
         "graph": {
           "mode": "table",
-          "height": 300.0,
+          "height": 300,
           "optionOpen": false,
           "keys": [],
           "values": [],
@@ -2634,6 +2645,46 @@
           "scatter": {}
         },
         "enabled": true,
+        "editorMode": "ace/mode/sql",
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "claim_savings.reportdate\tclaim_savings.name\tclaim_savings.sequenceid\tclaim_savings.claimid\tclaim_savings.costsavings\tclaim_savings.eligibilitycode\tclaim_savings.latitude\tclaim_savings.longitude\n2004-12-13\tADAIR\t19001\t465190\t909\t918\t41\t-94\n2014-05-03\tADAMS\t19003\t465191\t2083\t638\t41\t-95\n2009-07-02\tALLAMAKEE\t19005\t465192\t8309\t2233\t43\t-91\n2006-04-21\tAPPANOOSE\t19007\t465193\t43480\t2758\t41\t-93\n2003-01-17\tAUDUBON\t19009\t465194\t107\t648\t42\t-95\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1483723760326_-2065386838",
+      "id": "20170106-172920_1817992933",
+      "dateCreated": "2017-01-06T17:29:20+0000",
+      "dateStarted": "2017-12-07T23:55:08+0000",
+      "dateFinished": "2017-12-07T23:55:08+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:413"
+    },
+    {
+      "user": "ivanna_eu_hr",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala"
+        },
         "editorMode": "ace/mode/scala"
       },
       "settings": {
@@ -2641,14 +2692,15 @@
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1483723760326_-2065386838",
-      "id": "20170106-172920_1817992933",
-      "dateCreated": "Jan 6, 2017 5:29:20 PM",
+      "jobName": "paragraph_1512005425855_-1691066831",
+      "id": "20171130-013025_1367550955",
+      "dateCreated": "2017-11-30T01:30:25+0000",
       "status": "READY",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:414"
     }
   ],
-  "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivana EU HR",
+  "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivanna EU HR",
   "id": "2C3T6AYDG",
   "angularObjects": {
     "2CHS8UYQQ:shared_process": [],
@@ -2658,7 +2710,8 @@
     "2CKEKWY8Z:shared_process": []
   },
   "config": {
-    "looknfeel": "default"
+    "looknfeel": "default",
+    "personalizedMode": "false"
   },
   "info": {}
 }

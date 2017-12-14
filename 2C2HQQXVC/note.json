@@ -1,12 +1,12 @@
 {
   "paragraphs": [
     {
-      "title": "BMI by ZipCode",
+      "title": "BMI by ZipCode (US only)",
       "text": "%jdbc(hive)\nselect lpad(zipcode,5,\"0\"), avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by lpad(zipcode,5,\"0\") ",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:15:08 AM",
+      "dateUpdated": "2017-12-07T23:57:17+0000",
       "config": {
-        "colWidth": 6.0,
+        "colWidth": 6,
         "editorMode": "ace/mode/sql",
         "editorHide": false,
         "title": true,
@@ -15,19 +15,19 @@
           {
             "graph": {
               "mode": "multiBarChart",
-              "height": 274.0,
+              "height": 274,
               "optionOpen": false,
               "keys": [
                 {
                   "name": "_c0",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "bmi",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -35,7 +35,7 @@
               "scatter": {
                 "yAxis": {
                   "name": "bmi",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -60,7 +60,7 @@
           },
           {
             "type": "HTML",
-            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ecommon.max_count\u003c/strong\u003e\u003c/div\u003e"
+            "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 1000 rows. Learn more about <strong>common.max_count</strong></div>"
           }
         ]
       },
@@ -8076,12 +8076,12 @@
         "columnNames": [
           {
             "name": "_c0",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "bmi",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           }
         ],
@@ -12091,40 +12091,42 @@
       "apps": [],
       "jobName": "paragraph_1480308629938_25239664",
       "id": "20160925-071150_859801425",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:15:08 AM",
-      "dateFinished": "Oct 14, 2017 3:15:24 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:56:33+0000",
+      "dateFinished": "2017-12-07T23:56:48+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:2078"
     },
     {
-      "title": "Top 5 Report - States by BMI",
+      "title": "Top 5 Report - States by BMI (US Only)",
       "text": "%jdbc(hive)\nselect * from\n(select state, avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by state) s \norder by bmi desc\nlimit 5",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:15:31 AM",
+      "dateUpdated": "2017-12-07T23:57:29+0000",
       "config": {
-        "colWidth": 6.0,
-        "editorMode": "ace/mode/scala",
-        "editorHide": true,
+        "colWidth": 6,
+        "editorMode": "ace/mode/sql",
+        "editorHide": false,
         "title": true,
         "enabled": true,
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 277.0,
+              "height": 277,
               "optionOpen": false,
               "keys": [
                 {
                   "name": "s.state",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "s.bmi",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -12132,19 +12134,22 @@
               "scatter": {
                 "xAxis": {
                   "name": "s.state",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "s.bmi",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
             }
           }
         ],
-        "editorSetting": {}
+        "editorSetting": {
+          "editOnDblClick": false,
+          "language": "sql"
+        }
       },
       "settings": {
         "params": {},
@@ -12211,12 +12216,12 @@
         "columnNames": [
           {
             "name": "s.state",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "s.bmi",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           }
         ],
@@ -12246,20 +12251,21 @@
       "apps": [],
       "jobName": "paragraph_1480308629956_4463223",
       "id": "20160925-071159_1808389414",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:15:31 AM",
-      "dateFinished": "Oct 14, 2017 3:15:34 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:57:29+0000",
+      "dateFinished": "2017-12-07T23:57:35+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2079"
     },
     {
-      "title": "Dynamic Column Masking and Row Level Security in Action",
+      "title": "Dynamic Column Masking: MRN/password masked via tag policy. Rest masked via Hive col policy. Custom masks for Birthday/Age.",
       "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.us_customers LIMIT 50",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:15:37 AM",
+      "dateUpdated": "2017-12-07T23:57:41+0000",
       "config": {
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0,
+        "colWidth": 12,
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -12267,19 +12273,19 @@
           {
             "graph": {
               "mode": "table",
-              "height": 300.0,
+              "height": 300,
               "optionOpen": false,
               "keys": [
                 {
                   "name": "surname",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "streetaddress",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -12287,12 +12293,12 @@
               "scatter": {
                 "xAxis": {
                   "name": "surname",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "streetaddress",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -12313,7 +12319,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nSurname\tXxxxxxXxxxxxx\tCountry\tnull\tdc647eb65e6711e155375218212b3964\txxxxxxalID\tCCNuxxxx\tnull\tnull\nPowers\tnnnn Xxxxxxxx Xxxxx\tUS\t59\t94ffd65a44c3e687acd02e1505252a67\txxx-xx-3016\t5.49xxxx+xx\tnull\t01-01-1973\nWhitman\tnnnn Xxxxxxx Xxxxx\tUS\t56\t1e1ecfa7a73510ff67c68a8b3a885c84\txxx-xx-8255\t4.55xxxx+xx\tnull\t01-01-1977\nMarone\tnnn Xxxxx Xxxxx\tUS\t44\t09d628024cc60a249915154ce91a7738\txxx-xx-6142\t4.53xxxx+xx\tnull\t01-01-1977\nHarp\tnnnn Xxx Xxxx Xxxx\tUS\t29\td7be19d6fd7300c1d5caf6c628c2d584\txxx-xx-4018\t5.20xxxx+xx\tnull\t01-01-1997\nPereira\tnnnn Xxxxxxxx Xxxxxx\tUS\t89\t3c4f5f537a9b533dba234baa43a0a5fd\txxx-xx-1927\t5.38xxxx+xx\tnull\t01-01-1938\nBlackburn\tnnn Xxxxxxx Xxxx\tUS\t58\t2ce7e2d61505161888fa154328a2bf75\txxx-xx-7903\t5.53xxxx+xx\tnull\t01-01-1965\nGonzalez\tnnnn Xxxxx Xxxx\tUS\t23\t6082455e5d7d7055ca77088aff15075b\txxx-xx-2582\t4.71xxxx+xx\tnull\t01-01-1995\nHelton\tnnnn Xxxxxxx Xxxxx\tUS\t46\t9abf755bf7b69a9a6381b37e6ba96028\txxx-xx-4291\t5.25xxxx+xx\tnull\t01-01-1975\nMei\tnnn Xxxxx Xxxxxx\tUS\t85\t156be6018ef5288da1dd77a891d10a8c\txxx-xx-8366\t5.20xxxx+xx\tnull\t01-01-1941\nGoldberg\tnnnn Xxxxx Xxxxx\tUS\t90\tab8ab22dea8ee912a0227e9559342779\txxx-xx-4937\t4.55xxxx+xx\tnull\t01-01-1944\nWinkler\tnnnn Xxxxx Xxxx\tUS\t47\te0f025f67c34f7fed711afdd26f6020d\txxx-xx-3193\t5.43xxxx+xx\tnull\t01-01-1976\nThompson\tnnnn Xxxxx Xxxx Xxxxx\tUS\t78\t32af980dbf080c58ab15d17ae5b6c0d4\txxx-xx-5747\t4.55xxxx+xx\tnull\t01-01-1956\nAnderson\tnnnn Xxxxxxxxx Xxxxx\tUS\t62\t7ac52652087f699e70d481d9c03c5d36\txxx-xx-0336\t5.58xxxx+xx\tnull\t01-01-1974\nMejia\tnnnn Xxx Xxxx\tUS\t71\t0872e12366c7ba3ead02359b91e9fe29\txxx-xx-0064\t5.35xxxx+xx\tnull\t01-01-1961\nNoland\tnnnn Xxxxxx Xxxxxx\tUS\t34\t977cac895173e76b6414468a9812a6f0\txxx-xx-3798\t4.48xxx+xx\tnull\t01-01-1988\nHaynes\tnnnn Xxxxxxxxxx Xxxxx Xxxxxx\tUS\t28\tc1d2204dc93e7938b62166958c9c4fc5\txxx-xx-8147\t4.91xxx+xx\tnull\t01-01-1996\nDion\tnnnn Xxxxxx Xxxx\tUS\t48\t0cee4b8f8a5d49e41a5386c88978a435\txxx-xx-2587\t5.53xxxx+xx\tnull\t01-01-1971\nButler\tnnnn Xxxxx Xxxxxx\tUS\t51\t26b959e7aae9e3127e9df6a0c43857ed\txxx-xx-6719\t4.48xxxx+xx\tnull\t01-01-1977\nBigelow\tnnnn Xxxx Xxxxxx Xxxx\tUS\t50\tfc8cc156752b47ad5c176f49a887e0b7\txxx-xx-9172\t4.53xxxx+xx\tnull\t01-01-1970\nWalsh\tnnnn Xxxxx Xxxxx Xxxxx\tUS\t60\tfc0d012751ec0d1d517cd506dd8c882f\txxx-xx-3610\t4.55xxx+xx\tnull\t01-01-1965\nSheets\tnnnn Xxxxxx Xxxxxx\tUS\t26\td44b811e60b1386454660da13f703098\txxx-xx-5026\t4.91xxxx+xx\tnull\t01-01-1997\nParks\tnnnn Xxxxx Xxxxxx\tUS\t87\t1047ff9eaad215de78c22248ff55a142\txxx-xx-2077\t4.53xxxx+xx\tnull\t01-01-1940\nHelm\tnnnn Xxxxxxxx Xxx\tUS\t68\tf85cabce3b3704d4140634adcb674ace\txxx-xx-1168\t5.22xxxx+xx\tnull\t01-01-1966\nBrinegar\tnnnn Xxxxxxxxx Xxxxx\tUS\t30\t1eb11876945078ab3e6828c11112f2ff\txxx-xx-7445\t4.53xxxx+xx\tnull\t01-01-1994\nMcKinney\tnnnn Xxxxxxxxx Xxxxx\tUS\t70\t4c69a2cb9ac4675c137fe7453491bc2d\txxx-xx-9133\t5.59xxxx+xx\tnull\t01-01-1955\nBoehm\tnnnn Xxxxxx Xxxxxxx\tUS\t32\t22187f7cb3cf94a3250cedffcd479514\txxx-xx-4169\t4.53xxxx+xx\tnull\t01-01-1997\nBaker\tnnnn Xxxxxxx Xxxxxx\tUS\t88\t6f3f037cf53b9fd012d47be26b0846a9\txxx-xx-1699\t5.57xxxx+xx\tnull\t01-01-1941\nSmith\tnnnn Xxxxxxxxxx Xxxx\tUS\t26\t06f7ce73e011aa586292a8d5d4e3c9da\txxx-xx-3370\t5.11xxxx+xx\tnull\t01-01-1993\nDunton\tnnnn Xxxxxxxx Xxxxxx\tUS\t41\tdb678435727f03b941ecab8787cda0fe\txxx-xx-9390\t4.53xxxx+xx\tnull\t01-01-1985\nWiley\tnnnn Xxxxxx Xxxxxx\tUS\t47\t8e076c9ce940cf0c3df9efcf7ea51d06\txxx-xx-3457\t5.41xxxx+xx\tnull\t01-01-1984\nWeatherholt\tnnnn Xxxxxxx Xxxxx\tUS\t32\t50e99b15f06cf68aba708ea8bc9dd9f6\txxx-xx-1830\t4.48xxxx+xx\tnull\t01-01-1997\nJohnson\tnnnn Xxxx Xxx Xxxxx\tUS\t52\t379a59038df1b04667fbc557d29fd10c\txxx-xx-5368\t5.18xxxx+xx\tnull\t01-01-1979\nKilgore\tnnnn Xxxxxxxxx Xxxxxx\tUS\t95\tafb60f5a232d31004249d5ac0888a26f\txxx-xx-6347\t4.48xxxx+xx\tnull\t01-01-2032\nMorgan\tnnnn Xxxxxxx Xxxx\tUS\t67\tddd3104f736c5749825e995c57c37010\txxx-xx-9265\t5.39xxxx+xx\tnull\t01-01-1958\nSmith\tnnn Xxxxxx Xxxxxx\tUS\t86\td51017ca9a5ded5996fa0797e4b3e2a5\txxx-xx-0793\t4.53xxxx+xx\tnull\t01-01-1945\nHarrison\tnnn Xxx Xxx\tUS\t66\t7445255c5747d629e84797626c605c05\txxx-xx-9518\t5.51xxxx+xx\tnull\t01-01-1968\nHall\tnnn Xxxxxx Xxxxxx\tUS\t32\t7435b5bfd8ef6046b1922e98d6e3a678\txxx-xx-7908\t4.48xxxx+xx\tnull\t01-01-1989\nMunz\tnnnn Xxxxxxx Xxxxxx\tUS\t51\t8d883e278cda6f8feef3785103078696\txxx-xx-4274\t5.33xxxx+xx\tnull\t01-01-1971\nMcNulty\tnnnn Xxxxxxxx Xxxx\tUS\t31\tee339cebb368634ad642f938a1ce51e0\txxx-xx-9733\t5.40xxxx+xx\tnull\t01-01-1989\nGriffith\tnnnn Xxxxxxxx Xxxxxx\tUS\t58\tbe6530d505fb0a2a62d65083d6c6740b\txxx-xx-4328\t5.47xxxx+xx\tnull\t01-01-1974\nHarris\tnnnn Xxxxxxx Xxxxxx\tUS\t95\t1e2d60395e037ac254e4effd32387a5f\txxx-xx-2228\t4.48xxxx+xx\tnull\t01-01-1939\nBaker\tnnn Xxxxxxxx Xxxxxx\tUS\t72\ta4a4f1bb88bac411d2712547baefe279\txxx-xx-3961\t5.36xxxx+xx\tnull\t01-01-1955\nClark\tnnnn Xxxxx Xxx Xxxxx\tUS\t55\t5eea932c7404df02c9c56e976488ce3e\txxx-xx-8413\t5.23xxxx+xx\tnull\t01-01-1974\nHammonds\tnnnn Xxxxxx Xxxxxx\tUS\t86\t380ddee6fd7b0aa8ab60dc09776fe08f\txxx-xx-1898\t4.53xxxx+xx\tnull\t01-01-1943\nCruz\tnnn Xxxxxx Xxxx\tUS\t63\t8413198ee9c31c865ee06539ae06a608\txxx-xx-3563\t4.55xxx+xx\tnull\t01-01-1967\nLawrence\tnnnn Xxxxxxxxxxx Xxxx\tUS\t70\t51af1cf20bed6174a50deb2874710c37\txxx-xx-9699\t4.91xxxx+xx\tnull\t01-01-1959\nMarroquin\tnnnn Xxxxxxx Xxxxx\tUS\t50\t458cbbca8a3f5891b34f39bc9ad5f86f\txxx-xx-8286\t4.53xxxx+xx\tnull\t01-01-1972\nEide\tnnnn Xxxxxx Xxxxxx\tUS\t45\t25d00bc044cba1e1b8e5f84b28e970f5\txxx-xx-6762\t4.71xxxx+xx\tnull\t01-01-1980\nMiller\tnnnn Xxxxxxx Xxxx\tUS\t35\ta851cadfd9f537f274381a2d1c7e84f7\txxx-xx-2609\t4.71xxxx+xx\tnull\t01-01-1996\n"
+            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nSurname\tXxxxxxXxxxxxx\tCountry\tnull\tdc647eb65e6711e155375218212b3964\txxxxxxalID\tCCNuxxxx\tnull\tnull\nPowers\tnnnn Xxxxxxxx Xxxxx\tUS\t53\t94ffd65a44c3e687acd02e1505252a67\txxx-xx-3016\t5.49xxxx+xx\tnull\t01-01-1973\nWhitman\tnnnn Xxxxxxx Xxxxx\tUS\t54\t1e1ecfa7a73510ff67c68a8b3a885c84\txxx-xx-8255\t4.55xxxx+xx\tnull\t01-01-1977\nMarone\tnnn Xxxxx Xxxxx\tUS\t59\t09d628024cc60a249915154ce91a7738\txxx-xx-6142\t4.53xxxx+xx\tnull\t01-01-1977\nHarp\tnnnn Xxx Xxxx Xxxx\tUS\t37\td7be19d6fd7300c1d5caf6c628c2d584\txxx-xx-4018\t5.20xxxx+xx\tnull\t01-01-1997\nPereira\tnnnn Xxxxxxxx Xxxxxx\tUS\t90\t3c4f5f537a9b533dba234baa43a0a5fd\txxx-xx-1927\t5.38xxxx+xx\tnull\t01-01-1938\nBlackburn\tnnn Xxxxxxx Xxxx\tUS\t51\t2ce7e2d61505161888fa154328a2bf75\txxx-xx-7903\t5.53xxxx+xx\tnull\t01-01-1965\nGonzalez\tnnnn Xxxxx Xxxx\tUS\t29\t6082455e5d7d7055ca77088aff15075b\txxx-xx-2582\t4.71xxxx+xx\tnull\t01-01-1995\nHelton\tnnnn Xxxxxxx Xxxxx\tUS\t54\t9abf755bf7b69a9a6381b37e6ba96028\txxx-xx-4291\t5.25xxxx+xx\tnull\t01-01-1975\nMei\tnnn Xxxxx Xxxxxx\tUS\t97\t156be6018ef5288da1dd77a891d10a8c\txxx-xx-8366\t5.20xxxx+xx\tnull\t01-01-1941\nGoldberg\tnnnn Xxxxx Xxxxx\tUS\t77\tab8ab22dea8ee912a0227e9559342779\txxx-xx-4937\t4.55xxxx+xx\tnull\t01-01-1944\nWinkler\tnnnn Xxxxx Xxxx\tUS\t59\te0f025f67c34f7fed711afdd26f6020d\txxx-xx-3193\t5.43xxxx+xx\tnull\t01-01-1976\nThompson\tnnnn Xxxxx Xxxx Xxxxx\tUS\t74\t32af980dbf080c58ab15d17ae5b6c0d4\txxx-xx-5747\t4.55xxxx+xx\tnull\t01-01-1956\nAnderson\tnnnn Xxxxxxxxx Xxxxx\tUS\t59\t7ac52652087f699e70d481d9c03c5d36\txxx-xx-0336\t5.58xxxx+xx\tnull\t01-01-1974\nMejia\tnnnn Xxx Xxxx\tUS\t70\t0872e12366c7ba3ead02359b91e9fe29\txxx-xx-0064\t5.35xxxx+xx\tnull\t01-01-1961\nNoland\tnnnn Xxxxxx Xxxxxx\tUS\t36\t977cac895173e76b6414468a9812a6f0\txxx-xx-3798\t4.48xxx+xx\tnull\t01-01-1988\nHaynes\tnnnn Xxxxxxxxxx Xxxxx Xxxxxx\tUS\t26\tc1d2204dc93e7938b62166958c9c4fc5\txxx-xx-8147\t4.91xxx+xx\tnull\t01-01-1996\nDion\tnnnn Xxxxxx Xxxx\tUS\t65\t0cee4b8f8a5d49e41a5386c88978a435\txxx-xx-2587\t5.53xxxx+xx\tnull\t01-01-1971\nButler\tnnnn Xxxxx Xxxxxx\tUS\t49\t26b959e7aae9e3127e9df6a0c43857ed\txxx-xx-6719\t4.48xxxx+xx\tnull\t01-01-1977\nBigelow\tnnnn Xxxx Xxxxxx Xxxx\tUS\t51\tfc8cc156752b47ad5c176f49a887e0b7\txxx-xx-9172\t4.53xxxx+xx\tnull\t01-01-1970\nWalsh\tnnnn Xxxxx Xxxxx Xxxxx\tUS\t66\tfc0d012751ec0d1d517cd506dd8c882f\txxx-xx-3610\t4.55xxx+xx\tnull\t01-01-1965\nSheets\tnnnn Xxxxxx Xxxxxx\tUS\t24\td44b811e60b1386454660da13f703098\txxx-xx-5026\t4.91xxxx+xx\tnull\t01-01-1997\nParks\tnnnn Xxxxx Xxxxxx\tUS\t95\t1047ff9eaad215de78c22248ff55a142\txxx-xx-2077\t4.53xxxx+xx\tnull\t01-01-1940\nHelm\tnnnn Xxxxxxxx Xxx\tUS\t62\tf85cabce3b3704d4140634adcb674ace\txxx-xx-1168\t5.22xxxx+xx\tnull\t01-01-1966\nBrinegar\tnnnn Xxxxxxxxx Xxxxx\tUS\t31\t1eb11876945078ab3e6828c11112f2ff\txxx-xx-7445\t4.53xxxx+xx\tnull\t01-01-1994\nMcKinney\tnnnn Xxxxxxxxx Xxxxx\tUS\t63\t4c69a2cb9ac4675c137fe7453491bc2d\txxx-xx-9133\t5.59xxxx+xx\tnull\t01-01-1955\nBoehm\tnnnn Xxxxxx Xxxxxxx\tUS\t31\t22187f7cb3cf94a3250cedffcd479514\txxx-xx-4169\t4.53xxxx+xx\tnull\t01-01-1997\nBaker\tnnnn Xxxxxxx Xxxxxx\tUS\t82\t6f3f037cf53b9fd012d47be26b0846a9\txxx-xx-1699\t5.57xxxx+xx\tnull\t01-01-1941\nSmith\tnnnn Xxxxxxxxxx Xxxx\tUS\t42\t06f7ce73e011aa586292a8d5d4e3c9da\txxx-xx-3370\t5.11xxxx+xx\tnull\t01-01-1993\nDunton\tnnnn Xxxxxxxx Xxxxxx\tUS\t44\tdb678435727f03b941ecab8787cda0fe\txxx-xx-9390\t4.53xxxx+xx\tnull\t01-01-1985\nWiley\tnnnn Xxxxxx Xxxxxx\tUS\t38\t8e076c9ce940cf0c3df9efcf7ea51d06\txxx-xx-3457\t5.41xxxx+xx\tnull\t01-01-1984\nWeatherholt\tnnnn Xxxxxxx Xxxxx\tUS\t24\t50e99b15f06cf68aba708ea8bc9dd9f6\txxx-xx-1830\t4.48xxxx+xx\tnull\t01-01-1997\nJohnson\tnnnn Xxxx Xxx Xxxxx\tUS\t49\t379a59038df1b04667fbc557d29fd10c\txxx-xx-5368\t5.18xxxx+xx\tnull\t01-01-1979\nKilgore\tnnnn Xxxxxxxxx Xxxxxx\tUS\t102\tafb60f5a232d31004249d5ac0888a26f\txxx-xx-6347\t4.48xxxx+xx\tnull\t01-01-2032\nMorgan\tnnnn Xxxxxxx Xxxx\tUS\t63\tddd3104f736c5749825e995c57c37010\txxx-xx-9265\t5.39xxxx+xx\tnull\t01-01-1958\nSmith\tnnn Xxxxxx Xxxxxx\tUS\t83\td51017ca9a5ded5996fa0797e4b3e2a5\txxx-xx-0793\t4.53xxxx+xx\tnull\t01-01-1945\nHarrison\tnnn Xxx Xxx\tUS\t58\t7445255c5747d629e84797626c605c05\txxx-xx-9518\t5.51xxxx+xx\tnull\t01-01-1968\nHall\tnnn Xxxxxx Xxxxxx\tUS\t37\t7435b5bfd8ef6046b1922e98d6e3a678\txxx-xx-7908\t4.48xxxx+xx\tnull\t01-01-1989\nMunz\tnnnn Xxxxxxx Xxxxxx\tUS\t48\t8d883e278cda6f8feef3785103078696\txxx-xx-4274\t5.33xxxx+xx\tnull\t01-01-1971\nMcNulty\tnnnn Xxxxxxxx Xxxx\tUS\t33\tee339cebb368634ad642f938a1ce51e0\txxx-xx-9733\t5.40xxxx+xx\tnull\t01-01-1989\nGriffith\tnnnn Xxxxxxxx Xxxxxx\tUS\t52\tbe6530d505fb0a2a62d65083d6c6740b\txxx-xx-4328\t5.47xxxx+xx\tnull\t01-01-1974\nHarris\tnnnn Xxxxxxx Xxxxxx\tUS\t88\t1e2d60395e037ac254e4effd32387a5f\txxx-xx-2228\t4.48xxxx+xx\tnull\t01-01-1939\nBaker\tnnn Xxxxxxxx Xxxxxx\tUS\t82\ta4a4f1bb88bac411d2712547baefe279\txxx-xx-3961\t5.36xxxx+xx\tnull\t01-01-1955\nClark\tnnnn Xxxxx Xxx Xxxxx\tUS\t45\t5eea932c7404df02c9c56e976488ce3e\txxx-xx-8413\t5.23xxxx+xx\tnull\t01-01-1974\nHammonds\tnnnn Xxxxxx Xxxxxx\tUS\t85\t380ddee6fd7b0aa8ab60dc09776fe08f\txxx-xx-1898\t4.53xxxx+xx\tnull\t01-01-1943\nCruz\tnnn Xxxxxx Xxxx\tUS\t58\t8413198ee9c31c865ee06539ae06a608\txxx-xx-3563\t4.55xxx+xx\tnull\t01-01-1967\nLawrence\tnnnn Xxxxxxxxxxx Xxxx\tUS\t63\t51af1cf20bed6174a50deb2874710c37\txxx-xx-9699\t4.91xxxx+xx\tnull\t01-01-1959\nMarroquin\tnnnn Xxxxxxx Xxxxx\tUS\t56\t458cbbca8a3f5891b34f39bc9ad5f86f\txxx-xx-8286\t4.53xxxx+xx\tnull\t01-01-1972\nEide\tnnnn Xxxxxx Xxxxxx\tUS\t50\t25d00bc044cba1e1b8e5f84b28e970f5\txxx-xx-6762\t4.71xxxx+xx\tnull\t01-01-1980\nMiller\tnnnn Xxxxxxx Xxxx\tUS\t32\ta851cadfd9f537f274381a2d1c7e84f7\txxx-xx-2609\t4.71xxxx+xx\tnull\t01-01-1996\n"
           }
         ]
       },
@@ -13849,47 +13855,47 @@
         "columnNames": [
           {
             "name": "surname",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "streetaddress",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           },
           {
             "name": "country",
-            "index": 2.0,
+            "index": 2,
             "aggr": "sum"
           },
           {
             "name": "age",
-            "index": 3.0,
+            "index": 3,
             "aggr": "sum"
           },
           {
             "name": "password",
-            "index": 4.0,
+            "index": 4,
             "aggr": "sum"
           },
           {
             "name": "nationalid",
-            "index": 5.0,
+            "index": 5,
             "aggr": "sum"
           },
           {
             "name": "ccnumber",
-            "index": 6.0,
+            "index": 6,
             "aggr": "sum"
           },
           {
             "name": "mrn",
-            "index": 7.0,
+            "index": 7,
             "aggr": "sum"
           },
           {
             "name": "birthday",
-            "index": 8.0,
+            "index": 8,
             "aggr": "sum"
           }
         ],
@@ -14449,20 +14455,21 @@
       "apps": [],
       "jobName": "paragraph_1480308629957_4078474",
       "id": "20160923-075335_1656987170",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:15:37 AM",
-      "dateFinished": "Oct 14, 2017 3:15:38 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:57:42+0000",
+      "dateFinished": "2017-12-07T23:57:42+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2080"
     },
     {
-      "title": "Prohibition policy - prevent join of Zipcode, MRN, Blood group",
-      "text": "%jdbc(hive)\nselect zipcode, mrn, bloodtype from hortoniabank.ww_customers\nlimit 10",
+      "title": "Prohibition policy - prevent join of Zipcode, Insuranceid, Blood group",
+      "text": "%jdbc(hive)\nselect zipcode, insuranceid, bloodtype from hortoniabank.ww_customers\nlimit 10",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:15:52 AM",
+      "dateUpdated": "2017-12-07T23:58:00+0000",
       "config": {
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0,
+        "colWidth": 12,
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -14470,19 +14477,19 @@
           {
             "graph": {
               "mode": "table",
-              "height": 300.0,
+              "height": 300,
               "optionOpen": false,
               "keys": [
                 {
                   "name": "ww_customers.gender",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "ww_customers.title",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -14490,12 +14497,12 @@
               "scatter": {
                 "xAxis": {
                   "name": "ww_customers.gender",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "ww_customers.title",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -14516,7 +14523,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:262)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:248)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:300)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:241)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:649)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:733)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:323)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:226)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:470)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:457)\n\tat sun.reflect.GeneratedMethodAccessor66.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy48.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:313)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1317)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1302)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1221)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1215)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hortoniabank/ww_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
           }
         ]
       },
@@ -14528,19 +14535,20 @@
       "apps": [],
       "jobName": "paragraph_1480308629961_2539479",
       "id": "20160923-075040_806201705",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:15:52 AM",
-      "dateFinished": "Oct 14, 2017 3:15:52 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:58:00+0000",
+      "dateFinished": "2017-12-07T23:58:00+0000",
       "status": "ERROR",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2081"
     },
     {
-      "title": "Prohibition policy - dropping MRN allows query to run",
+      "title": "Prohibition policy - dropping insuranceid allows query to run",
       "text": "%jdbc(hive)\nselect zipcode, bloodtype from hortoniabank.ww_customers\nlimit 10",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:17:17 AM",
+      "dateUpdated": "2017-12-07T23:58:04+0000",
       "config": {
-        "colWidth": 12.0,
+        "colWidth": 12,
         "enabled": true,
         "results": {},
         "editorSetting": {
@@ -14566,38 +14574,39 @@
       "apps": [],
       "jobName": "paragraph_1507950972060_-139740069",
       "id": "20171014-031612_1756057609",
-      "dateCreated": "Oct 14, 2017 3:16:12 AM",
-      "dateStarted": "Oct 14, 2017 3:16:24 AM",
-      "dateFinished": "Oct 14, 2017 3:16:24 AM",
+      "dateCreated": "2017-10-14T03:16:12+0000",
+      "dateStarted": "2017-12-07T23:58:04+0000",
+      "dateFinished": "2017-12-07T23:58:04+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2082"
     },
     {
-      "title": "Tage based policy - fed_tax is tagged with EXPIRED_ON which is restricted",
-      "text": "%jdbc(hive)\nselect fed_tax, ssn, state_tax from finance.tax_2015",
+      "title": "Tage based policy - fed_tax is tagged with EXPIRED_ON which is restricted to analysts",
+      "text": "%jdbc(hive)\nselect fed_tax from finance.tax_2015",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:17:39 AM",
+      "dateUpdated": "2017-12-07T23:58:09+0000",
       "config": {
-        "colWidth": 12.0,
+        "colWidth": 12,
         "editorMode": "ace/mode/sql",
         "enabled": true,
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 300.0,
+              "height": 300,
               "optionOpen": false,
               "keys": [
                 {
                   "name": "tax_2015.ssn",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 }
               ],
               "values": [
                 {
                   "name": "tax_2015.fed_tax",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               ],
@@ -14605,12 +14614,12 @@
               "scatter": {
                 "xAxis": {
                   "name": "tax_2015.ssn",
-                  "index": 0.0,
+                  "index": 0,
                   "aggr": "sum"
                 },
                 "yAxis": {
                   "name": "tax_2015.fed_tax",
-                  "index": 1.0,
+                  "index": 1,
                   "aggr": "sum"
                 }
               }
@@ -14632,7 +14641,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:262)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:248)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:300)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:241)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:649)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:733)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:323)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:226)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:470)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:457)\n\tat sun.reflect.GeneratedMethodAccessor66.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy48.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:313)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1317)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1302)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1221)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1215)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
           }
         ]
       },
@@ -14700,22 +14709,22 @@
         "columnNames": [
           {
             "name": "tax_2015.ssn",
-            "index": 0.0,
+            "index": 0,
             "aggr": "sum"
           },
           {
             "name": "tax_2015.fed_tax",
-            "index": 1.0,
+            "index": 1,
             "aggr": "sum"
           },
           {
             "name": "tax_2015.state_tax",
-            "index": 2.0,
+            "index": 2,
             "aggr": "sum"
           },
           {
             "name": "tax_2015.local_tax",
-            "index": 3.0,
+            "index": 3,
             "aggr": "sum"
           }
         ],
@@ -14743,24 +14752,64 @@
       "apps": [],
       "jobName": "paragraph_1480308629961_2539479",
       "id": "20160925-071354_682186859",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:01:10 AM",
-      "dateFinished": "Oct 14, 2017 3:01:10 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:58:09+0000",
+      "dateFinished": "2017-12-07T23:58:09+0000",
       "status": "ERROR",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2083"
     },
     {
-      "title": "Querying for columns other than fed_tax works",
-      "text": "%jdbc(hive)\nselect ssn, state_tax from finance.tax_2015",
+      "title": "Tage based policy - ssn is tagged with PII which is restricted to analysts",
+      "text": "%jdbc(hive)\nselect ssn from finance.tax_2015",
       "user": "joe_analyst",
-      "dateUpdated": "Oct 14, 2017 3:02:01 AM",
+      "dateUpdated": "2017-12-07T23:58:11+0000",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [finance/tax_2015/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1512006307470_1184413464",
+      "id": "20171130-014507_1288287350",
+      "dateCreated": "2017-11-30T01:45:07+0000",
+      "dateStarted": "2017-12-07T23:58:11+0000",
+      "dateFinished": "2017-12-07T23:58:11+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2084"
+    },
+    {
+      "title": "Querying for columns other than fed_tax/ssn works",
+      "text": "%jdbc(hive)\nselect state_tax from finance.tax_2015",
+      "user": "joe_analyst",
+      "dateUpdated": "2017-12-07T23:58:14+0000",
       "config": {
         "editorMode": "ace/mode/sql",
-        "colWidth": 12.0,
+        "colWidth": 12,
         "enabled": true,
         "graph": {
           "mode": "table",
-          "height": 300.0,
+          "height": 300,
           "optionOpen": false,
           "keys": [],
           "values": [],
@@ -14783,32 +14832,81 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "ssn\tstate_tax\n123-45-6789\t5750\n234-56-7890\t8765\n345-67-8901\t10123\n"
+            "data": "state_tax\n5750\n8765\n10123\n"
           }
         ]
       },
       "apps": [],
       "jobName": "paragraph_1480308629961_2539479",
       "id": "20160923-080610_1981371448",
-      "dateCreated": "Nov 28, 2016 4:50:29 AM",
-      "dateStarted": "Oct 14, 2017 3:02:01 AM",
-      "dateFinished": "Oct 14, 2017 3:02:01 AM",
+      "dateCreated": "2016-11-28T04:50:29+0000",
+      "dateStarted": "2017-12-07T23:58:14+0000",
+      "dateFinished": "2017-12-07T23:58:14+0000",
       "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2085"
+    },
+    {
+      "title": "Tag based policy: Cannot access table tagged with DATA_QUALITY score < 60%",
+      "text": "%jdbc(hive)\nselect * from cost_savings.claim_savings limit 5",
+      "user": "joe_analyst",
+      "dateUpdated": "2017-12-07T23:58:17+0000",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [cost_savings/claim_savings/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [cost_savings/claim_savings/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [cost_savings/claim_savings/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1507949718183_131146704",
+      "id": "20171014-025518_429189642",
+      "dateCreated": "2017-10-14T02:55:18+0000",
+      "dateStarted": "2017-12-07T23:58:17+0000",
+      "dateFinished": "2017-12-07T23:58:17+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2086"
     },
     {
       "user": "joe_analyst",
-      "config": {},
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala"
+      },
       "settings": {
         "params": {},
         "forms": {}
       },
       "apps": [],
-      "jobName": "paragraph_1507949718183_131146704",
-      "id": "20171014-025518_429189642",
-      "dateCreated": "Oct 14, 2017 2:55:18 AM",
+      "jobName": "paragraph_1512009001112_-626365410",
+      "id": "20171130-023001_1880969110",
+      "dateCreated": "2017-11-30T02:30:01+0000",
       "status": "READY",
-      "progressUpdateIntervalMs": 500
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:2087"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Joe Analyst",
@@ -14821,7 +14919,8 @@
     "2CKEKWY8Z:shared_process": []
   },
   "config": {
-    "looknfeel": "default"
+    "looknfeel": "default",
+    "personalizedMode": "false"
   },
   "info": {}
 }

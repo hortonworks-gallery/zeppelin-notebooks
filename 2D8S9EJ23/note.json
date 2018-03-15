@@ -1,0 +1,579 @@
+{
+   "paragraphs":[
+      {
+         "text":"%sh\nspark-submit --version",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:21:19-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"sh",
+               "editOnDblClick":false
+            },
+            "editorMode":"ace/mode/sh"
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"SPARK_MAJOR_VERSION is set to 2, using Spark2\nWelcome to\n      ____              __\n     / __/__  ___ _____/ /__\n    _\\ \\/ _ \\/ _ `/ __/  '_/\n   /___/ .__/\\_,_/_/ /_/\\_\\   version 2.2.0.2.6.3.0-235\n      /_/\n                        \nUsing Scala version 2.11.8, OpenJDK 64-Bit Server VM, 1.8.0_161\nBranch HEAD\nCompiled by user jenkins on 2017-10-30T03:44:19Z\nRevision 4842c452e9a0ae6543f3749aec7bff92e82434e1\nUrl git@github.com:hortonworks/spark2.git\nType --help for more information.\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520975451914_-427716871",
+         "id":"20180313-171051_1774908151",
+         "dateCreated":"2018-03-13T17:10:51-0400",
+         "dateStarted":"2018-03-14T20:21:22-0400",
+         "dateFinished":"2018-03-14T20:21:24-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "focus":true,
+         "$$hashKey":"object:341"
+      },
+      {
+         "title":"Data Source",
+         "text":"%sh\ncurl -i -L \"http://172.31.219.87:50070/webhdfs/v1/user/zeppelin/CCFraud.csv?op=OPEN\" | tail -n 5",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:21:28-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"sh",
+               "editOnDblClick":false
+            },
+            "editorMode":"ace/mode/sh",
+            "title":true
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n\r100  1512  100  1512    0     0  15089      0 --:--:-- --:--:-- --:--:-- 15089\n1,19123,7.20,9.50,11.20\r\n1,19123,0.90,1.10,16.60\r\n1,19123,11.40,0.90,1.30\r\n1,19123,1.80,15.60,0.80\r\n1,19123,0.30,2.04,17.50"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1521000468334_838468221",
+         "id":"20180314-000748_964252568",
+         "dateCreated":"2018-03-14T00:07:48-0400",
+         "dateStarted":"2018-03-14T20:21:28-0400",
+         "dateFinished":"2018-03-14T20:21:29-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:342"
+      },
+      {
+         "text":"import org.apache.spark.sql.Row\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.ml.classification.ProbabilisticClassifier\nimport org.apache.spark.ml.classification.LogisticRegression\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\nimport org.apache.spark.mllib.util.MLUtils\nimport org.apache.spark.ml.feature.VectorAssembler\nimport org.apache.spark.ml.linalg.Vectors\nimport org.apache.spark.sql.types._\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS\nimport org.apache.spark.ml.classification.{BinaryLogisticRegressionSummary, LogisticRegression}",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:32:50-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "editOnDblClick":false,
+               "language":"scala"
+            },
+            "editorMode":"ace/mode/scala",
+            "editorHide":false,
+            "tableHide":false
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"import org.apache.spark.sql.Row\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.ml.classification.ProbabilisticClassifier\nimport org.apache.spark.ml.classification.LogisticRegression\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\nimport org.apache.spark.mllib.util.MLUtils\nimport org.apache.spark.ml.feature.VectorAssembler\nimport org.apache.spark.ml.linalg.Vectors\nimport org.apache.spark.sql.types._\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS\nimport org.apache.spark.ml.classification.{BinaryLogisticRegressionSummary, LogisticRegression}\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520893036135_1516307342",
+         "id":"20180312-181716_1529814573",
+         "dateCreated":"2018-03-12T18:17:16-0400",
+         "dateStarted":"2018-03-14T20:29:57-0400",
+         "dateFinished":"2018-03-14T20:29:59-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:343"
+      },
+      {
+         "title":"Load Data",
+         "text":"// Load training data, (Note: mention your ip address for HDFS)\nval data = sqlContext.read.format(\"com.databricks.spark.csv\").option(\"header\", \"false\").option(\"inferSchema\",\"true\").load(\"hdfs://172.31.219.87:8020/user/zeppelin/CCFraud.csv\")\n\n// show schema and dataset\ndata.printSchema\ndata.show(10)",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:33:33-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"scala",
+               "editOnDblClick":false
+            },
+            "editorMode":"ace/mode/scala",
+            "title":true
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"data: org.apache.spark.sql.DataFrame = [_c0: int, _c1: int ... 3 more fields]\nroot\n |-- _c0: integer (nullable = true)\n |-- _c1: integer (nullable = true)\n |-- _c2: double (nullable = true)\n |-- _c3: double (nullable = true)\n |-- _c4: double (nullable = true)\n\n+---+-----+----+----+----+\n|_c0|  _c1| _c2| _c3| _c4|\n+---+-----+----+----+----+\n|  0|19123|0.85|2.05|0.78|\n|  0|19123|0.96|2.05|0.78|\n|  0|19123|1.09|2.05|0.78|\n|  0|19123|0.21|2.05|0.78|\n|  0|19123|0.39|2.05| 1.3|\n|  0|19123|0.08|2.44|0.24|\n|  1|19123|12.0| 2.0| 3.0|\n|  1|19123| 2.1|22.4| 3.1|\n|  1|19123| 8.0| 6.5| 9.7|\n|  0|19123|0.73|2.23|0.43|\n+---+-----+----+----+----+\nonly showing top 10 rows\n\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520975975655_-171523365",
+         "id":"20180313-171935_535187626",
+         "dateCreated":"2018-03-13T17:19:35-0400",
+         "dateStarted":"2018-03-14T20:30:37-0400",
+         "dateFinished":"2018-03-14T20:30:58-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:344"
+      },
+      {
+         "title":"Create Train and Test Data",
+         "text":"// create feature vector\nval assembler =  new VectorAssembler()\n  .setInputCols(Array(\"_c2\", \"_c3\", \"_c4\"))\n  .setOutputCol(\"features\")\n  \n// assemble a new vector from dataframe\nval df1 = assembler.transform(data).select($\"_c0\".cast(DoubleType).as(\"label\"), $\"features\")\n\n// Split the data into train and test\nval splits = df1.randomSplit(Array(7.0, 3.0), seed = 1234L)\nval (train, test) = (splits(0), splits(1))\n\ntest.count\ntrain.count",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:31:46-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"scala"
+            },
+            "editorMode":"ace/mode/scala",
+            "title":true
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"assembler: org.apache.spark.ml.feature.VectorAssembler = vecAssembler_9d347a103dbe\ndf1: org.apache.spark.sql.DataFrame = [label: double, features: vector]\nsplits: Array[org.apache.spark.sql.Dataset[org.apache.spark.sql.Row]] = Array([label: double, features: vector], [label: double, features: vector])\ntrain: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [label: double, features: vector]\ntest: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [label: double, features: vector]\nres13: Long = 14\nres14: Long = 48\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520894809511_-1921142788",
+         "id":"20180312-184649_495466714",
+         "dateCreated":"2018-03-12T18:46:49-0400",
+         "dateStarted":"2018-03-14T20:31:46-0400",
+         "dateFinished":"2018-03-14T20:31:53-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:345"
+      },
+      {
+         "text":"//register as temp table\ndata.toDF.registerTempTable(\"Data\")",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:31:57-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"scala"
+            },
+            "editorMode":"ace/mode/scala"
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"warning: there was one deprecation warning; re-run with -deprecation for details\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1521000300948_-1183998048",
+         "id":"20180314-000500_1968468640",
+         "dateCreated":"2018-03-14T00:05:00-0400",
+         "dateStarted":"2018-03-14T20:31:57-0400",
+         "dateFinished":"2018-03-14T20:31:57-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:346"
+      },
+      {
+         "text":"%sql\nselect * from Data limit 10",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:31:59-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"sql"
+            },
+            "editorMode":"ace/mode/sql"
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TABLE",
+                  "data":"_c0\t_c1\t_c2\t_c3\t_c4\n0\t19123\t0.85\t2.05\t0.78\n0\t19123\t0.96\t2.05\t0.78\n0\t19123\t1.09\t2.05\t0.78\n0\t19123\t0.21\t2.05\t0.78\n0\t19123\t0.39\t2.05\t1.3\n0\t19123\t0.08\t2.44\t0.24\n1\t19123\t12.0\t2.0\t3.0\n1\t19123\t2.1\t22.4\t3.1\n1\t19123\t8.0\t6.5\t9.7\n0\t19123\t0.73\t2.23\t0.43\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1521000308825_-215184993",
+         "id":"20180314-000508_842215994",
+         "dateCreated":"2018-03-14T00:05:08-0400",
+         "dateStarted":"2018-03-14T20:32:00-0400",
+         "dateFinished":"2018-03-14T20:32:00-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:347"
+      },
+      {
+         "title":"Build a model",
+         "text":"// create model\nval model = new LogisticRegression()\n  .setMaxIter(700)\n  .setRegParam(0.1)\n  .setElasticNetParam(0.8)\n  .setFamily(\"binomial\")\n\n// train model\nval rModel = model.fit(train)\n\n// Print the coefficients and intercepts for logistic regression with multinomial family\nprintln(s\"Multinomial coefficients: ${rModel.coefficientMatrix}\")\nprintln(s\"Multinomial intercepts: ${rModel.interceptVector}\")\n\nval trainingSummary = rModel.summary\n\n// Obtain the objective per iteration.\nval objectiveHistory = trainingSummary.objectiveHistory\nobjectiveHistory.foreach(loss => println(loss))\n\n// Obtain the metrics useful to judge performance on test data.\n// We cast the summary to a BinaryLogisticRegressionSummary since the problem is a\n// binary classification problem.\nval binarySummary = trainingSummary.asInstanceOf[BinaryLogisticRegressionSummary]\n\n// Obtain the receiver-operating characteristic as a dataframe and areaUnderROC.\nval roc = binarySummary.roc\nroc.show()\nprintln(binarySummary.areaUnderROC)\n\n// Set the model threshold to maximize F-Measure\nval fMeasure = binarySummary.fMeasureByThreshold\nval maxFMeasure = fMeasure.select(max(\"F-Measure\")).head().getDouble(0)\nval bestThreshold = fMeasure.where($\"F-Measure\" === maxFMeasure)\n  .select(\"threshold\").head().getDouble(0)\nrModel.setThreshold(bestThreshold)\n\n\n//save\n//model.save(\"/user/zeppelin/CreditFraudModel\")",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:32:04-0400",
+         "config":{
+            "colWidth":12,
+            "editorMode":"ace/mode/scala",
+            "results":[
+               {
+                  "graph":{
+                     "mode":"table",
+                     "height":300,
+                     "optionOpen":false,
+                     "keys":[
+
+                     ],
+                     "values":[
+
+                     ],
+                     "groups":[
+
+                     ],
+                     "scatter":{
+
+                     }
+                  }
+               }
+            ],
+            "enabled":true,
+            "editorSetting":{
+               "editOnDblClick":false,
+               "language":"scala"
+            },
+            "editorHide":false,
+            "tableHide":false,
+            "title":true
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"model: org.apache.spark.ml.classification.LogisticRegression = logreg_2b9f896204d6\nrModel: org.apache.spark.ml.classification.LogisticRegressionModel = logreg_2b9f896204d6\nMultinomial coefficients: 0.18575227244787798  0.02673919500598391  0.10793384098850714  \nMultinomial intercepts: [-1.4888359399500508]\ntrainingSummary: org.apache.spark.ml.classification.LogisticRegressionTrainingSummary = org.apache.spark.ml.classification.BinaryLogisticRegressionTrainingSummary@2897d940\nobjectiveHistory: Array[Double] = Array(0.6853142072764574, 0.6639616195635891, 0.57500503936484, 0.5445884891636131, 0.522940588028914, 0.516422497301394, 0.5155574615210339, 0.5151951004713109, 0.515148054725231, 0.5151366564476099, 0.5151365016291882, 0.5151364959015731, 0.5151364957884422, 0.5151364957722266)\n0.6853142072764574\n0.6639616195635891\n0.57500503936484\n0.5445884891636131\n0.522940588028914\n0.516422497301394\n0.5155574615210339\n0.5151951004713109\n0.515148054725231\n0.5151366564476099\n0.5151365016291882\n0.5151364959015731\n0.5151364957884422\n0.5151364957722266\nbinarySummary: org.apache.spark.ml.classification.BinaryLogisticRegressionSummary = org.apache.spark.ml.classification.BinaryLogisticRegressionTrainingSummary@2897d940\nroc: org.apache.spark.sql.DataFrame = [FPR: double, TPR: double]\n+--------------------+--------------------+\n|                 FPR|                 TPR|\n+--------------------+--------------------+\n|                 0.0|                 0.0|\n|                 0.0|0.047619047619047616|\n|                 0.0| 0.14285714285714285|\n|                 0.0| 0.19047619047619047|\n|                 0.0|  0.2857142857142857|\n|                 0.0| 0.38095238095238093|\n|                 0.0| 0.42857142857142855|\n|                 0.0|  0.5238095238095238|\n|                 0.0|  0.6190476190476191|\n|                 0.0|  0.7142857142857143|\n|                 0.0|  0.7619047619047619|\n|                 0.0|  0.8095238095238095|\n|                 0.0|  0.8571428571428571|\n|                 0.0|  0.9047619047619048|\n|                 0.0|                 1.0|\n|0.037037037037037035|                 1.0|\n| 0.07407407407407407|                 1.0|\n|  0.1111111111111111|                 1.0|\n| 0.14814814814814814|                 1.0|\n| 0.18518518518518517|                 1.0|\n+--------------------+--------------------+\nonly showing top 20 rows\n\n1.0\nfMeasure: org.apache.spark.sql.DataFrame = [threshold: double, F-Measure: double]\nmaxFMeasure: Double = 1.0\nbestThreshold: Double = 0.3427634737856114\nres38: rModel.type = logreg_2b9f896204d6\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520891857333_-977555642",
+         "id":"20160422-130535_1047679357",
+         "dateCreated":"2018-03-12T17:57:37-0400",
+         "dateStarted":"2018-03-14T20:32:04-0400",
+         "dateFinished":"2018-03-14T20:32:15-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:348"
+      },
+      {
+         "text":"%sql\nselect * from Data",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:32:14-0400",
+         "config":{
+            "colWidth":12,
+            "editorMode":"ace/mode/sql",
+            "results":[
+               {
+                  "graph":{
+                     "mode":"lineChart",
+                     "height":300,
+                     "optionOpen":false,
+                     "keys":[
+                        {
+                           "name":"_1",
+                           "index":0,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_2",
+                           "index":1,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_3",
+                           "index":2,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_4",
+                           "index":3,
+                           "aggr":"sum"
+                        }
+                     ],
+                     "values":[
+                        {
+                           "name":"_1",
+                           "index":0,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_2",
+                           "index":1,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_3",
+                           "index":2,
+                           "aggr":"sum"
+                        },
+                        {
+                           "name":"_4",
+                           "index":3,
+                           "aggr":"sum"
+                        }
+                     ],
+                     "groups":[
+
+                     ],
+                     "scatter":{
+                        "xAxis":{
+                           "name":"_1",
+                           "index":0,
+                           "aggr":"sum"
+                        },
+                        "yAxis":{
+                           "name":"_2",
+                           "index":1,
+                           "aggr":"sum"
+                        }
+                     }
+                  },
+                  "helium":{
+
+                  }
+               }
+            ],
+            "enabled":true,
+            "editorSetting":{
+               "language":"sql"
+            }
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TABLE",
+                  "data":"_c0\t_c1\t_c2\t_c3\t_c4\n0\t19123\t0.85\t2.05\t0.78\n0\t19123\t0.96\t2.05\t0.78\n0\t19123\t1.09\t2.05\t0.78\n0\t19123\t0.21\t2.05\t0.78\n0\t19123\t0.39\t2.05\t1.3\n0\t19123\t0.08\t2.44\t0.24\n1\t19123\t12.0\t2.0\t3.0\n1\t19123\t2.1\t22.4\t3.1\n1\t19123\t8.0\t6.5\t9.7\n0\t19123\t0.73\t2.23\t0.43\n0\t19123\t0.77\t2.23\t1.3\n0\t19123\t1.65\t2.05\t0.51\n0\t19123\t0.79\t2.05\t0.51\n0\t19123\t0.61\t2.05\t1.54\n0\t19123\t0.03\t2.05\t1.3\n0\t19123\t1.43\t2.05\t1.54\n0\t19123\t1.37\t2.05\t1.26\n1\t19123\t1.8\t15.6\t0.8\n1\t19123\t0.3\t2.04\t17.5\n0\t19123\t1.61\t2.05\t0.74\n0\t19123\t1.31\t2.05\t1.3\n0\t19123\t1.32\t2.05\t0.51\n0\t19123\t0.95\t2.05\t0.51\n0\t19123\t1.01\t2.05\t1.54\n0\t19123\t0.73\t2.44\t1.54\n0\t19123\t0.06\t2.23\t1.12\n0\t19123\t0.99\t2.23\t0.04\n0\t19123\t1.65\t2.05\t1.22\n0\t19123\t0.09\t2.05\t1.54\n0\t19123\t1.56\t2.05\t0.24\n0\t19123\t1.46\t2.05\t1.3\n0\t19123\t1.57\t2.05\t0.74\n0\t19123\t0.79\t2.05\t1.22\n0\t19123\t0.96\t2.05\t0.78\n0\t19123\t0.06\t2.05\t1.06\n0\t19123\t0.78\t2.05\t1.22\n0\t19123\t0.72\t2.05\t1.22\n0\t19123\t1.9\t2.05\t0.04\n0\t19123\t0.3\t2.05\t1.54\n0\t19123\t0.5\t2.05\t1.26\n1\t19123\t12.0\t2.0\t3.0\n1\t19123\t2.1\t22.4\t3.1\n1\t19123\t8.0\t6.5\t9.7\n1\t19123\t5.9\t2.0\t33.3\n1\t19123\t14.0\t3.3\t4.1\n1\t19123\t1.4\t15.7\t2.0\n1\t19123\t7.2\t9.5\t11.2\n1\t19123\t0.9\t1.1\t16.6\n1\t19123\t11.4\t0.9\t1.3\n1\t19123\t1.8\t15.6\t0.8\n1\t19123\t0.3\t2.04\t10.5\n1\t19123\t22.0\t2.0\t3.0\n1\t19123\t2.1\t22.4\t3.1\n1\t19123\t8.0\t67.5\t19.7\n1\t19123\t5.9\t2.0\t33.3\n1\t19123\t14.0\t3.3\t4.1\n1\t19123\t1.4\t15.7\t2.0\n1\t19123\t7.2\t9.5\t11.2\n1\t19123\t0.9\t1.1\t16.6\n1\t19123\t11.4\t0.9\t1.3\n1\t19123\t1.8\t15.6\t0.8\n1\t19123\t0.3\t2.04\t17.5\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520891857336_-978709889",
+         "id":"20160422-132731_193522292",
+         "dateCreated":"2018-03-12T17:57:37-0400",
+         "dateStarted":"2018-03-14T20:32:15-0400",
+         "dateFinished":"2018-03-14T20:32:15-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:349"
+      },
+      {
+         "dateUpdated":"2018-03-12T17:57:37-0400",
+         "config":{
+            "colWidth":12,
+            "editorMode":"ace/mode/scala",
+            "graph":{
+               "mode":"table",
+               "height":300,
+               "optionOpen":false,
+               "keys":[
+
+               ],
+               "values":[
+
+               ],
+               "groups":[
+
+               ],
+               "scatter":{
+
+               }
+            },
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"scala"
+            }
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1520891857337_-979094638",
+         "id":"20160422-134041_1986121581",
+         "dateCreated":"2018-03-12T17:57:37-0400",
+         "status":"READY",
+         "errorMessage":"",
+         "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:350"
+      }
+   ],
+   "name":"Credit Fraud Detection ML",
+   "id":"2D8S9EJ23",
+   "angularObjects":{
+      "2CHS8UYQQ:shared_process":[
+
+      ],
+      "2CK8A9MEG:shared_process":[
+
+      ],
+      "2D9B74F52:shared_process":[
+
+      ],
+      "2CKAY1A8Y:shared_process":[
+
+      ],
+      "2CKEKWY8Z:shared_process":[
+
+      ]
+   },
+   "config":{
+      "looknfeel":"default",
+      "personalizedMode":"false"
+   },
+   "info":{
+
+   }
+}

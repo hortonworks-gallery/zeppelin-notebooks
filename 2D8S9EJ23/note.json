@@ -47,53 +47,6 @@
          "$$hashKey":"object:341"
       },
       {
-         "title":"Data Source",
-         "text":"%sh\ncurl -i -L \"http://172.31.219.87:50070/webhdfs/v1/user/zeppelin/CCFraud.csv?op=OPEN\" | tail -n 5",
-         "user":"admin",
-         "dateUpdated":"2018-03-14T20:21:28-0400",
-         "config":{
-            "colWidth":12,
-            "enabled":true,
-            "results":{
-
-            },
-            "editorSetting":{
-               "language":"sh",
-               "editOnDblClick":false
-            },
-            "editorMode":"ace/mode/sh",
-            "title":true
-         },
-         "settings":{
-            "params":{
-
-            },
-            "forms":{
-
-            }
-         },
-         "results":{
-            "code":"SUCCESS",
-            "msg":[
-               {
-                  "type":"TEXT",
-                  "data":"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n\r100  1512  100  1512    0     0  15089      0 --:--:-- --:--:-- --:--:-- 15089\n1,19123,7.20,9.50,11.20\r\n1,19123,0.90,1.10,16.60\r\n1,19123,11.40,0.90,1.30\r\n1,19123,1.80,15.60,0.80\r\n1,19123,0.30,2.04,17.50"
-               }
-            ]
-         },
-         "apps":[
-
-         ],
-         "jobName":"paragraph_1521000468334_838468221",
-         "id":"20180314-000748_964252568",
-         "dateCreated":"2018-03-14T00:07:48-0400",
-         "dateStarted":"2018-03-14T20:21:28-0400",
-         "dateFinished":"2018-03-14T20:21:29-0400",
-         "status":"FINISHED",
-         "progressUpdateIntervalMs":500,
-         "$$hashKey":"object:342"
-      },
-      {
          "text":"import org.apache.spark.sql.Row\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.ml.classification.ProbabilisticClassifier\nimport org.apache.spark.ml.classification.LogisticRegression\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\nimport org.apache.spark.mllib.util.MLUtils\nimport org.apache.spark.ml.feature.VectorAssembler\nimport org.apache.spark.ml.linalg.Vectors\nimport org.apache.spark.sql.types._\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.mllib.classification.LogisticRegressionWithLBFGS\nimport org.apache.spark.ml.classification.{BinaryLogisticRegressionSummary, LogisticRegression}",
          "user":"admin",
          "dateUpdated":"2018-03-14T20:32:50-0400",
@@ -138,13 +91,60 @@
          "dateFinished":"2018-03-14T20:29:59-0400",
          "status":"FINISHED",
          "progressUpdateIntervalMs":500,
+         "$$hashKey":"object:342"
+      },
+      {
+         "title":"Downloading Data to HDFS",
+         "text":"%sh\n\ncurl -sSL -O \"https://raw.githubusercontent.com/hortonworks-gallery/zeppelin-notebooks/master/2D8S9EJ23/training.csv\" \n\ncat training.csv | tail -n 5\n\nhadoop fs -mkdir -p /user/zeppelin/ccdemo\nhadoop fs -copyFromLocal -f training.csv /user/zeppelin/ccdemo/\n\nhadoop fs -ls /user/zeppelin/ccdemo/",
+         "user":"admin",
+         "dateUpdated":"2018-03-14T20:54:22-0400",
+         "config":{
+            "colWidth":12,
+            "enabled":true,
+            "results":{
+
+            },
+            "editorSetting":{
+               "language":"sh",
+               "editOnDblClick":false
+            },
+            "editorMode":"ace/mode/sh",
+            "title":true
+         },
+         "settings":{
+            "params":{
+
+            },
+            "forms":{
+
+            }
+         },
+         "results":{
+            "code":"SUCCESS",
+            "msg":[
+               {
+                  "type":"TEXT",
+                  "data":"1,19123,7.20,9.50,11.20\n1,19123,0.90,1.10,16.60\n1,19123,11.40,0.90,1.30\n1,19123,1.80,15.60,0.80\n1,19123,0.30,2.04,17.50\nFound 1 items\n-rw-r--r--   1 zeppelin hdfs       1452 2018-03-14 20:54 /user/zeppelin/ccdemo/training.csv\n"
+               }
+            ]
+         },
+         "apps":[
+
+         ],
+         "jobName":"paragraph_1521074577747_516501422",
+         "id":"20180314-204257_387312418",
+         "dateCreated":"2018-03-14T20:42:57-0400",
+         "dateStarted":"2018-03-14T20:54:11-0400",
+         "dateFinished":"2018-03-14T20:54:20-0400",
+         "status":"FINISHED",
+         "progressUpdateIntervalMs":500,
          "$$hashKey":"object:343"
       },
       {
-         "title":"Load Data",
-         "text":"// Load training data, (Note: mention your ip address for HDFS)\nval data = sqlContext.read.format(\"com.databricks.spark.csv\").option(\"header\", \"false\").option(\"inferSchema\",\"true\").load(\"hdfs://172.31.219.87:8020/user/zeppelin/CCFraud.csv\")\n\n// show schema and dataset\ndata.printSchema\ndata.show(10)",
+         "title":"Read Data",
+         "text":"// Load training data\nval data = sqlContext.read.format(\"com.databricks.spark.csv\").option(\"header\", \"false\").option(\"inferSchema\",\"true\").load(\"/user/zeppelin/ccdemo/training.csv\")\n\n// show schema and dataset\ndata.printSchema\ndata.show(10)",
          "user":"admin",
-         "dateUpdated":"2018-03-14T20:33:33-0400",
+         "dateUpdated":"2018-03-14T20:49:44-0400",
          "config":{
             "colWidth":12,
             "enabled":true,
@@ -181,8 +181,8 @@
          "jobName":"paragraph_1520975975655_-171523365",
          "id":"20180313-171935_535187626",
          "dateCreated":"2018-03-13T17:19:35-0400",
-         "dateStarted":"2018-03-14T20:30:37-0400",
-         "dateFinished":"2018-03-14T20:30:58-0400",
+         "dateStarted":"2018-03-14T20:49:06-0400",
+         "dateFinished":"2018-03-14T20:49:07-0400",
          "status":"FINISHED",
          "progressUpdateIntervalMs":500,
          "$$hashKey":"object:344"

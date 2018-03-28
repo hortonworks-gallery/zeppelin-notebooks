@@ -4,10 +4,10 @@
       "title": "Accessing US Customers fails with an Access Control violation",
       "text": "%jdbc(hive)\nselect * from hortoniabank.us_customers limit 10",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2017-12-07T23:54:27+0000",
+      "dateUpdated": "2018-03-28T06:13:08+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "colWidth": 6,
         "editorHide": false,
         "title": true,
@@ -49,7 +49,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -62,7 +62,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor121.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1866)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy47.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:324)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:148)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:228)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:264)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:479)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:466)\n\tat sun.reflect.GeneratedMethodAccessor42.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1869)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy46.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1377)\n\tat org.apache.hive.service.cli.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1362)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:562)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:856)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:644)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:511)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:321)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1224)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1218)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:146)\n\t... 26 more\n"
           }
         ]
       },
@@ -75,22 +75,22 @@
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160923-074955_889514713",
       "dateCreated": "2016-11-28T17:26:50+0000",
-      "dateStarted": "2017-12-07T23:54:27+0000",
-      "dateFinished": "2017-12-07T23:54:28+0000",
+      "dateStarted": "2018-03-28T06:13:08+0000",
+      "dateFinished": "2018-03-28T06:13:13+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:409"
+      "$$hashKey": "object:348"
     },
     {
       "title": "Customers by country - can only see EU customer data",
       "text": "%jdbc(hive)\nselect * from \n(select countryfull, count(*) num_customers from hortoniabank.ww_customers\ngroup by countryfull) s\norder by num_customers desc\nlimit 5",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2017-12-07T23:54:33+0000",
+      "dateUpdated": "2018-03-28T06:13:16+0000",
       "config": {
         "tableHide": false,
         "colWidth": 6,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -131,7 +131,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -236,11 +236,11 @@
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160925-072311_300749908",
       "dateCreated": "2016-11-28T17:26:50+0000",
-      "dateStarted": "2017-12-07T23:54:33+0000",
-      "dateFinished": "2017-12-07T23:54:49+0000",
+      "dateStarted": "2018-03-28T06:13:16+0000",
+      "dateFinished": "2018-03-28T06:13:37+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:410"
+      "$$hashKey": "object:349"
     },
     {
       "title": "Row Level Security - Customer data filtered to EU persons only based on location",
@@ -249,7 +249,7 @@
       "dateUpdated": "2017-12-07T23:54:54+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "colWidth": 12,
         "editorHide": false,
         "title": true,
@@ -268,7 +268,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -446,17 +446,17 @@
       "dateFinished": "2017-12-07T23:54:55+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:411"
+      "$$hashKey": "object:350"
     },
     {
       "title": "HR analyst can see unmasked records - but only for EU customers",
       "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers LIMIT 50",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2017-12-07T23:54:59+0000",
+      "dateUpdated": "2018-03-28T06:13:58+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
@@ -471,7 +471,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
         "title": true
@@ -2622,17 +2622,17 @@
       "jobName": "paragraph_1484095493257_2022483872",
       "id": "20170111-004453_2103984184",
       "dateCreated": "2017-01-11T00:44:53+0000",
-      "dateStarted": "2017-12-07T23:54:59+0000",
-      "dateFinished": "2017-12-07T23:55:00+0000",
+      "dateStarted": "2018-03-28T06:13:59+0000",
+      "dateFinished": "2018-03-28T06:14:06+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:412"
+      "$$hashKey": "object:351"
     },
     {
       "title": "HR analyst can access table tagged with DATA_QUALITY (even though it's score < 60%)",
       "text": "%jdbc(hive)\nselect * from cost_savings.claim_savings limit 5",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2017-12-07T23:55:32+0000",
+      "dateUpdated": "2018-03-28T06:14:15+0000",
       "config": {
         "colWidth": 12,
         "graph": {
@@ -2645,10 +2645,10 @@
           "scatter": {}
         },
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": {},
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
         "title": true
@@ -2670,11 +2670,11 @@
       "jobName": "paragraph_1483723760326_-2065386838",
       "id": "20170106-172920_1817992933",
       "dateCreated": "2017-01-06T17:29:20+0000",
-      "dateStarted": "2017-12-07T23:55:08+0000",
-      "dateFinished": "2017-12-07T23:55:08+0000",
+      "dateStarted": "2018-03-28T06:14:15+0000",
+      "dateFinished": "2018-03-28T06:14:15+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:413"
+      "$$hashKey": "object:352"
     },
     {
       "user": "ivanna_eu_hr",
@@ -2683,9 +2683,11 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "scala"
+          "language": "sh",
+          "editOnDblClick": false
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/sh",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -2695,9 +2697,89 @@
       "jobName": "paragraph_1512005425855_-1691066831",
       "id": "20171130-013025_1367550955",
       "dateCreated": "2017-11-30T01:30:25+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:353",
+      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM;\necho \"***Attempting to access T_FOREX as Ivanna***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Ivanna***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell",
+      "dateUpdated": "2018-03-28T06:15:36+0000",
+      "dateFinished": "2018-03-28T06:15:53+0000",
+      "dateStarted": "2018-03-28T06:15:36+0000",
+      "title": "HR analyst can access HBase table marked as SENSITIVE",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "***Attempting to access T_FOREX as Ivanna***...\nHBase Shell; enter 'help<RETURN>' for list of supported commands.\nType \"exit<RETURN>\" to leave the HBase Shell\nVersion 1.1.2.2.6.4.0-91, r2a88e694af7238290a5747f963a4fa0079c55bf9, Thu Jan  4 10:42:39 UTC 2018\n\nscan 'T_FOREX'\nROW  COLUMN+CELL\n0 row(s) in 0.3410 seconds\n\n****Attempting to access T_PRIVATE as Ivanna***...\nHBase Shell; enter 'help<RETURN>' for list of supported commands.\nType \"exit<RETURN>\" to leave the HBase Shell\nVersion 1.1.2.2.6.4.0-91, r2a88e694af7238290a5747f963a4fa0079c55bf9, Thu Jan  4 10:42:39 UTC 2018\n\nscan 'T_PRIVATE'\nROW  COLUMN+CELL\n0 row(s) in 0.3200 seconds\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sh\n\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\necho \"***Attempting to access PRIVATE topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-03-28T06:17:03+0000",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1522217736358_-1088186954",
+      "id": "20180328-061536_703725138",
+      "dateCreated": "2018-03-28T06:15:36+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:1496",
+      "dateFinished": "2018-03-28T06:17:08+0000",
+      "dateStarted": "2018-03-28T06:17:03+0000",
+      "title": "HR Analyst can access Kafka topic marked SENSITIVE",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "***Attempting to access FOREX topic as Ivanna***...\nUTC time,EUR/USD\n2018-03-26T09:00:00Z,1.231\n2018-03-26T10:00:00Z,1.232\n[2018-03-28 06:17:05,833] WARN TGT renewal thread has been interrupted and will exit. (org.apache.kafka.common.security.kerberos.KerberosLogin)\nProcessed a total of 3 messages\n***Attempting to access PRIVATE topic as Ivanna***...\n123-45-67890\n321-54-09876\n800-60-32982\n[2018-03-28 06:17:08,429] WARN TGT renewal thread has been interrupted and will exit. (org.apache.kafka.common.security.kerberos.KerberosLogin)\nProcessed a total of 3 messages\n"
+          }
+        ]
+      }
+    },
+    {
+      "text": "%sh\n",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-03-28T06:17:03+0000",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sh"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1522217823620_647507803",
+      "id": "20180328-061703_84498097",
+      "dateCreated": "2018-03-28T06:17:03+0000",
       "status": "READY",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:414"
+      "focus": true,
+      "$$hashKey": "object:1586"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivanna EU HR",

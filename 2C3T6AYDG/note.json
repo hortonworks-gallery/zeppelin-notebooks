@@ -2819,16 +2819,16 @@
       "progressUpdateIntervalMs": 500,
       "focus": true,
       "$$hashKey": "object:1816",
-      "text": "%md\n### Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent \nMake sure you have completed below steps before proceeding:\n1. From Ambari: started Interactive Hive before running below\n2. From Ranger: enabled Hive row filter policy called 'filter: ww_customers for consent'",
-      "dateUpdated": "2018-04-13T04:46:03+0000",
-      "dateFinished": "2018-04-13T04:46:03+0000",
-      "dateStarted": "2018-04-13T04:46:03+0000",
+      "text": "%md\n### Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent \nMake sure you have completed below steps before proceeding:\n1. From Ambari: enable/start Interactive Hive (row filter condition requires Hive 2.x)\n2. From Ambari: restart Zeppelin (to make it aware of %jdbc(hive_interactive) interpreter)\n3. From Ranger: enable the Row Filter policy in Hive called 'filter: ww_customers for consent'",
+      "dateUpdated": "2018-04-13T08:38:36+0000",
+      "dateFinished": "2018-04-13T08:38:25+0000",
+      "dateStarted": "2018-04-13T08:38:25+0000",
       "results": {
         "code": "SUCCESS",
         "msg": [
           {
             "type": "HTML",
-            "data": "<h3>Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent</h3>\n<p>Make sure you have completed below steps before proceeding:</p>\n<ol>\n<li>From Ambari: started Interactive Hive before running below</li>\n<li>From Ranger: enabled Hive row filter policy called 'filter: ww_customers for consent'</li>\n</ol>\n"
+            "data": "<h3>Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent</h3>\n<p>Make sure you have completed below steps before proceeding:</p>\n<ol>\n<li>From Ambari: enable/start Interactive Hive (row filter condition requires Hive 2.x)</li>\n<li>From Ambari: restart Zeppelin (to make it aware of %jdbc(hive_interactive) interpreter)</li>\n<li>From Ranger: enable the Row Filter policy in Hive called 'filter: ww_customers for consent'</li>\n</ol>\n"
           }
         ]
       }

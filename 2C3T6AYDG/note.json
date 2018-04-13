@@ -80,7 +80,7 @@
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:1562"
+      "$$hashKey": "object:396"
     },
     {
       "title": "Customers by country - can only see EU customer data",
@@ -240,7 +240,7 @@
       "dateFinished": "2018-04-05T06:53:57+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1563"
+      "$$hashKey": "object:397"
     },
     {
       "title": "Row Level Security - Customer data filtered to EU persons only based on location",
@@ -446,7 +446,7 @@
       "dateFinished": "2017-12-07T23:54:55+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1564"
+      "$$hashKey": "object:398"
     },
     {
       "title": "HR analyst can see unmasked records - but only for EU customers",
@@ -2626,7 +2626,7 @@
       "dateFinished": "2018-03-28T06:14:06+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1565"
+      "$$hashKey": "object:399"
     },
     {
       "title": "HR analyst can access table tagged with DATA_QUALITY (even though it's score < 60%)",
@@ -2674,7 +2674,7 @@
       "dateFinished": "2018-03-28T06:14:15+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1566"
+      "$$hashKey": "object:400"
     },
     {
       "title": "HR analyst can access HBase table marked as SENSITIVE",
@@ -2713,7 +2713,7 @@
       "dateFinished": "2018-03-28T06:15:53+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1567"
+      "$$hashKey": "object:401"
     },
     {
       "title": "HR Analyst can access Kafka topic marked SENSITIVE",
@@ -2752,10 +2752,13 @@
       "dateFinished": "2018-03-28T06:17:08+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1568"
+      "$$hashKey": "object:402"
     },
     {
+      "title": "Analyst should not be able to update consent master data tagged as REFERENCE_DATA (Tag based policy)",
+      "text": "%jdbc(hive)\nupdate  consent_master.consent_data_trans set  loyaltyconsent='NO' where insuranceid='57155949'",
       "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-04-13T00:36:58+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -2771,18 +2774,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1522911432067_-1842583155",
-      "id": "20180405-065712_1674075221",
-      "dateCreated": "2018-04-05T06:57:12+0000",
-      "status": "ERROR",
-      "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:1571",
-      "text": "%jdbc(hive)\nupdate  consent_master.consent_data_trans set  loyaltyconsent='NO' where insuranceid='57155949'",
-      "dateUpdated": "2018-04-13T00:36:58+0000",
-      "dateFinished": "2018-04-13T00:36:38+0000",
-      "dateStarted": "2018-04-13T00:36:38+0000",
-      "title": "Analyst should not be able to update consent master data tagged as REFERENCE_DATA (Tag based policy)",
       "results": {
         "code": "ERROR",
         "msg": [
@@ -2791,10 +2782,62 @@
             "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [UPDATE] privilege on [consent_master/consent_data_trans/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [UPDATE] privilege on [consent_master/consent_data_trans/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:376)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:193)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:278)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:312)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:517)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:504)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:310)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1497)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1482)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:599)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [UPDATE] privilege on [consent_master/consent_data_trans/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:874)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:661)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:520)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:358)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1300)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1272)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:191)\n\t... 15 more\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1522911432067_-1842583155",
+      "id": "20180405-065712_1674075221",
+      "dateCreated": "2018-04-05T06:57:12+0000",
+      "dateStarted": "2018-04-13T00:36:38+0000",
+      "dateFinished": "2018-04-13T00:36:38+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:403"
     },
     {
       "user": "ivanna_eu_hr",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1523594327995_1815327660",
+      "id": "20180413-043847_2032822720",
+      "dateCreated": "2018-04-13T04:38:47+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:1816",
+      "text": "%md\n### Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent \nMake sure you have completed below steps before proceeding:\n1. From Ambari: started Interactive Hive before running below\n2. From Ranger: enabled Hive row filter policy called 'filter: ww_customers for consent'",
+      "dateUpdated": "2018-04-13T04:46:03+0000",
+      "dateFinished": "2018-04-13T04:46:03+0000",
+      "dateStarted": "2018-04-13T04:46:03+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h3>Proceeding cells require Hive 2.x (LLAP) and Hive row filter policy for consent</h3>\n<p>Make sure you have completed below steps before proceeding:</p>\n<ol>\n<li>From Ambari: started Interactive Hive before running below</li>\n<li>From Ranger: enabled Hive row filter policy called 'filter: ww_customers for consent'</li>\n</ol>\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Analyst can't see customers who have not given consent (Row filtering)",
+      "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, insuranceid, ccnumber, mrn, birthday FROM  hortoniabank.ww_customers where insuranceid='23182722'",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-04-13T04:45:41+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -2810,19 +2853,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1523579808612_1407490913",
-      "id": "20180413-003648_703756615",
-      "dateCreated": "2018-04-13T00:36:48+0000",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:2799",
-      "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, insuranceid, ccnumber, mrn, birthday FROM  hortoniabank.ww_customers where insuranceid='23182722'",
-      "dateUpdated": "2018-04-13T00:38:01+0000",
-      "dateFinished": "2018-04-13T00:38:03+0000",
-      "dateStarted": "2018-04-13T00:38:01+0000",
-      "title": "Analyst can't see customers who have not given consent (Row filtering)",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -2831,10 +2861,22 @@
             "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tinsuranceid\tccnumber\tmrn\tbirthday\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1523579808612_1407490913",
+      "id": "20180413-003648_703756615",
+      "dateCreated": "2018-04-13T00:36:48+0000",
+      "dateStarted": "2018-04-13T00:38:01+0000",
+      "dateFinished": "2018-04-13T00:38:03+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:404"
     },
     {
+      "title": "Analysts only see portion of customers - only those who have given consent. Table actually has ~30k rows",
+      "text": "%jdbc(hive_interactive)\nSELECT count(*) FROM hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-04-13T04:45:41+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -2850,19 +2892,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1523579797663_-335436928",
-      "id": "20180413-003637_386274272",
-      "dateCreated": "2018-04-13T00:36:37+0000",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:2708",
-      "text": "%jdbc(hive)\nSELECT count(*) FROM hortoniabank.ww_customers",
-      "dateUpdated": "2018-04-13T00:41:49+0000",
-      "dateFinished": "2018-04-13T00:38:52+0000",
-      "dateStarted": "2018-04-13T00:38:50+0000",
-      "title": "Analysts only see portion of customers - only those who have given consent. Table actually has ~30k rows",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -2871,10 +2900,21 @@
             "data": "_c0\n2788\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1523579797663_-335436928",
+      "id": "20180413-003637_386274272",
+      "dateCreated": "2018-04-13T00:36:37+0000",
+      "dateStarted": "2018-04-13T00:38:50+0000",
+      "dateFinished": "2018-04-13T00:38:52+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:405"
     },
     {
+      "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-04-13T04:46:02+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -2917,18 +2957,6 @@
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1523579897125_1778691524",
-      "id": "20180413-003817_1582696423",
-      "dateCreated": "2018-04-13T00:38:17+0000",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:2959",
-      "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers",
-      "dateUpdated": "2018-04-13T00:40:16+0000",
-      "dateFinished": "2018-04-13T00:39:21+0000",
-      "dateStarted": "2018-04-13T00:39:19+0000",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -2941,7 +2969,16 @@
             "data": "<div class=\"result-alert alert-warning\" role=\"alert\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button><strong>Output is truncated</strong> to 102400 bytes. Learn more about <strong>ZEPPELIN_INTERPRETER_OUTPUT_LIMIT</strong></div>"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1523579897125_1778691524",
+      "id": "20180413-003817_1582696423",
+      "dateCreated": "2018-04-13T00:38:17+0000",
+      "dateStarted": "2018-04-13T00:39:19+0000",
+      "dateFinished": "2018-04-13T00:39:21+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:406"
     },
     {
       "user": "ivanna_eu_hr",
@@ -2964,8 +3001,7 @@
       "dateCreated": "2018-04-13T00:39:18+0000",
       "status": "READY",
       "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:3099"
+      "$$hashKey": "object:407"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivanna EU HR",

@@ -38,7 +38,7 @@
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:7679"
+      "$$hashKey": "object:12811"
     },
     {
       "text": "%md\n### Dynamic classification based masking policies\n1. HR can veiw PII data unmasked\n2. Analysts see columns tagged as PII (with type attribute of MRN) as null\n3. Analysts see columns tagged as PII (with type attribute of password) as hashed value\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-tag-masking-policy.png)\n\n### Hive masking policy:\nCan do masking of specific hive columns in variety of formats:\n-redact\n-show last 4\n-show first 4\n-hash\n-nullify\n-show only year\n-custom\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-hive-masking-policy.png)\n",
@@ -76,7 +76,7 @@
       "dateFinished": "2018-04-19T00:22:40+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7680"
+      "$$hashKey": "object:12812"
     },
     {
       "text": "%md\n### Objective: Establish an Enterprise Data Catalog to define enterprise data footprint\n### Purpose: \n####  - Identify and classify sensitive data\n####  - Identify and map sources that contain personal data\n### Solution: Use Atlas to capture classifications and attributes related to sensitive and personal data\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-Atlas-tags.png)",
@@ -115,7 +115,7 @@
       "dateFinished": "2018-04-19T00:32:30+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7681"
+      "$$hashKey": "object:12813"
     },
     {
       "text": "%md\n### Sample queries analyst would run",
@@ -154,7 +154,7 @@
       "dateFinished": "2018-04-16T12:48:17+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7682"
+      "$$hashKey": "object:12814"
     },
     {
       "title": "BMI by ZipCode (US only)",
@@ -12252,7 +12252,7 @@
       "dateFinished": "2018-04-16T09:03:47+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7683"
+      "$$hashKey": "object:12815"
     },
     {
       "title": "Top 5 Report - States by BMI (US Only)",
@@ -12411,7 +12411,7 @@
       "dateFinished": "2018-04-16T11:45:11+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7684"
+      "$$hashKey": "object:12816"
     },
     {
       "title": "Dynamic Column Masking: MRN/password cols masked via classification policy. Others masked via Hive col policy. Custom masks for Birthday/Age.",
@@ -14615,7 +14615,7 @@
       "dateFinished": "2018-04-16T11:47:24+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7685"
+      "$$hashKey": "object:12817"
     },
     {
       "text": "%md\n### Prohibition policy to prevent toxic joins\nBelow policy prevents the combination of zipcode, bloodtype, insuranceid columns on ww_customers table\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-prohibition-policy.png)",
@@ -14653,7 +14653,7 @@
       "dateFinished": "2018-04-16T13:50:37+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7686"
+      "$$hashKey": "object:12818"
     },
     {
       "title": "Prohibition policy: Prevent toxic joins (prevent join of Zipcode, Insuranceid, Blood group)",
@@ -14733,7 +14733,7 @@
       "dateFinished": "2018-04-16T11:47:51+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7687"
+      "$$hashKey": "object:12819"
     },
     {
       "title": "Prohibition policy - dropping insuranceid allows query to run",
@@ -14772,7 +14772,7 @@
       "dateFinished": "2018-04-16T11:47:55+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7688"
+      "$$hashKey": "object:12820"
     },
     {
       "text": "%md\n### Leased Data Asset: Lifecycle controlled by Classification based policy \nColumns tagged with EXPIRED_ON are restricted\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-expiredon-policy.png)",
@@ -14811,7 +14811,7 @@
       "dateFinished": "2018-04-16T13:57:14+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7689"
+      "$$hashKey": "object:12821"
     },
     {
       "title": "Leased Data Asset: Lifecycle controlled by Classification based policy (fed_tax is tagged with EXPIRED_ON which is restricted to analysts)",
@@ -14989,7 +14989,7 @@
       "dateFinished": "2018-04-16T11:47:59+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7690"
+      "$$hashKey": "object:12822"
     },
     {
       "text": "%md\n### Analyst prohibited from accessing personal data through Data Classification based policy\nColums tagged with PII cannot by accessed by analysts\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-PII-policy.png)",
@@ -15028,7 +15028,7 @@
       "dateFinished": "2018-04-16T14:00:14+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7691"
+      "$$hashKey": "object:12823"
     },
     {
       "title": "Analyst prohibited from accessing personal data through Data Classification based policy (SSN column is tagged with PII which analysts cannot access)",
@@ -15067,7 +15067,7 @@
       "dateFinished": "2018-04-16T11:48:04+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7692"
+      "$$hashKey": "object:12824"
     },
     {
       "title": "Querying for columns other than fed_tax/ssn works",
@@ -15115,7 +15115,7 @@
       "dateFinished": "2018-04-16T12:16:28+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7693"
+      "$$hashKey": "object:12825"
     },
     {
       "title": "Data Quality annotation based policy: Don't waste time on poor quality datasets! (Analysts should not access table tagged with DATA_QUALITY score < 60%)",
@@ -15154,12 +15154,12 @@
       "dateFinished": "2018-04-16T12:16:33+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7694"
+      "$$hashKey": "object:12826"
     },
     {
-      "text": "%md\n### Dynmaic tag based prohibition policies on other components: Hbase, Kafka",
+      "text": "%md\n### What about tag based policies on other components?\n\n#### Dynmaic tag based prohibition policies on Hbase, Kafka, HDFS",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T12:44:52+0000",
+      "dateUpdated": "2018-06-20T01:26:39+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -15181,7 +15181,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<h3>Dynmaic tag based prohibition policies on other components: Hbase, Kafka</h3>\n"
+            "data": "<h3>What about tag based policies on other components?</h3>\n<h4>Dynmaic tag based prohibition policies on Hbase, Kafka, HDFS</h4>\n"
           }
         ]
       },
@@ -15189,19 +15189,19 @@
       "jobName": "paragraph_1523881010867_-1648299547",
       "id": "20180416-121650_1644147608",
       "dateCreated": "2018-04-16T12:16:50+0000",
-      "dateStarted": "2018-04-16T12:44:52+0000",
-      "dateFinished": "2018-04-16T12:44:52+0000",
+      "dateStarted": "2018-06-20T01:26:39+0000",
+      "dateFinished": "2018-06-20T01:26:39+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7695"
+      "$$hashKey": "object:12827"
     },
     {
-      "title": "Analyst prohibited from accessing personal data through Data Classification based policy (HBase table is tagged with SENSITIVE which analysts cannot access)",
+      "title": "HBase table tagged with SENSITIVE tag cannot be accessed by analysts ",
       "text": "%sh\n\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM;\necho \"***Attempting to access T_FOREX as Joe***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Joe***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell\n",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T12:55:08+0000",
+      "dateUpdated": "2018-06-20T01:28:06+0000",
       "config": {
-        "colWidth": 12,
+        "colWidth": 4,
         "enabled": true,
         "results": {},
         "editorSetting": {
@@ -15232,15 +15232,15 @@
       "dateFinished": "2018-04-16T12:55:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7696"
+      "$$hashKey": "object:12828"
     },
     {
-      "title": "Analyst prohibited from accessing personal data through Data Classification based policy (Kafka topic is tagged with SENSITIVE which analysts cannot access)",
+      "title": "Kafka topics tagged with SENSITIVE tag cannot be accessed by analysts ",
       "text": "%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server  $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T12:55:23+0000",
+      "dateUpdated": "2018-06-20T01:28:15+0000",
       "config": {
-        "colWidth": 12,
+        "colWidth": 4,
         "enabled": true,
         "results": {},
         "editorSetting": {
@@ -15275,7 +15275,50 @@
       "dateFinished": "2018-04-16T12:56:24+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7697"
+      "$$hashKey": "object:12829"
+    },
+    {
+      "title": "HDFS dir/file tagged with SENSITIVE tag cannot be accessed by analysts ",
+      "text": "%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\nhdfs dfs -cat /sensitive/private.csv",
+      "user": "joe_analyst",
+      "dateUpdated": "2018-06-20T01:28:26+0000",
+      "config": {
+        "colWidth": 4,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sh",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "cat: Permission denied: user=joe_analyst, access=EXECUTE, inode=\"/sensitive/private.csv\"\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "ExitValue: 1"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1529457310002_-756238179",
+      "id": "20180620-011510_115380564",
+      "dateCreated": "2018-06-20T01:15:10+0000",
+      "dateStarted": "2018-06-20T01:16:13+0000",
+      "dateFinished": "2018-06-20T01:16:16+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:12830"
     },
     {
       "text": "%md\n### Objective:Implement appropriate security controls to monitor access to data across the enterprise\n### Purpose: \n####  - Track user activity for personal/sensitive data to support both forensic auditing\n####  - Monitor and correlate data access via audits for breach forensics\n### Solution: \n####  - Ranger audits across Hadoop components (Hive, Hbase, Kafka etc) captured in Solr and HDFS\n\nLog into Ranger and navigate to Audit > Access. You will see a screen that looks like below:",
@@ -15314,7 +15357,7 @@
       "dateFinished": "2018-04-19T00:38:27+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7698"
+      "$$hashKey": "object:12831"
     },
     {
       "text": "%md\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-joe-audits.png)",
@@ -15353,7 +15396,7 @@
       "dateFinished": "2018-04-16T13:00:50+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7699"
+      "$$hashKey": "object:12832"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Joe Analyst",
@@ -15367,7 +15410,8 @@
   },
   "config": {
     "looknfeel": "default",
-    "personalizedMode": "false"
+    "personalizedMode": "false",
+    "isZeppelinNotebookCronEnable": false
   },
   "info": {}
 }

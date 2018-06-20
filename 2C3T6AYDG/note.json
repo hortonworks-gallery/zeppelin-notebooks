@@ -38,7 +38,7 @@
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:10248"
+      "$$hashKey": "object:7934"
     },
     {
       "text": "%md\n### Ranger access policy on us_customers table (EU employees have not been granted access)\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-policy_us_customers.png)\n",
@@ -76,7 +76,7 @@
       "dateFinished": "2018-04-18T09:48:02+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10249"
+      "$$hashKey": "object:7935"
     },
     {
       "text": "%md\n\n### Row level filtering policy defined in Ranger on co-mingled Hive table ww_customers:\n1. US employees only see data for US customers\n2. EU employees only see data for EU customers who have given consent within last year\n3. Super users belonging to etl/DPO groups can see data for all EU customers\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-row-filter-policy.png)\n",
@@ -115,7 +115,7 @@
       "dateFinished": "2018-04-18T08:54:34+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10250"
+      "$$hashKey": "object:7936"
     },
     {
       "title": "EU employee can not access us_customers table",
@@ -124,7 +124,7 @@
       "dateUpdated": "2018-04-18T09:29:22+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "colWidth": 4,
         "editorHide": false,
         "title": true,
@@ -166,7 +166,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -196,7 +196,7 @@
       "dateFinished": "2018-04-16T09:34:39+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10251"
+      "$$hashKey": "object:7937"
     },
     {
       "title": "Customers by country - can only see EU customer data out of co-mingled table",
@@ -206,7 +206,7 @@
       "config": {
         "tableHide": false,
         "colWidth": 4,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -247,7 +247,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -356,7 +356,7 @@
       "dateFinished": "2018-04-16T13:17:04+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10252"
+      "$$hashKey": "object:7938"
     },
     {
       "title": "Row Level Security - Customer data filtered to EU persons only based on location",
@@ -365,7 +365,7 @@
       "dateUpdated": "2018-04-18T09:28:44+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "colWidth": 4,
         "editorHide": false,
         "title": true,
@@ -384,7 +384,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         }
       },
@@ -562,7 +562,7 @@
       "dateFinished": "2018-04-16T09:43:31+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10253"
+      "$$hashKey": "object:7939"
     },
     {
       "title": "HR analyst can see unmasked records - but only for EU customers",
@@ -572,7 +572,7 @@
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": [
           {
             "graph": {
@@ -587,7 +587,7 @@
           }
         ],
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
         "title": true
@@ -2742,7 +2742,7 @@
       "dateFinished": "2018-04-16T10:00:31+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10254"
+      "$$hashKey": "object:7940"
     },
     {
       "title": "Analysts only see portion of customers - only those who have given consent. (Table actually has ~29k rows)",
@@ -2754,10 +2754,10 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -2781,7 +2781,7 @@
       "dateFinished": "2018-04-19T00:43:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10255"
+      "$$hashKey": "object:7941"
     },
     {
       "title": "Analyst CAN'T see a customer who has not given consent (Row filtering)",
@@ -2802,10 +2802,10 @@
           }
         },
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -2829,7 +2829,7 @@
       "dateFinished": "2018-04-18T23:25:22+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10256"
+      "$$hashKey": "object:7942"
     },
     {
       "title": "Analyst CAN see a customer who has given consent (Row filtering)",
@@ -2841,10 +2841,10 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -2868,7 +2868,7 @@
       "dateFinished": "2018-04-19T00:43:32+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10257"
+      "$$hashKey": "object:7943"
     },
     {
       "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers",
@@ -2907,10 +2907,10 @@
           }
         },
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sql"
+        "editorMode": "ace/mode/text"
       },
       "settings": {
         "params": {},
@@ -2937,7 +2937,7 @@
       "dateFinished": "2018-04-16T10:02:18+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10258"
+      "$$hashKey": "object:7944"
     },
     {
       "text": "%md\n### Classification based policies",
@@ -2974,7 +2974,7 @@
       "dateFinished": "2018-04-18T09:26:39+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10259"
+      "$$hashKey": "object:7945"
     },
     {
       "title": "HR Analyst should not be able to update consent master data tagged as REFERENCE_DATA (Tag based policy)",
@@ -2986,10 +2986,10 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -3013,7 +3013,7 @@
       "dateFinished": "2018-04-13T00:36:38+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10260"
+      "$$hashKey": "object:7946"
     },
     {
       "title": "HR analyst can access table tagged with DATA_QUALITY even though it's score < 60% (joe_analyst can not access)",
@@ -3032,10 +3032,10 @@
           "scatter": {}
         },
         "enabled": true,
-        "editorMode": "ace/mode/sql",
+        "editorMode": "ace/mode/text",
         "results": {},
         "editorSetting": {
-          "language": "sql",
+          "language": "text",
           "editOnDblClick": false
         },
         "title": true
@@ -3061,22 +3061,62 @@
       "dateFinished": "2018-04-16T10:00:44+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10261"
+      "$$hashKey": "object:7947"
+    },
+    {
+      "user": "ivanna_eu_hr",
+      "config": {
+        "colWidth": 12,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1529457585114_2010504841",
+      "id": "20180620-011945_664507306",
+      "dateCreated": "2018-06-20T01:19:45+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:10031",
+      "text": "%md\n### What about tag based policies for other components?",
+      "dateUpdated": "2018-06-20T01:20:09+0000",
+      "dateFinished": "2018-06-20T01:20:10+0000",
+      "dateStarted": "2018-06-20T01:20:09+0000",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<h3>What about tag based policies for other components?</h3>\n"
+          }
+        ]
+      }
     },
     {
       "title": "HR analyst can access HBase table marked as SENSITIVE",
       "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM;\necho \"***Attempting to access T_FOREX as Ivanna***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Ivanna***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:37:13+0000",
+      "dateUpdated": "2018-06-20T01:18:19+0000",
       "config": {
-        "colWidth": 6,
+        "colWidth": 4,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sh",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sh",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -3100,22 +3140,22 @@
       "dateFinished": "2018-04-18T09:37:24+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10262"
+      "$$hashKey": "object:7948"
     },
     {
       "title": "HR Analyst can access Kafka topic marked SENSITIVE",
       "text": "%sh\n\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:37:17+0000",
+      "dateUpdated": "2018-06-20T01:18:23+0000",
       "config": {
-        "colWidth": 6,
+        "colWidth": 4,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "sh",
+          "language": "text",
           "editOnDblClick": false
         },
-        "editorMode": "ace/mode/sh",
+        "editorMode": "ace/mode/text",
         "title": true
       },
       "settings": {
@@ -3139,7 +3179,47 @@
       "dateFinished": "2018-04-18T09:37:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10263"
+      "$$hashKey": "object:7949"
+    },
+    {
+      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM\nhdfs dfs -cat /sensitive/private.csv",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-06-20T01:19:16+0000",
+      "config": {
+        "colWidth": 4,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/sh",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1529457508500_758223792",
+      "id": "20180620-011828_753426684",
+      "dateCreated": "2018-06-20T01:18:28+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:9932",
+      "dateFinished": "2018-06-20T01:19:18+0000",
+      "dateStarted": "2018-06-20T01:19:16+0000",
+      "title": "HR Analyst can access HDFS dir marked SENSITIVE",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "123-45-67890\n321-54-09876\n800-60-32982\n333-22-09873\n222-98-21816\n111-44-91021\n999-11-56101\n098-45-10927\n"
+          }
+        ]
+      }
     },
     {
       "text": "%md\n### Objective:Implement appropriate security controls to monitor access to data across the enterprise\n### Purpose: \n####  - Track user activity for personal/sensitive data to support both forensic auditing\n####  - Monitor and correlate data access via audits for breach forensics\n### Solution: \n####  - Ranger audits across Hadoop components (Hive, Hbase, Kafka etc) captured in Solr and HDFS\n\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-ranger-audits-ivanna.png)",
@@ -3178,7 +3258,7 @@
       "dateFinished": "2018-04-19T00:44:59+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10264"
+      "$$hashKey": "object:7950"
     },
     {
       "text": "%md\n",
@@ -3189,10 +3269,10 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "markdown",
-          "editOnDblClick": true
+          "language": "text",
+          "editOnDblClick": false
         },
-        "editorMode": "ace/mode/markdown"
+        "editorMode": "ace/mode/text"
       },
       "settings": {
         "params": {},
@@ -3204,7 +3284,7 @@
       "dateCreated": "2018-04-18T09:43:16+0000",
       "status": "READY",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:10265"
+      "$$hashKey": "object:7951"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivanna EU HR",
@@ -3218,7 +3298,8 @@
   },
   "config": {
     "looknfeel": "default",
-    "personalizedMode": "false"
+    "personalizedMode": "false",
+    "isZeppelinNotebookCronEnable": false
   },
   "info": {}
 }

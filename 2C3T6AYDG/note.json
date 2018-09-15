@@ -14,7 +14,8 @@
         },
         "editorMode": "ace/mode/text",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -38,7 +39,7 @@
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:7934"
+      "$$hashKey": "object:6451"
     },
     {
       "text": "%md\n### Ranger access policy on us_customers table (EU employees have not been granted access)\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-policy_us_customers.png)\n",
@@ -53,7 +54,8 @@
         },
         "editorMode": "ace/mode/scala",
         "editorHide": true,
-        "title": false
+        "title": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -76,7 +78,7 @@
       "dateFinished": "2018-04-18T09:48:02+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7935"
+      "$$hashKey": "object:6452"
     },
     {
       "text": "%md\n\n### Row level filtering policy defined in Ranger on co-mingled Hive table ww_customers:\n1. US employees only see data for US customers\n2. EU employees only see data for EU customers who have given consent within last year\n3. Super users belonging to etl/DPO groups can see data for all EU customers\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-row-filter-policy.png)\n",
@@ -92,7 +94,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -115,16 +118,16 @@
       "dateFinished": "2018-04-18T08:54:34+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7936"
+      "$$hashKey": "object:6453"
     },
     {
       "title": "EU employee can not access us_customers table",
-      "text": "%jdbc(hive_interactive)\nselect * from hortoniabank.us_customers limit 10",
+      "text": "%jdbc(hive)\nselect * from hortoniabank.us_customers limit 10",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:29:22+0000",
+      "dateUpdated": "2018-07-20T09:46:35+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/sql",
         "colWidth": 4,
         "editorHide": false,
         "title": true,
@@ -166,9 +169,11 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
-        }
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -179,7 +184,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:277)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:263)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:303)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:244)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:682)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:763)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:101)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:502)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:175)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:376)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:193)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:278)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:312)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:517)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:504)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:310)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:509)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1497)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1482)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.thrift.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:599)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:460)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:874)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:661)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:520)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:358)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1300)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1272)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:191)\n\t... 15 more\n"
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:300)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:286)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:324)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:265)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:718)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:801)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:103)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:633)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:335)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:199)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:260)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:247)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:541)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:527)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1688)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy72.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:312)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:562)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1557)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1542)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.metastore.security.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:647)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [ivanna_eu_hr] does not have [SELECT] privilege on [hortoniabank/us_customers/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:483)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:1306)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:1070)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:697)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1830)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1777)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1772)\n\tat org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:197)\n\t... 27 more\n"
           }
         ]
       },
@@ -192,21 +197,21 @@
       "jobName": "paragraph_1480354010645_1168104396",
       "id": "20160923-074955_889514713",
       "dateCreated": "2016-11-28T17:26:50+0000",
-      "dateStarted": "2018-04-16T09:34:38+0000",
-      "dateFinished": "2018-04-16T09:34:39+0000",
+      "dateStarted": "2018-07-20T09:46:35+0000",
+      "dateFinished": "2018-07-20T09:46:36+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7937"
+      "$$hashKey": "object:6454"
     },
     {
       "title": "Customers by country - can only see EU customer data out of co-mingled table",
-      "text": "%jdbc(hive_interactive)\nselect * from \n(select countryfull, count(*) num_customers from hortoniabank.ww_customers\ngroup by countryfull) s\norder by num_customers desc\nlimit 5",
+      "text": "%jdbc(hive)\nselect * from \n(select countryfull, count(*) num_customers from hortoniabank.ww_customers\ngroup by countryfull) s\norder by num_customers desc\nlimit 5",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:29:39+0000",
+      "dateUpdated": "2018-07-20T09:46:42+0000",
       "config": {
         "tableHide": false,
         "colWidth": 4,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/sql",
         "editorHide": false,
         "title": true,
         "enabled": true,
@@ -247,9 +252,11 @@
           }
         ],
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
-        }
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -356,16 +363,16 @@
       "dateFinished": "2018-04-16T13:17:04+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7938"
+      "$$hashKey": "object:6455"
     },
     {
       "title": "Row Level Security - Customer data filtered to EU persons only based on location",
-      "text": "%jdbc(hive_interactive)\nselect distinct(country) from hortoniabank.ww_customers",
+      "text": "%jdbc(hive)\nselect distinct(country) from hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:28:44+0000",
+      "dateUpdated": "2018-07-20T09:46:46+0000",
       "config": {
         "tableHide": false,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/sql",
         "colWidth": 4,
         "editorHide": false,
         "title": true,
@@ -379,14 +386,36 @@
               "keys": [],
               "values": [],
               "groups": [],
-              "scatter": {}
+              "scatter": {},
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "country": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
             }
           }
         ],
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
-        }
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -562,17 +591,17 @@
       "dateFinished": "2018-04-16T09:43:31+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7939"
+      "$$hashKey": "object:6456"
     },
     {
       "title": "HR analyst can see unmasked records - but only for EU customers",
-      "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers LIMIT 50",
+      "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers LIMIT 50",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-16T10:00:29+0000",
+      "dateUpdated": "2018-07-20T09:51:54+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "editorMode": "ace/mode/text",
+        "editorMode": "ace/mode/sql",
         "results": [
           {
             "graph": {
@@ -582,15 +611,45 @@
               "keys": [],
               "values": [],
               "groups": [],
-              "scatter": {}
+              "scatter": {},
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "surname": "string",
+                      "streetaddress": "string",
+                      "country": "string",
+                      "age": "string",
+                      "password": "string",
+                      "nationalid": "string",
+                      "ccnumber": "string",
+                      "mrn": "string",
+                      "birthday": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
             }
           }
         ],
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -601,7 +660,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nFarmer\tNánási út 21.\tHU\t56\thaelur9Vo\t\t4929764018730840\t6819852595\t07/29/59\nOstrowski\t88 rue Gustave Eiffel\tFR\t56\tli7Iew9ooK\t1591104054466 85\t5207079048919070\t1914743934\t11/21/59\nDresdner\tKossuth Lajos u. 8.\tHU\t34\tUsienae8\t\t5269381966521350\t4418407422\t10/06/81\nKratochvílová\tR Palmeira 103\tPT\t21\tfoh0xaePh2R\t\t4539794004471150\t7221782333\t03/09/95\nDahl\tÅdalen 23\tDK\t19\taechi8aiGhah\t120497-0412\t5351218478660980\t8641685037\t04/12/97\nBernát\tΒασ. Γεωργίου 202\tCY\t50\tohqu9fooXix\t\t4556337372397970\t674861883\t09/30/65\nKhoury\tVainupea 98\tEE\t41\taiCh2chi6ee\t\t4556369531733620\t4018210256\t03/04/75\nJetté\tGelkingestraat 97\tNL\t66\tfaa4Vaqu6ei\t\t4485671058369500\t1239001331\t10/10/49\nAbrha\tTrg revolucije 99\tSI\t43\treeW2eiGh1ie\t\t4929121725059950\t9192247381\t05/22/73\nAhonen\tul. Kajty Franciszka 52\tPL\t45\tOhmeic5Aach\t71040118583\t4916322932803460\t3087286525\t04/01/71\n梁\tBem rkp. 45.\tHU\t64\tOivaingah8\t\t4532454070526150\t2058457736\t10/21/51\nDiggle\tAlte Poststrasse 21\tAT\t76\tIethuiri3g\t\t5133244599700390\t8718083756\t07/21/39\nAsghar\tR Pelourinho 18\tPT\t34\tOhy1Shaefie\t\t5448670212916910\t7826388105\t01/29/82\nUdegbunam\tÕie 93\tEE\t83\tjaveW4eeg\t\t4916352687517160\t6874031824\t03/27/33\nTsuda\tŠtefanikova 1039\tCZ\t78\tIengo7cei\t\t4485134521953210\t7914880411\t01/15/38\nGiguère\tVambola 95\tEE\t81\taed0Jumaeb\t\t4916455467622990\t916066169\t08/17/34\nRevulac\tMatiegkova 86\tCZ\t56\tahg2Zee9Ai\t\t5112778157285360\t7054106858\t01/03/60\nNilsson\t82 rue Jean Vilar\tFR\t48\tUunah9Guaph\t2670840132335 03\t4556269348100850\t389879941\t08/24/67\nJepsen\tul. Kraszewskiego Józefa 66\tPL\t72\tCheixae2\t43120229643\t5245803376025870\t5150685855\t12/02/43\nCarvalho\tVia delle Mura Gianicolensi 36\tIT\t72\tphee3Viecoh\tPR73273010\t4716562816292470\t8193166507\t04/06/44\nChukwujekwu\tC/ Cañada del Rosal 8\tES\t67\tOeCait7eo\t\t5576074571153010\t6553867785\t08/19/48\nMurdžoski\t32 rue Nationale\tFR\t50\tkainaiXa1pa\t2660504397577 59\t4532794308811550\t9918362619\t05/29/66\n宋\tLandsberger Allee 31\tDE\t35\tLi6ufee7\t\t5324516706162980\t89166467\t08/29/80\nBagi\tHooivelden 111\tBE\t71\tahc9Nei6\t\t4716246746135010\t2925865044\t03/17/45\nSchuringa\tRamselsesteenweg 356\tBE\t60\tohfe9Ku5Oo\t\t5377397464712280\t7639518920\t12/28/55\nLauritsen\tFlotowstr. 76\tDE\t74\taiTai1boh\t\t5205369286873260\t7114329966\t07/14/41\nAsano\tMerelstraat 147\tNL\t30\tIeng6ieZuof\t\t5446634370149230\t6647554663\t05/26/86\nNwokeocha\tBlancefloerlaan 436\tBE\t67\tLupahkah7\t\t5111794964741700\t6978898895\t04/04/49\nBrozina\tKerkweg 14\tNL\t55\tIeghoof6Dai\t\t5434291700720690\t9280555592\t12/07/60\nGarrard\tMänni 97\tEE\t50\tna9Chie0\t\t4716830198882840\t4711901340\t03/06/66\nVedzizhev\tχλμ Εθνικής Οδού Αλεξανδρούπολης 91\tCY\t20\tAer2EHeevoo\t\t5236718753750720\t2239714129\t10/31/95\nJansson\tHätilänkatu 12\tFI\t42\tquohPhahw6\t030374-630S\t4539783649455410\t586195401\t03/03/74\nAntoun\tKirchenplatz 2\tAT\t27\tpi8EjaiZeed9\t\t4716316235176060\t1228735097\t08/08/88\nBrandt\tΛεωφ. Ηρώων Πολυτεχνείου 133\tCY\t43\tchahxooW5sah\t\t5352561515806540\t352174295\t04/12/73\nŠtosir\tFornäng 53\tSE\t52\tXaiyaib4nil\t630720-9210\t5434086106460710\t6731015569\t07/20/63\nRukavina\tGrössgstötten 29\tAT\t54\tea3Phooch\t\t4539337450593970\t2363936710\t01/29/62\nยศสงคราม\tAvda. Rio Nalon 36\tES\t23\tTedie0Ahxe\t\t4916202990691410\t4144993526\t09/22/92\nIbragimov\tAvenue Emile Vandervelde 8\tBE\t54\tAisaizie3oh\t\t5299406891570450\t2632287363\t05/24/62\nŠišma\tKäbbatorp Locketorp 20\tSE\t67\tJeilohf2\t490529-7653\t4556513046476250\t7545713158\t05/29/49\nPetros\tMunkácsy Mihály út 94.\tHU\t35\taing6tee7uCh\t\t4716004045465400\t4886434003\t10/10/80\nMa\tDalmatinova 96\tSI\t59\tChoodahMa3\t\t5140228082727920\t1100966385\t01/04/57\nطاهری\tRue Haute 2\tBE\t26\tiesh9URah3\t\t5264481912236060\t6264319312\t06/21/89\nŽivković\tLaan 1940-1945 167\tNL\t57\toeghoJ8ah\t\t4929075965258990\t7132346099\t06/04/59\nمعظمی\tul. Beskidzka 86\tPL\t40\tXu8aiPajohgh\t75112823456\t5219797707858040\t4512510681\t11/28/75\n照沼\tYsitie 80\tFI\t85\tohch5eeG\t120231-480U\t5584914084379230\t8650936018\t02/12/31\nDiggle\tKauhajärventie 68\tFI\t82\tluphahT4\t261033-779F\t5391098022161310\t3301712591\t10/26/33\nสมคำศรี\tRákóczi út 28.\tHU\t64\tohwaiNgu2\t\t4539375283786670\t3317352999\t01/24/52\nGunnarsson\tLiisankatu 48\tFI\t41\twe3Thai8ohBa\t311274-1099\t5253035496954800\t3053529025\t12/31/74\nStrøm\tSzent Gellért tér 36.\tHU\t62\tZahgej1ua\t\t4929478223539420\t4374935161\t09/20/53\nGanim\tMjölkalånga 15\tSE\t35\tVaing8AhVaish\t800728-5508\t4485309946912580\t9737553135\t07/28/80\n"
+            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nAbrha\tTrg revolucije 99\tSI\t43\treeW2eiGh1ie\t\t4929121725059950\t9192247381\t05/22/73\nAhonen\tul. Kajty Franciszka 52\tPL\t45\tOhmeic5Aach\t71040118583\t4916322932803460\t3087286525\t04/01/71\nGarrard\tMänni 97\tEE\t50\tna9Chie0\t\t4716830198882840\t4711901340\t03/06/66\nGanim\tMjölkalånga 15\tSE\t35\tVaing8AhVaish\t800728-5508\t4485309946912580\t9737553135\t07/28/80\nTeodros\tNørrebrovænget 75\tDK\t83\tied0aeng6Ee\t041132-0847\t5408164289338720\t4019719744\t11/04/32\nAngantýsdóttir\tPebre 72\tEE\t77\tIew0aalei\t\t5138605533168260\t8292708522\t09/12/38\nMatthíasdóttir\tSkölvägen 49\tFI\t48\tbo8YuiDai4li\t051267-108N\t4556521462280410\t3821514057\t12/05/67\nBeckenbauer\tHogendijk 182\tNL\t81\taeXoo7sheu\t\t4916352917351390\t3318238402\t05/13/35\nShamoon\tHantverkarg 74\tSE\t76\tOngah4oh\t400418-3713\t5503888184127740\t5115336310\t04/18/40\nMohammed\tMaskenstraat 308\tBE\t20\tair4ohb5K\t\t5256938723037290\t3492151075\t07/25/95\nธนะมัย\tPl. Ofiar Katynia 39\tPL\t37\teeRae3aiwee\t78080115897\t4539110089838330\t5627548643\t08/01/78\nMandić\tKolodvorska 102\tSI\t85\tcei5ooNg0yoo\t\t4556792335562020\t3875734372\t01/16/31\nYudin\tBuanvägen 17\tSE\t50\tEw4wiexeivo\t660128-2350\t4539685118481730\t2607721923\t01/28/66\nBrandybuck\tAn der Alster 52\tDE\t26\twaexahShohg6\t\t5355033769172480\t3045429280\t05/30/90\nBolger-Baggins\tYsitie 3\tFI\t40\tPu4iejaedoo\t151175-4071\t4532626870644700\t5336531917\t11/15/75\nHarb\tKopli 49\tEE\t63\tdah1Uweech\t\t5311557542724290\t1683714590\t03/17/53\nJakobsen\t24 rue La Boétie\tFR\t79\tuDaiC9Keey\t2360643283102 22\t5530759841214670\t2019421635\t06/27/36\nSuda\tul. Mierniczych 99\tPL\t78\tYoo9ahnga\t37070490985\t5376405227428580\t7269821646\t07/04/37\nBolger\tParaguay 62\tES\t19\tohph2eGhai\t\t4716074005177520\t814604358\t05/13/97\nLonghole\tAv. Zumalakarregi 45\tES\t76\tiePhaiF0sah\t\t5288927626524140\t3315013898\t02/01/40\nSaid\tΟδός Πειραιώς 78\tCY\t68\tlogheet9Sh\t\t5368577601886220\t4838662440\t03/08/48\nYamanaka\tRue de la Brasserie 208\tBE\t45\tquai3me1Aoh\t\t4716627279548150\t1788234356\t05/25/71\nArian\tEusebio Dávila 49\tES\t50\tIengie3gai\t\t5100872810546260\t6032555857\t11/15/65\nZogby\tHoge Wei 399\tBE\t22\tooY6seid\t\t5243878934371010\t6829490684\t03/08/94\nOgnjenović\tKauterstraat 148\tNL\t80\tleel3aeTh\t\t5144449998318130\t6329668024\t03/09/36\nBisliev\tTeperova 1965\tCZ\t77\ttha2Ohm2\t\t5444562293308730\t6030542901\t10/30/38\nLindberg\tVia Piave 37\tIT\t84\tphuuZing7Ie\tLP43140547\t5145390206863680\t6195381423\t08/30/31\nPagan\tRue de Virton 361\tBE\t52\tWoh9mio6Qu\t\t4532509730470820\t1886813207\t02/05/64\nSeif\t55 rue Banaudon\tFR\t59\tfuaxub8Eid\t1570382315819 48\t4539336991831970\t4898007428\t03/07/57\nGoliwe\tAbsolonova 533\tCZ\t55\tthieTa7Eeph\t\t5440038107213880\t8531891452\t01/03/61\nMontalvo\tPohlstrasse 44\tDE\t50\tjiej7Oodaif\t\t4539152263019440\t9684364884\t02/10/66\nMarolin\tVia Goffredo Mameli 95\tIT\t36\teibeiB7i\tSU50603379\t5276190989630990\t9539485103\t10/07/79\nТретьяков\tLuchthavenlaan 251\tBE\t78\tIegh8Reequ\t\t4485633975665330\t8286807071\t10/23/37\nDương\tStenløsegyden 48\tDK\t29\tAixei2ahng\t070886-0409\t4916192125281540\t1570751508\t08/07/86\nRoderic\tLillesäter 30\tSE\t47\tAiFaiTahk5\t680621-8548\t5585507427340050\t1868336959\t06/21/68\nVidaković\tSchallmooser Hauptstrasse 53\tAT\t49\tohGeo8Ohqu0\t\t5444027760192110\t3237082860\t10/25/66\nAlmeida\tPiazza della Repubblica 94\tIT\t60\thieC6Fi6\tHQ15926098\t5479537093107790\t9839545851\t12/03/55\nChmielewski\tHütteldorfer Strasse 14\tAT\t68\tBei3eusaeb0\t\t5189492017858700\t912503697\t10/13/47\nKarataev\tRue de la Sarthe 279\tBE\t82\tEeyoh6ooca\t\t5169463462120370\t828057262\t01/07/34\nNowak \tVia Lagrange 7\tIT\t28\tkohdeeL0iu\tMX86933333\t4539406063850830\t2541743754\t08/05/87\nScott\tEstrada Nacional 82\tPT\t21\taex3kiQu\t\t5246509245550070\t8923391457\t10/25/94\nOvergaard\tCelso Emilio Ferreiro 70\tES\t48\teibohj3Ae\t\t5192517576775830\t6018019719\t05/07/68\nบิลหมัดอะด้ำ\tBennebroekerdijk 26\tNL\t20\tLu9aith4aith\t\t5257472102378790\t4086789530\t10/22/95\nHu\tR 5 Outubro 70\tPT\t56\tPheiN0Xai\t\t4929574646453370\t3440722227\t08/30/59\nKowalczyk\tHagemanstraat 101\tNL\t29\tTeingu3waw\t\t5412280191683080\t3203384927\t11/06/86\n江崎\tLomená 1167\tCZ\t21\teex2kei9Woo\t\t5359273282317720\t5491957026\t05/19/95\nÞorsteinsdóttir\tSchallmooser Hauptstrasse 27\tAT\t81\tyaS2ooPh\t\t5137579022986920\t3201964991\t08/25/34\nGanim\tR Castelo 71\tPT\t77\tgoayei4Ohju\t\t4539196506003660\t3112139548\t01/15/39\nRazo\tΚαστελλόκαμπος 19\tCY\t23\tei6Deenau\t\t4539445241827370\t2208831715\t04/07/93\nBazhaev\tBlaue Lagune 88\tAT\t24\tAiv2xieb3om\t\t4556709204181310\t5497334827\t05/03/92\n"
           }
         ]
       },
@@ -2738,27 +2797,57 @@
       "jobName": "paragraph_1484095493257_2022483872",
       "id": "20170111-004453_2103984184",
       "dateCreated": "2017-01-11T00:44:53+0000",
-      "dateStarted": "2018-04-16T10:00:30+0000",
-      "dateFinished": "2018-04-16T10:00:31+0000",
+      "dateStarted": "2018-07-20T09:51:54+0000",
+      "dateFinished": "2018-07-20T09:52:34+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7940"
+      "$$hashKey": "object:6457"
     },
     {
       "title": "Analysts only see portion of customers - only those who have given consent. (Table actually has ~29k rows)",
-      "text": "%jdbc(hive_interactive)\nSELECT count(*) FROM hortoniabank.ww_customers",
+      "text": "%jdbc(hive)\nSELECT count(*) FROM hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-19T00:43:19+0000",
+      "dateUpdated": "2018-07-20T09:52:48+0000",
       "config": {
         "colWidth": 4,
         "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "_c0": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
         },
-        "editorMode": "ace/mode/text",
-        "title": true
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -2781,13 +2870,13 @@
       "dateFinished": "2018-04-19T00:43:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7941"
+      "$$hashKey": "object:6458"
     },
     {
       "title": "Analyst CAN'T see a customer who has not given consent (Row filtering)",
-      "text": "%jdbc(hive_interactive)\nSELECT insuranceid, surname, streetaddress, country, age FROM hortoniabank.ww_customers where insuranceid='23182722'",
+      "text": "%jdbc(hive)\nSELECT insuranceid, surname, streetaddress, country, age FROM hortoniabank.ww_customers where insuranceid='23182722'",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T23:25:21+0000",
+      "dateUpdated": "2018-07-20T09:52:50+0000",
       "config": {
         "colWidth": 4,
         "enabled": true,
@@ -2796,17 +2885,43 @@
             "graph": {
               "mode": "table",
               "height": 300,
-              "optionOpen": false
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "insuranceid": "string",
+                      "surname": "string",
+                      "streetaddress": "string",
+                      "country": "string",
+                      "age": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
             },
             "helium": {}
           }
         },
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "editorMode": "ace/mode/text",
-        "title": true
+        "editorMode": "ace/mode/sql",
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -2829,23 +2944,57 @@
       "dateFinished": "2018-04-18T23:25:22+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7942"
+      "$$hashKey": "object:6459"
     },
     {
       "title": "Analyst CAN see a customer who has given consent (Row filtering)",
-      "text": "%jdbc(hive_interactive)\nSELECT insuranceid, surname, streetaddress, country, age FROM hortoniabank.ww_customers where insuranceid='62517316'",
+      "text": "%jdbc(hive)\nSELECT insuranceid, surname, streetaddress, country, age FROM hortoniabank.ww_customers where insuranceid='62517316'",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-19T00:43:31+0000",
+      "dateUpdated": "2018-07-20T09:52:53+0000",
       "config": {
         "colWidth": 4,
         "enabled": true,
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "insuranceid": "string",
+                      "surname": "string",
+                      "streetaddress": "string",
+                      "country": "string",
+                      "age": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
         },
-        "editorMode": "ace/mode/text",
-        "title": true
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -2868,12 +3017,12 @@
       "dateFinished": "2018-04-19T00:43:32+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7943"
+      "$$hashKey": "object:6460"
     },
     {
-      "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers",
+      "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.ww_customers",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-16T10:02:16+0000",
+      "dateUpdated": "2018-09-15T07:36:33+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -2884,7 +3033,12 @@
               "height": 300,
               "optionOpen": false,
               "setting": {
-                "multiBarChart": {}
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
               },
               "commonSetting": {},
               "keys": [
@@ -2907,10 +3061,12 @@
           }
         },
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "editorMode": "ace/mode/text"
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -2937,7 +3093,7 @@
       "dateFinished": "2018-04-16T10:02:18+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7944"
+      "$$hashKey": "object:6461"
     },
     {
       "text": "%md\n### Classification based policies",
@@ -2951,7 +3107,8 @@
           "language": "scala"
         },
         "editorMode": "ace/mode/scala",
-        "editorHide": true
+        "editorHide": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -2974,23 +3131,25 @@
       "dateFinished": "2018-04-18T09:26:39+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7945"
+      "$$hashKey": "object:6462"
     },
     {
       "title": "HR Analyst should not be able to update consent master data tagged as REFERENCE_DATA (Tag based policy)",
-      "text": "%jdbc(hive_interactive)\nupdate  consent_master.consent_data_trans set  loyaltyconsent='NO' where insuranceid='57155949'",
+      "text": "%jdbc(hive)\nupdate  consent_master.consent_data_trans set  loyaltyconsent='NO' where insuranceid='57155949'",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:30:40+0000",
+      "dateUpdated": "2018-07-20T09:52:57+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "editorMode": "ace/mode/text",
-        "title": true
+        "editorMode": "ace/mode/sql",
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3013,13 +3172,13 @@
       "dateFinished": "2018-04-13T00:36:38+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7946"
+      "$$hashKey": "object:6463"
     },
     {
       "title": "HR analyst can access table tagged with DATA_QUALITY even though it's score < 60% (joe_analyst can not access)",
-      "text": "%jdbc(hive_interactive)\nselect * from cost_savings.claim_savings limit 5",
+      "text": "%jdbc(hive)\nselect * from cost_savings.claim_savings limit 5",
       "user": "ivanna_eu_hr",
-      "dateUpdated": "2018-04-18T09:27:56+0000",
+      "dateUpdated": "2018-07-20T09:53:00+0000",
       "config": {
         "colWidth": 12,
         "graph": {
@@ -3032,13 +3191,50 @@
           "scatter": {}
         },
         "enabled": true,
-        "editorMode": "ace/mode/text",
-        "results": {},
-        "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+        "editorMode": "ace/mode/sql",
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "claim_savings.reportdate": "string",
+                      "claim_savings.name": "string",
+                      "claim_savings.sequenceid": "string",
+                      "claim_savings.claimid": "string",
+                      "claim_savings.costsavings": "string",
+                      "claim_savings.eligibilitycode": "string",
+                      "claim_savings.latitude": "string",
+                      "claim_savings.longitude": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
         },
-        "title": true
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3061,10 +3257,86 @@
       "dateFinished": "2018-04-16T10:00:44+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7947"
+      "$$hashKey": "object:6464"
     },
     {
+      "title": "Decrypt UDF (HDP 3.0):EU employee only see AES-256 encrypted versions of email and phone number",
+      "text": "%jdbc(hive)\nselect * from  hr.employees_encrypted;",
       "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-08-01T21:44:08+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "employees_encrypted.id": "string",
+                      "employees_encrypted.name": "string",
+                      "employees_encrypted.age": "string",
+                      "employees_encrypted.phone": "string",
+                      "employees_encrypted.email": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "employees_encrypted.id\temployees_encrypted.name\temployees_encrypted.age\temployees_encrypted.phone\temployees_encrypted.email\nnull\tName\tnull\tv+QlFMEThiq1vKEaIQFF/A==\tSfHV4KUbK7rTCZ3JlsvK0Q==\n677509\tDonald Walker\t42\tgXjGBPEsY4mWFFMzqWAWGQ==\tiU8tebHLyI7cNnKnlQQzQzVdGdfMtyv+tPklZVag6oo=\n940761\tRaymond Robinson\t41\tzD+cfA9uj7Dr67fHEzJ79Q==\t+oq6CHQcQB4zi13ngOFC6RLHdZzXnvB0pDg7QiSCF2M=\n428945\tScott Robinson\t39\tOyN+YKHjeUxlt9yYvJcT2A==\tCzbiEuYivSR4IIjd9N6H2WfmicqbHQmFFqJYMvCwZ1w=\n408351\tJason Evans\t20\trvulJoQT5jV18KCo1aTR/A==\tJECUry5s2HtJ18u9+3CRZ7uDJUWelaWmz9s5luZwDiE=\n193819\tGregory Russell\t78\tgCzV1q2LEwCnao5p+VI0NQ==\trZyWzg5IaQO20bnN/EJnzAJd+KzSsZfXKQisAj1EIrY=\n499687\tRalph Bailey\t50\tc7vJg6DuUFlR9jIxX9+YBw==\t+NyYaPixjVUXLksTkbyDJ9zhQXEW7FSTxnPf2EG4g1g=\n539712\tScott Baker\t22\tAUUaq3aACiJj0SQ6mIdrTA==\tNasnDBTQ/FSlLxkeJyfddWcZIqVzlNkqP58lypIfHtg=\n380086\tEugene Murphy\t43\toz9LaaZBAvIVZUF9j/Ayrg==\tmHrfc70JqmTF1hf5/nN5mmfmicqbHQmFFqJYMvCwZ1w=\n477616\tFred Young\t77\tn2a94+GnuQeQe81h9lh9ZA==\tPmchDSUXSNB8U5ZhNyWecjVdGdfMtyv+tPklZVag6oo=\n162402\tJonathan Peterson\t73\tvK5ld6sp8uqAacs7NUq9bg==\ti6TgCyo+2VOMqkO9vQuwGn664KdUvX1ulQ9JbB9wmas=\n231469\tTerry Flores\t41\t+FphnHEQ0xJDlVcoHyF49w==\tXrXRNikc6ZU0nAIi9R/t+Z2TCoM6ZIoGxz5YqpmGnWY=\n153989\tSamuel Alexander\t60\t7dPFyb4Foo9FwuGBCRK81Q==\tYRB/6c/4gGqwgbrk1yODBac/earNQmGR1DmjMym7vYw=\n386158\tPhilip King\t42\tkMLwfM4yYo/NgCl6w4ALiQ==\tQ38/1cT3F8INw5Sd4QbELDujaH9yIFjXz49fDGQNwlo=\n301576\tRonald Watson\t56\tpF8MXnwCvS4ZedNocM9Q9w==\tcVMPv7RWJCFtSpOL0A6xvWfmicqbHQmFFqJYMvCwZ1w=\n441771\tRichard Scott\t28\tSfSTYMyAhsxneY4wxn47qA==\teqJ5d7kfE+0h4Mc5w8ILyGfmicqbHQmFFqJYMvCwZ1w=\n528509\tAlan Diaz\t20\tOtBVFxM4veKjMlaKk0libw==\tIF3401BFstixrMymgA98gm+92RL/9mFCMu4THWsktBU=\n912990\tTodd Stewart\t46\t7Mv97+mpkjApToNMZH12GQ==\tSo+hTNXONE/WoRMaJWybWriFdp9fNZQ7mm3oDIZytTI=\n214352\tJohn Lee\t40\tIcJoZTLi45ASqvH+nTtK/A==\tGmZcxKmnuGdQL9ojzvUK4vi+NNjXMV4pW+/FzpTDNGw=\n890290\tLawrence Scott\t46\tvXMkv0WDwCHXSxsikd/suw==\tBTVDs6Nt3/i5wYbVU56vv+w2YcF8gcBg4s5eoo4Cb0E=\n622406\tRyan Lewis\t52\tq53eiHKdTZQhDsmn6JOyHQ==\te0BqQVXFbd74swhC8qHl0WfmicqbHQmFFqJYMvCwZ1w=\n979607\tShawn Edwards\t19\tGaXmYoy/8VH2gEFvBm7Ttw==\tq9n+YzM1AWA4Ey7qr9SnKVzN1VHOumCDlLK9HbuIeqw=\n969580\tJose Turner\t77\tnTF37vng6mPSl2kT5SZrkA==\tQzhuhqCtJ/3RAyBoM8iPSqc/earNQmGR1DmjMym7vYw=\n426038\tCharles Stewart\t49\tirbY1hHUebhi6JGySCoXrg==\t0uE7f0LqnUfYXrkf9Vg8052TCoM6ZIoGxz5YqpmGnWY=\n388642\tRonald Rogers\t22\tP30l/bssP4Rj/z80FeKEPA==\tnbaZI8N1bCwwm2zSdCqbTvi+NNjXMV4pW+/FzpTDNGw=\n560455\tJimmy Hayes\t61\tOx4+kL0gxR6yadwjDkkBYA==\tjwF5IzYtdoIVJ2kqIWUCtCI7kMNtcVupng1yO3hBFCE=\n477253\tJimmy Russell\t19\t9xqxzf+2Uxxvkr2j6ysXdw==\tPz9oIc44D2SWP+ya9gnHtm+92RL/9mFCMu4THWsktBU=\n263480\tLouis Cooper\t76\tzAKwNjd8g8iU1gh389vitA==\tgOh4ELH9itIv2w+9Jqe8uI0LY7c2+XeMrxkSCkBV33A=\n683826\tAntonio Roberts\t23\t7DaWsMfuni0B1Cm0y2jR2A==\tBeli4hB0IeEl29+uqYg6yTVdGdfMtyv+tPklZVag6oo=\n474599\tRalph Walker\t31\tLiu5pkcVzAem6e7wSMGVXA==\tuTAIsmI3NjzUlkDm8jLTDT8UisPU37LCOFaiF4xeO8M=\n335732\tPhillip Butler\t34\trKzG6MyBBRfSuuP7ifj6+g==\tOSyHsWJfcX1Un7OW2MYaIjVdGdfMtyv+tPklZVag6oo=\n329752\tGary Brown\t19\tqwm7jd7wt8KU4XnjHkZI7A==\thr/Ub1UZQZjHgUbKTc6TYvi+NNjXMV4pW+/FzpTDNGw=\n893212\tJames Howard\t37\tF14ArTitljGxnVWwFOBHrQ==\tzM0njR49ZJ5dV0tsc7nJUWcZIqVzlNkqP58lypIfHtg=\n621833\tJose Edwards\t84\tH72GJ0yEfPD7HnlD3NDx4A==\ti5tVTrs5hgs7jIxvGW8bfjr0/x3l7vVwVRMhh7Ne5iU=\n456747\tBenjamin Griffin\t59\tDJLW/Jgcn2M49dkNzl8/hw==\tHL12md6nVV63IMTw7fZf67uDJUWelaWmz9s5luZwDiE=\n278556\tPeter Mitchell\t71\tHzxDGkaLMkCKNs/QBbQ4XA==\tkXbL4mneJJMzVkMk3zNw/fKbOoLquKjWq2QRu27/y5k=\n333476\tRobert Wilson\t48\t2bUc1KVTbV9U3Yw1/oJwpg==\tYGlTmpcJN7/2sMqTYEo0aV1Yk8CClWAZRuiAt6zyBQc=\n218791\tMichael Price\t27\tfgdYe1s7gr61aj7Iw/McOg==\tJbLkrVyzek7ckL+/ygDPO2cZIqVzlNkqP58lypIfHtg=\n134841\tAdam Brown\t46\tjtUBDw7VSUpYkPCFwDsKDg==\t1DSuXjYXOUS/EpW5pIwKXA0b1TDsjQcdID87OiU82a4=\n726264\tGerald Collins\t27\tHxBFwc0o8UobpRtEMLxQFg==\te756Ij2YupcubSZF7COVlZ2TCoM6ZIoGxz5YqpmGnWY=\n766610\tEdward Jenkins\t43\twgG3e+wp7DrLZkXAg6yWBg==\tSLe0DcxLwUNLTFBpiMXAiPi+NNjXMV4pW+/FzpTDNGw=\n923947\tJoshua Bryant\t76\tVFnhUp1OT7iYEBfRvvFZ1g==\t0slfdDkcijNKqSpI5mr0CvmtlsyBsNQqH8AN55PYCIE=\n227922\tRoy Hughes\t63\tL3KLUlYORIVYQ6rgDn84ug==\tZqC5s2/SXS+ZfIdKhh1EViFk/lPGd1MnwZHBZ++a3Rk=\n265813\tPhilip Campbell\t42\tCgDgXqOAOZ0fXeIKeDaRBQ==\thSKxNGtPB2GXSnkpYc1YNTVdGdfMtyv+tPklZVag6oo=\n247137\tBobby Rivera\t73\twtp9qqr1jn9pEx4MMhb9Lw==\t/icSPdQF/XBIuWIM/2ORTuw2YcF8gcBg4s5eoo4Cb0E=\n407061\tScott Jackson\t49\tNZe1w6blY/cy6ZBoktFaQQ==\t6B3oOqVMWj0Vd8qQgFRxBORMS1jw69XIyzL9bQuj498=\n226714\tBruce Davis\t57\tNbloDVPT5njL4YlqpJmhNQ==\tZu9RvSCuLczETZCoMIjB0w0b1TDsjQcdID87OiU82a4=\n702813\tRyan Martinez\t44\tTjuk1Non4D96/CWqnRMvDQ==\tJtO0lO2preGPR60WQUKqDRLHdZzXnvB0pDg7QiSCF2M=\n524896\tRalph Walker\t37\t0MUU2Ps/1RqYhbIl8iAXiA==\t6bOG6jSHGxeBfQTSsSk5X6c/earNQmGR1DmjMym7vYw=\n363065\tPhillip Butler\t19\tJHrPlOdLk4gav1ewoOgaJw==\toxE6Bx1Co2cM+eb78qzbXvi+NNjXMV4pW+/FzpTDNGw=\n227924\tGary Brown\t69\t2xAzmPbaF65flAMMfZI/5g==\tfMPXFpN5XmzTDV8m5fDlLvi+NNjXMV4pW+/FzpTDNGw=\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532074332254_641311161",
+      "id": "20180720-081212_394649230",
+      "dateCreated": "2018-07-20T08:12:12+0000",
+      "dateStarted": "2018-08-01T21:44:08+0000",
+      "dateFinished": "2018-08-01T21:44:08+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:6465"
+    },
+    {
+      "text": "%md\n### What about tag based policies for other components?",
+      "user": "ivanna_eu_hr",
+      "dateUpdated": "2018-06-20T01:20:09+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
@@ -3075,24 +3347,13 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1529457585114_2010504841",
-      "id": "20180620-011945_664507306",
-      "dateCreated": "2018-06-20T01:19:45+0000",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:10031",
-      "text": "%md\n### What about tag based policies for other components?",
-      "dateUpdated": "2018-06-20T01:20:09+0000",
-      "dateFinished": "2018-06-20T01:20:10+0000",
-      "dateStarted": "2018-06-20T01:20:09+0000",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -3101,7 +3362,16 @@
             "data": "<h3>What about tag based policies for other components?</h3>\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1529457585114_2010504841",
+      "id": "20180620-011945_664507306",
+      "dateCreated": "2018-06-20T01:19:45+0000",
+      "dateStarted": "2018-06-20T01:20:09+0000",
+      "dateFinished": "2018-06-20T01:20:10+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:6466"
     },
     {
       "title": "HR analyst can access HBase table marked as SENSITIVE",
@@ -3117,7 +3387,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/text",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3140,7 +3411,7 @@
       "dateFinished": "2018-04-18T09:37:24+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7948"
+      "$$hashKey": "object:6467"
     },
     {
       "title": "HR Analyst can access Kafka topic marked SENSITIVE",
@@ -3156,7 +3427,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/text",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3179,9 +3451,10 @@
       "dateFinished": "2018-04-18T09:37:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7949"
+      "$$hashKey": "object:6468"
     },
     {
+      "title": "HR Analyst can access HDFS dir marked SENSITIVE",
       "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@HWX.COM\nhdfs dfs -cat /sensitive/private.csv",
       "user": "ivanna_eu_hr",
       "dateUpdated": "2018-06-20T01:19:16+0000",
@@ -3194,23 +3467,13 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/sh",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "apps": [],
-      "jobName": "paragraph_1529457508500_758223792",
-      "id": "20180620-011828_753426684",
-      "dateCreated": "2018-06-20T01:18:28+0000",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500,
-      "focus": true,
-      "$$hashKey": "object:9932",
-      "dateFinished": "2018-06-20T01:19:18+0000",
-      "dateStarted": "2018-06-20T01:19:16+0000",
-      "title": "HR Analyst can access HDFS dir marked SENSITIVE",
       "results": {
         "code": "SUCCESS",
         "msg": [
@@ -3219,7 +3482,16 @@
             "data": "123-45-67890\n321-54-09876\n800-60-32982\n333-22-09873\n222-98-21816\n111-44-91021\n999-11-56101\n098-45-10927\n"
           }
         ]
-      }
+      },
+      "apps": [],
+      "jobName": "paragraph_1529457508500_758223792",
+      "id": "20180620-011828_753426684",
+      "dateCreated": "2018-06-20T01:18:28+0000",
+      "dateStarted": "2018-06-20T01:19:16+0000",
+      "dateFinished": "2018-06-20T01:19:18+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:6469"
     },
     {
       "text": "%md\n### Objective:Implement appropriate security controls to monitor access to data across the enterprise\n### Purpose: \n####  - Track user activity for personal/sensitive data to support both forensic auditing\n####  - Monitor and correlate data access via audits for breach forensics\n### Solution: \n####  - Ranger audits across Hadoop components (Hive, Hbase, Kafka etc) captured in Solr and HDFS\n\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-ranger-audits-ivanna.png)",
@@ -3235,7 +3507,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3258,7 +3531,7 @@
       "dateFinished": "2018-04-19T00:44:59+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7950"
+      "$$hashKey": "object:6470"
     },
     {
       "text": "%md\n",
@@ -3269,10 +3542,12 @@
         "enabled": true,
         "results": {},
         "editorSetting": {
-          "language": "text",
-          "editOnDblClick": false
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
         },
-        "editorMode": "ace/mode/text"
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -3284,17 +3559,16 @@
       "dateCreated": "2018-04-18T09:43:16+0000",
       "status": "READY",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:7951"
+      "$$hashKey": "object:6471"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Ivanna EU HR",
   "id": "2C3T6AYDG",
+  "noteParams": {},
+  "noteForms": {},
   "angularObjects": {
-    "2CHS8UYQQ:shared_process": [],
-    "2CK8A9MEG:shared_process": [],
-    "2CKX8WPU1:shared_process": [],
-    "2CKAY1A8Y:shared_process": [],
-    "2CKEKWY8Z:shared_process": []
+    "md:shared_process": [],
+    "jdbc:shared_process": []
   },
   "config": {
     "looknfeel": "default",

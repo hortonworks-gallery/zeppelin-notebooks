@@ -1,0 +1,197 @@
+{
+  "paragraphs": [
+    {
+      "title": "Decrypt UDF: interns see decrypted email but AES-256 encrypted version of phone number",
+      "text": "%jdbc(hive)\nselect * from  hr.employees_encrypted;",
+      "user": "scott_intern",
+      "dateUpdated": "2018-08-01T21:48:42+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "employees_encrypted.id": "string",
+                      "employees_encrypted.name": "string",
+                      "employees_encrypted.age": "string",
+                      "employees_encrypted.phone": "string",
+                      "employees_encrypted.email": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "employees_encrypted.id\temployees_encrypted.name\temployees_encrypted.age\temployees_encrypted.phone\temployees_encrypted.email\nnull\tName\tnull\tv+QlFMEThiq1vKEaIQFF/A==\tEmail\n677509\tDonald Walker\t42\tgXjGBPEsY4mWFFMzqWAWGQ==\tlois.walker@hotmail.com\n940761\tRaymond Robinson\t41\tzD+cfA9uj7Dr67fHEzJ79Q==\tbrenda.robinson@gmail.com\n428945\tScott Robinson\t39\tOyN+YKHjeUxlt9yYvJcT2A==\tjoe.robinson@gmail.com\n408351\tJason Evans\t20\trvulJoQT5jV18KCo1aTR/A==\tdiane.evans@yahoo.com\n193819\tGregory Russell\t78\tgCzV1q2LEwCnao5p+VI0NQ==\tbenjamin.russell@charter.net\n499687\tRalph Bailey\t50\tc7vJg6DuUFlR9jIxX9+YBw==\tpatrick.bailey@aol.com\n539712\tScott Baker\t22\tAUUaq3aACiJj0SQ6mIdrTA==\tnancy.baker@bp.com\n380086\tEugene Murphy\t43\toz9LaaZBAvIVZUF9j/Ayrg==\tcarol.murphy@gmail.com\n477616\tFred Young\t77\tn2a94+GnuQeQe81h9lh9ZA==\tfrances.young@gmail.com\n162402\tJonathan Peterson\t73\tvK5ld6sp8uqAacs7NUq9bg==\tdiana.peterson@hotmail.co.uk\n231469\tTerry Flores\t41\t+FphnHEQ0xJDlVcoHyF49w==\tralph.flores@yahoo.com\n153989\tSamuel Alexander\t60\t7dPFyb4Foo9FwuGBCRK81Q==\tjack.alexander@gmail.com\n386158\tPhilip King\t42\tkMLwfM4yYo/NgCl6w4ALiQ==\tmelissa.king@comcast.net\n301576\tRonald Watson\t56\tpF8MXnwCvS4ZedNocM9Q9w==\twayne.watson@gmail.com\n441771\tRichard Scott\t28\tSfSTYMyAhsxneY4wxn47qA==\tcheryl.scott@gmail.com\n528509\tAlan Diaz\t20\tOtBVFxM4veKjMlaKk0libw==\tpaula.diaz@gmail.com\n912990\tTodd Stewart\t46\t7Mv97+mpkjApToNMZH12GQ==\tjoshua.stewart@yahoo.ca\n214352\tJohn Lee\t40\tIcJoZTLi45ASqvH+nTtK/A==\ttheresa.lee@gmail.com\n890290\tLawrence Scott\t46\tvXMkv0WDwCHXSxsikd/suw==\tjulia.scott@apple.com\n622406\tRyan Lewis\t52\tq53eiHKdTZQhDsmn6JOyHQ==\tthomas.lewis@gmail.com\n979607\tShawn Edwards\t19\tGaXmYoy/8VH2gEFvBm7Ttw==\tcarol.edwards@msn.com\n969580\tJose Turner\t77\tnTF37vng6mPSl2kT5SZrkA==\tmatthew.turner@gmail.com\n426038\tCharles Stewart\t49\tirbY1hHUebhi6JGySCoXrg==\tjoan.stewart@yahoo.com\n388642\tRonald Rogers\t22\tP30l/bssP4Rj/z80FeKEPA==\truby.rogers@gmail.com\n560455\tJimmy Hayes\t61\tOx4+kL0gxR6yadwjDkkBYA==\tcarolyn.hayes@hotmail.co.uk\n477253\tJimmy Russell\t19\t9xqxzf+2Uxxvkr2j6ysXdw==\tanne.russell@ibm.com\n263480\tLouis Cooper\t76\tzAKwNjd8g8iU1gh389vitA==\tdaniel.cooper@yahoo.com\n683826\tAntonio Roberts\t23\t7DaWsMfuni0B1Cm0y2jR2A==\troger.roberts@gmail.com\n474599\tRalph Walker\t31\tLiu5pkcVzAem6e7wSMGVXA==\tmaria.walker@microsoft.com\n335732\tPhillip Butler\t34\trKzG6MyBBRfSuuP7ifj6+g==\tbrenda.butler@gmail.com\n329752\tGary Brown\t19\tqwm7jd7wt8KU4XnjHkZI7A==\tlillian.brown@aol.com\n893212\tJames Howard\t37\tF14ArTitljGxnVWwFOBHrQ==\tamy.howard@aol.com\n621833\tJose Edwards\t84\tH72GJ0yEfPD7HnlD3NDx4A==\tgregory.edwards@outlook.com\n456747\tBenjamin Griffin\t59\tDJLW/Jgcn2M49dkNzl8/hw==\troy.griffin@yahoo.com\n278556\tPeter Mitchell\t71\tHzxDGkaLMkCKNs/QBbQ4XA==\trichard.mitchell@verizon.net\n333476\tRobert Wilson\t48\t2bUc1KVTbV9U3Yw1/oJwpg==\tmary.wilson@sbcglobal.net\n218791\tMichael Price\t27\tfgdYe1s7gr61aj7Iw/McOg==\taaron.price@bp.com\n134841\tAdam Brown\t46\tjtUBDw7VSUpYkPCFwDsKDg==\tdonna.brown@aol.com\n726264\tGerald Collins\t27\tHxBFwc0o8UobpRtEMLxQFg==\tcarl.collins@yahoo.com\n766610\tEdward Jenkins\t43\twgG3e+wp7DrLZkXAg6yWBg==\tjoyce.jenkins@aol.com\n923947\tJoshua Bryant\t76\tVFnhUp1OT7iYEBfRvvFZ1g==\tmary.bryant@verizon.net\n227922\tRoy Hughes\t63\tL3KLUlYORIVYQ6rgDn84ug==\tamanda.hughes@rediffmail.com\n265813\tPhilip Campbell\t42\tCgDgXqOAOZ0fXeIKeDaRBQ==\tjack.campbell@gmail.com\n247137\tBobby Rivera\t73\twtp9qqr1jn9pEx4MMhb9Lw==\talan.rivera@apple.com\n407061\tScott Jackson\t49\tNZe1w6blY/cy6ZBoktFaQQ==\telizabeth.jackson@aol.com\n226714\tBruce Davis\t57\tNbloDVPT5njL4YlqpJmhNQ==\tnancy.davis@ibm.com\n702813\tRyan Martinez\t44\tTjuk1Non4D96/CWqnRMvDQ==\ternest.martinez@gmail.com\n524896\tRalph Walker\t37\t0MUU2Ps/1RqYhbIl8iAXiA==\tjudy.hernandez@gmail.com\n363065\tPhillip Butler\t19\tJHrPlOdLk4gav1ewoOgaJw==\tnancy.jones@gmail.com\n227924\tGary Brown\t69\t2xAzmPbaF65flAMMfZI/5g==\tpamela.wright@aol.com\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532068966407_539795017",
+      "id": "20180720-060044_151147572",
+      "dateCreated": "2018-07-20T06:42:46+0000",
+      "dateStarted": "2018-08-01T21:48:42+0000",
+      "dateFinished": "2018-08-01T21:48:43+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "focus": true,
+      "$$hashKey": "object:35620"
+    },
+    {
+      "title": "Scott intern can only access employees table during his summer internship (until it ends in Aug 31 2018)",
+      "text": "%jdbc(hive)\nselect * from  hr.employees limit 10",
+      "user": "scott_intern",
+      "dateUpdated": "2018-08-01T21:50:16+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "employees.id": "string",
+                      "employees.name": "string",
+                      "employees.age": "string",
+                      "employees.phone": "string",
+                      "employees.email": "string",
+                      "employees.dateofbirth": "string",
+                      "employees.region": "string",
+                      "employees.salary": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "employees.id\temployees.name\temployees.age\temployees.phone\temployees.email\temployees.dateofbirth\temployees.region\temployees.salary\nnull\tName\tnull\tPhone\tEmail\tnull\tRegion\tnull\n677509\tDonald Walker\t42\t303-572-8492\tlois.walker@hotmail.com\tnull\tUK\t168251\n940761\tRaymond Robinson\t41\t225-945-4954\tbrenda.robinson@gmail.com\tnull\tUS\t51063\n428945\tScott Robinson\t39\t219-904-2161\tjoe.robinson@gmail.com\tnull\tEU\t50155\n408351\tJason Evans\t20\t215-793-6791\tdiane.evans@yahoo.com\tnull\tEU\t180294\n193819\tGregory Russell\t78\t262-404-2252\tbenjamin.russell@charter.net\tnull\tUK\t117642\n499687\tRalph Bailey\t50\t319-812-6957\tpatrick.bailey@aol.com\tnull\tUS\t72305\n539712\tScott Baker\t22\t229-336-5117\tnancy.baker@bp.com\tnull\tUK\t98189\n380086\tEugene Murphy\t43\t216-336-0009\tcarol.murphy@gmail.com\tnull\tEU\t60918\n477616\tFred Young\t77\t210-819-9765\tfrances.young@gmail.com\tnull\tUK\t121587\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532072253847_301798418",
+      "id": "20180720-073733_275253857",
+      "dateCreated": "2018-07-20T07:37:33+0000",
+      "dateStarted": "2018-08-01T21:49:02+0000",
+      "dateFinished": "2018-08-01T21:49:02+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:35621"
+    },
+    {
+      "text": "%jdbc\n",
+      "user": "scott_intern",
+      "dateUpdated": "2018-07-20T08:28:10+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1532075290529_1827020854",
+      "id": "20180720-082810_1657787069",
+      "dateCreated": "2018-07-20T08:28:10+0000",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:35622"
+    }
+  ],
+  "name": "Demos / Security / HortoniaBank / HortoniaBank - Scott Intern",
+  "id": "2DJVH9H46",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "md:shared_process": [],
+    "jdbc:shared_process": [],
+    "spark2:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}

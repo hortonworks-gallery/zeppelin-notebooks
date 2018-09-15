@@ -14,7 +14,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -38,7 +39,7 @@
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
       "focus": true,
-      "$$hashKey": "object:12811"
+      "$$hashKey": "object:369"
     },
     {
       "text": "%md\n### Dynamic classification based masking policies\n1. HR can veiw PII data unmasked\n2. Analysts see columns tagged as PII (with type attribute of MRN) as null\n3. Analysts see columns tagged as PII (with type attribute of password) as hashed value\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-tag-masking-policy.png)\n\n### Hive masking policy:\nCan do masking of specific hive columns in variety of formats:\n-redact\n-show last 4\n-show first 4\n-hash\n-nullify\n-show only year\n-custom\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-hive-masking-policy.png)\n",
@@ -53,7 +54,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/text",
-        "editorHide": true
+        "editorHide": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -76,7 +78,7 @@
       "dateFinished": "2018-04-19T00:22:40+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12812"
+      "$$hashKey": "object:370"
     },
     {
       "text": "%md\n### Objective: Establish an Enterprise Data Catalog to define enterprise data footprint\n### Purpose: \n####  - Identify and classify sensitive data\n####  - Identify and map sources that contain personal data\n### Solution: Use Atlas to capture classifications and attributes related to sensitive and personal data\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-Atlas-tags.png)",
@@ -92,7 +94,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -115,7 +118,7 @@
       "dateFinished": "2018-04-19T00:32:30+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12813"
+      "$$hashKey": "object:371"
     },
     {
       "text": "%md\n### Sample queries analyst would run",
@@ -131,7 +134,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -154,13 +158,13 @@
       "dateFinished": "2018-04-16T12:48:17+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12814"
+      "$$hashKey": "object:372"
     },
     {
       "title": "BMI by ZipCode (US only)",
-      "text": "%jdbc(hive_interactive)\nselect lpad(zipcode,5,\"0\"), avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by lpad(zipcode,5,\"0\") ",
+      "text": "%jdbc(hive)\nselect lpad(zipcode,5,\"0\"), avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by lpad(zipcode,5,\"0\") ",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T09:03:45+0000",
+      "dateUpdated": "2018-09-15T07:36:06+0000",
       "config": {
         "colWidth": 6,
         "editorMode": "ace/mode/sql",
@@ -194,14 +198,25 @@
                   "index": 1,
                   "aggr": "sum"
                 }
-              }
+              },
+              "setting": {
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {}
             }
           }
         ],
         "editorSetting": {
           "editOnDblClick": false,
-          "language": "sql"
-        }
+          "language": "sql",
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -12252,13 +12267,13 @@
       "dateFinished": "2018-04-16T09:03:47+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12815"
+      "$$hashKey": "object:373"
     },
     {
       "title": "Top 5 Report - States by BMI (US Only)",
-      "text": "%jdbc(hive_interactive)\nselect * from\n(select state, avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by state) s \norder by bmi desc\nlimit 5",
+      "text": "%jdbc(hive)\nselect * from\n(select state, avg((weight*4500/(height*height))) as bmi\nfrom hortoniabank.us_customers\ngroup by state) s \norder by bmi desc\nlimit 5",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T11:44:57+0000",
+      "dateUpdated": "2018-07-20T09:43:07+0000",
       "config": {
         "colWidth": 6,
         "editorMode": "ace/mode/sql",
@@ -12297,14 +12312,37 @@
                   "index": 1,
                   "aggr": "sum"
                 }
-              }
+              },
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "s.state": "string",
+                      "s.bmi": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
             }
           }
         ],
         "editorSetting": {
           "editOnDblClick": false,
-          "language": "sql"
-        }
+          "language": "sql",
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -12411,13 +12449,13 @@
       "dateFinished": "2018-04-16T11:45:11+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12816"
+      "$$hashKey": "object:374"
     },
     {
       "title": "Dynamic Column Masking: MRN/password cols masked via classification policy. Others masked via Hive col policy. Custom masks for Birthday/Age.",
-      "text": "%jdbc(hive_interactive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.us_customers LIMIT 50",
+      "text": "%jdbc(hive)\nSELECT surname, streetaddress, country, age, password, nationalid, ccnumber, mrn, birthday FROM hortoniabank.us_customers LIMIT 50",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T11:47:23+0000",
+      "dateUpdated": "2018-07-20T09:42:49+0000",
       "config": {
         "editorMode": "ace/mode/sql",
         "colWidth": 12,
@@ -12456,14 +12494,44 @@
                   "index": 1,
                   "aggr": "sum"
                 }
-              }
+              },
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "surname": "string",
+                      "streetaddress": "string",
+                      "country": "string",
+                      "age": "string",
+                      "password": "string",
+                      "nationalid": "string",
+                      "ccnumber": "string",
+                      "mrn": "string",
+                      "birthday": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
             }
           }
         ],
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
-        }
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -12474,7 +12542,7 @@
         "msg": [
           {
             "type": "TABLE",
-            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nPowers\tnnnn Xxxxxxxx Xxxxx\tUS\t52\t94ffd65a44c3e687acd02e1505252a67\txxx-xx-3016\t5.49xxxx+xx\tnull\t01-01-1973\nWhitman\tnnnn Xxxxxxx Xxxxx\tUS\t59\t1e1ecfa7a73510ff67c68a8b3a885c84\txxx-xx-8255\t4.55xxxx+xx\tnull\t01-01-1977\nMarone\tnnn Xxxxx Xxxxx\tUS\t58\t09d628024cc60a249915154ce91a7738\txxx-xx-6142\t4.53xxxx+xx\tnull\t01-01-1977\nHarp\tnnnn Xxx Xxxx Xxxx\tUS\t34\td7be19d6fd7300c1d5caf6c628c2d584\txxx-xx-4018\t5.20xxxx+xx\tnull\t01-01-1997\nPereira\tnnnn Xxxxxxxx Xxxxxx\tUS\t92\t3c4f5f537a9b533dba234baa43a0a5fd\txxx-xx-1927\t5.38xxxx+xx\tnull\t01-01-2038\nBlackburn\tnnn Xxxxxxx Xxxx\tUS\t64\t2ce7e2d61505161888fa154328a2bf75\txxx-xx-7903\t5.53xxxx+xx\tnull\t01-01-1965\nGonzalez\tnnnn Xxxxx Xxxx\tUS\t41\t6082455e5d7d7055ca77088aff15075b\txxx-xx-2582\t4.71xxxx+xx\tnull\t01-01-1995\nHelton\tnnnn Xxxxxxx Xxxxx\tUS\t54\t9abf755bf7b69a9a6381b37e6ba96028\txxx-xx-4291\t5.25xxxx+xx\tnull\t01-01-1975\nMei\tnnn Xxxxx Xxxxxx\tUS\t87\t156be6018ef5288da1dd77a891d10a8c\txxx-xx-8366\t5.20xxxx+xx\tnull\t01-01-1941\nGoldberg\tnnnn Xxxxx Xxxxx\tUS\t77\tab8ab22dea8ee912a0227e9559342779\txxx-xx-4937\t4.55xxxx+xx\tnull\t01-01-1944\nWinkler\tnnnn Xxxxx Xxxx\tUS\t54\te0f025f67c34f7fed711afdd26f6020d\txxx-xx-3193\t5.43xxxx+xx\tnull\t01-01-1976\nThompson\tnnnn Xxxxx Xxxx Xxxxx\tUS\t72\t32af980dbf080c58ab15d17ae5b6c0d4\txxx-xx-5747\t4.55xxxx+xx\tnull\t01-01-1956\nAnderson\tnnnn Xxxxxxxxx Xxxxx\tUS\t59\t7ac52652087f699e70d481d9c03c5d36\txxx-xx-0336\t5.58xxxx+xx\tnull\t01-01-1974\nMejia\tnnnn Xxx Xxxx\tUS\t57\t0872e12366c7ba3ead02359b91e9fe29\txxx-xx-0064\t5.35xxxx+xx\tnull\t01-01-1961\nNoland\tnnnn Xxxxxx Xxxxxx\tUS\t30\t977cac895173e76b6414468a9812a6f0\txxx-xx-3798\t4.48xxx+xx\tnull\t01-01-1988\nHaynes\tnnnn Xxxxxxxxxx Xxxxx Xxxxxx\tUS\t26\tc1d2204dc93e7938b62166958c9c4fc5\txxx-xx-8147\t4.91xxx+xx\tnull\t01-01-1996\nDion\tnnnn Xxxxxx Xxxx\tUS\t54\t0cee4b8f8a5d49e41a5386c88978a435\txxx-xx-2587\t5.53xxxx+xx\tnull\t01-01-1971\nButler\tnnnn Xxxxx Xxxxxx\tUS\t54\t26b959e7aae9e3127e9df6a0c43857ed\txxx-xx-6719\t4.48xxxx+xx\tnull\t01-01-1977\nBigelow\tnnnn Xxxx Xxxxxx Xxxx\tUS\t60\tfc8cc156752b47ad5c176f49a887e0b7\txxx-xx-9172\t4.53xxxx+xx\tnull\t01-01-1970\nWalsh\tnnnn Xxxxx Xxxxx Xxxxx\tUS\t67\tfc0d012751ec0d1d517cd506dd8c882f\txxx-xx-3610\t4.55xxx+xx\tnull\t01-01-1965\nSheets\tnnnn Xxxxxx Xxxxxx\tUS\t24\td44b811e60b1386454660da13f703098\txxx-xx-5026\t4.91xxxx+xx\tnull\t01-01-1997\nParks\tnnnn Xxxxx Xxxxxx\tUS\t90\t1047ff9eaad215de78c22248ff55a142\txxx-xx-2077\t4.53xxxx+xx\tnull\t01-01-1940\nHelm\tnnnn Xxxxxxxx Xxx\tUS\t65\tf85cabce3b3704d4140634adcb674ace\txxx-xx-1168\t5.22xxxx+xx\tnull\t01-01-1966\nBrinegar\tnnnn Xxxxxxxxx Xxxxx\tUS\t23\t1eb11876945078ab3e6828c11112f2ff\txxx-xx-7445\t4.53xxxx+xx\tnull\t01-01-1994\nMcKinney\tnnnn Xxxxxxxxx Xxxxx\tUS\t73\t4c69a2cb9ac4675c137fe7453491bc2d\txxx-xx-9133\t5.59xxxx+xx\tnull\t01-01-1955\nBoehm\tnnnn Xxxxxx Xxxxxxx\tUS\t36\t22187f7cb3cf94a3250cedffcd479514\txxx-xx-4169\t4.53xxxx+xx\tnull\t01-01-1997\nBaker\tnnnn Xxxxxxx Xxxxxx\tUS\t92\t6f3f037cf53b9fd012d47be26b0846a9\txxx-xx-1699\t5.57xxxx+xx\tnull\t01-01-1941\nSmith\tnnnn Xxxxxxxxxx Xxxx\tUS\t29\t06f7ce73e011aa586292a8d5d4e3c9da\txxx-xx-3370\t5.11xxxx+xx\tnull\t01-01-1993\nDunton\tnnnn Xxxxxxxx Xxxxxx\tUS\t32\tdb678435727f03b941ecab8787cda0fe\txxx-xx-9390\t4.53xxxx+xx\tnull\t01-01-1985\nWiley\tnnnn Xxxxxx Xxxxxx\tUS\t40\t8e076c9ce940cf0c3df9efcf7ea51d06\txxx-xx-3457\t5.41xxxx+xx\tnull\t01-01-1984\nWeatherholt\tnnnn Xxxxxxx Xxxxx\tUS\t23\t50e99b15f06cf68aba708ea8bc9dd9f6\txxx-xx-1830\t4.48xxxx+xx\tnull\t01-01-1997\nJohnson\tnnnn Xxxx Xxx Xxxxx\tUS\t46\t379a59038df1b04667fbc557d29fd10c\txxx-xx-5368\t5.18xxxx+xx\tnull\t01-01-1979\nKilgore\tnnnn Xxxxxxxxx Xxxxxx\tUS\t87\tafb60f5a232d31004249d5ac0888a26f\txxx-xx-6347\t4.48xxxx+xx\tnull\t01-01-2032\nMorgan\tnnnn Xxxxxxx Xxxx\tUS\t70\tddd3104f736c5749825e995c57c37010\txxx-xx-9265\t5.39xxxx+xx\tnull\t01-01-1958\nSmith\tnnn Xxxxxx Xxxxxx\tUS\t87\td51017ca9a5ded5996fa0797e4b3e2a5\txxx-xx-0793\t4.53xxxx+xx\tnull\t01-01-1945\nHarrison\tnnn Xxx Xxx\tUS\t50\t7445255c5747d629e84797626c605c05\txxx-xx-9518\t5.51xxxx+xx\tnull\t01-01-1968\nHall\tnnn Xxxxxx Xxxxxx\tUS\t27\t7435b5bfd8ef6046b1922e98d6e3a678\txxx-xx-7908\t4.48xxxx+xx\tnull\t01-01-1989\nMunz\tnnnn Xxxxxxx Xxxxxx\tUS\t60\t8d883e278cda6f8feef3785103078696\txxx-xx-4274\t5.33xxxx+xx\tnull\t01-01-1971\nMcNulty\tnnnn Xxxxxxxx Xxxx\tUS\t41\tee339cebb368634ad642f938a1ce51e0\txxx-xx-9733\t5.40xxxx+xx\tnull\t01-01-1989\nGriffith\tnnnn Xxxxxxxx Xxxxxx\tUS\t46\tbe6530d505fb0a2a62d65083d6c6740b\txxx-xx-4328\t5.47xxxx+xx\tnull\t01-01-1974\nHarris\tnnnn Xxxxxxx Xxxxxx\tUS\t86\t1e2d60395e037ac254e4effd32387a5f\txxx-xx-2228\t4.48xxxx+xx\tnull\t01-01-1939\nBaker\tnnn Xxxxxxxx Xxxxxx\tUS\t78\ta4a4f1bb88bac411d2712547baefe279\txxx-xx-3961\t5.36xxxx+xx\tnull\t01-01-1955\nClark\tnnnn Xxxxx Xxx Xxxxx\tUS\t44\t5eea932c7404df02c9c56e976488ce3e\txxx-xx-8413\t5.23xxxx+xx\tnull\t01-01-1974\nHammonds\tnnnn Xxxxxx Xxxxxx\tUS\t77\t380ddee6fd7b0aa8ab60dc09776fe08f\txxx-xx-1898\t4.53xxxx+xx\tnull\t01-01-1943\nCruz\tnnn Xxxxxx Xxxx\tUS\t58\t8413198ee9c31c865ee06539ae06a608\txxx-xx-3563\t4.55xxx+xx\tnull\t01-01-1967\nLawrence\tnnnn Xxxxxxxxxxx Xxxx\tUS\t67\t51af1cf20bed6174a50deb2874710c37\txxx-xx-9699\t4.91xxxx+xx\tnull\t01-01-1959\nMarroquin\tnnnn Xxxxxxx Xxxxx\tUS\t52\t458cbbca8a3f5891b34f39bc9ad5f86f\txxx-xx-8286\t4.53xxxx+xx\tnull\t01-01-1972\nEide\tnnnn Xxxxxx Xxxxxx\tUS\t46\t25d00bc044cba1e1b8e5f84b28e970f5\txxx-xx-6762\t4.71xxxx+xx\tnull\t01-01-1980\nMiller\tnnnn Xxxxxxx Xxxx\tUS\t28\ta851cadfd9f537f274381a2d1c7e84f7\txxx-xx-2609\t4.71xxxx+xx\tnull\t01-01-1996\nFontenot\tnnnn Xxxxxxx Xxxxx\tUS\t71\t70a8443a6b6ed5340cf80121924398db\txxx-xx-5867\t5.59xxxx+xx\tnull\t01-01-1949\n"
+            "data": "surname\tstreetaddress\tcountry\tage\tpassword\tnationalid\tccnumber\tmrn\tbirthday\nPowers\tnnnn Xxxxxxxx Xxxxx\tUS\t62\t76a3fe33eb676cb12b99f00400772e7f5e5abc00950f432a7428d8e3567e26cf\txxx-xx-3016\t5.49xxxx+xx\tnull\t01-01-1973\nWhitman\tnnnn Xxxxxxx Xxxxx\tUS\t58\t6103bc600fc877e5cdf250521e422fc738544bff75165f335e5d2437e6793f4f\txxx-xx-8255\t4.55xxxx+xx\tnull\t01-01-1977\nMarone\tnnn Xxxxx Xxxxx\tUS\t43\tda01407d5922624b1dd67c22e849cb9ee0ba0fbf3b25ab6e3f78ed234a86b817\txxx-xx-6142\t4.53xxxx+xx\tnull\t01-01-1977\nHarp\tnnnn Xxx Xxxx Xxxx\tUS\t38\t717051c13b6bda179f3f1fca42d415524c7e373dcfefc265c0973badf28b1600\txxx-xx-4018\t5.20xxxx+xx\tnull\t01-01-1997\nPereira\tnnnn Xxxxxxxx Xxxxxx\tUS\t80\t47d2ebe1a1c1146698e22d126282356ac2ccbe0ca60a9d4d6d4f757cde627e30\txxx-xx-1927\t5.38xxxx+xx\tnull\t01-01-2038\nBlackburn\tnnn Xxxxxxx Xxxx\tUS\t53\t127473e0e3d200b19f7f9fe20facdc159eccdb67433b8ec271a62cca4445a7d7\txxx-xx-7903\t5.53xxxx+xx\tnull\t01-01-1965\nGonzalez\tnnnn Xxxxx Xxxx\tUS\t41\t4082d6873762eaf3b566cae982b973ff064248b4d1eaf554aa1651ae49895bc3\txxx-xx-2582\t4.71xxxx+xx\tnull\t01-01-1995\nHelton\tnnnn Xxxxxxx Xxxxx\tUS\t49\t5a5e10b606eb7599b8175a13289663cda1bbfb17edf44e97a3044b5f89038c03\txxx-xx-4291\t5.25xxxx+xx\tnull\t01-01-1975\nMei\tnnn Xxxxx Xxxxxx\tUS\t95\t79027eba8d2ae53c943d26c0ba801ae021aec73e46d9463ab5b6700d22d59b60\txxx-xx-8366\t5.20xxxx+xx\tnull\t01-01-1941\nGoldberg\tnnnn Xxxxx Xxxxx\tUS\t81\t478f719c117d97df442ec619f535f7a7e1454c58315f70b4402d618dbc146ac6\txxx-xx-4937\t4.55xxxx+xx\tnull\t01-01-1944\nWinkler\tnnnn Xxxxx Xxxx\tUS\t46\t5dfa9db09186e767a2e6c63bfbb3136e14e59212357e98c634156e46c4f5c6de\txxx-xx-3193\t5.43xxxx+xx\tnull\t01-01-1976\nThompson\tnnnn Xxxxx Xxxx Xxxxx\tUS\t79\t2fcbf7698869f199622f80c0440c94e770b1b846f9c95431af6ea1ed9b9a91e5\txxx-xx-5747\t4.55xxxx+xx\tnull\t01-01-1956\nAnderson\tnnnn Xxxxxxxxx Xxxxx\tUS\t48\t1956925afde71a890a4df019b980e975f6a8e417342967d2225c98277dac62a2\txxx-xx-0336\t5.58xxxx+xx\tnull\t01-01-1974\nMejia\tnnnn Xxx Xxxx\tUS\t57\t6f90e556636a22a8a484ff498004af2d7a2aa69e9d661b6b59f4359973ab93b3\txxx-xx-0064\t5.35xxxx+xx\tnull\t01-01-1961\nNoland\tnnnn Xxxxxx Xxxxxx\tUS\t37\tcfa7cce9b7b32a45de22e76ae382918925dc50a55bf79a211b9845c13c5c9113\txxx-xx-3798\t4.48xxx+xx\tnull\t01-01-1988\nHaynes\tnnnn Xxxxxxxxxx Xxxxx Xxxxxx\tUS\t31\t65a99668f810afc6698d35ba4c531e8591bd3ba6bc0099ed664bc9106aeb535d\txxx-xx-8147\t4.91xxx+xx\tnull\t01-01-1996\nDion\tnnnn Xxxxxx Xxxx\tUS\t62\t26400bfde5875f9ced4c84284d92601f24739c57cc834356967505c625b0a76f\txxx-xx-2587\t5.53xxxx+xx\tnull\t01-01-1971\nButler\tnnnn Xxxxx Xxxxxx\tUS\t50\t8f8e13932e829d86aec0051912a3035e802abfc3b4c41db0b771f590b944f726\txxx-xx-6719\t4.48xxxx+xx\tnull\t01-01-1977\nBigelow\tnnnn Xxxx Xxxxxx Xxxx\tUS\t51\tfea59a46dbe83781e313ecb837bd33858d81a33f55b4c87f9a7bb41c90de9a2d\txxx-xx-9172\t4.53xxxx+xx\tnull\t01-01-1970\nWalsh\tnnnn Xxxxx Xxxxx Xxxxx\tUS\t55\t96736a02052ee964a0238386f9a514fb69e8a7edd1705f0e2aab49f271a31033\txxx-xx-3610\t4.55xxx+xx\tnull\t01-01-1965\nSheets\tnnnn Xxxxxx Xxxxxx\tUS\t35\t31e7d947d7ff06228e379d0d0021aecf81881ad377ffdde7f5d73acd2962ef9d\txxx-xx-5026\t4.91xxxx+xx\tnull\t01-01-1997\nParks\tnnnn Xxxxx Xxxxxx\tUS\t82\t2795821286f1854f8e2c24a81c578c800419992474000a92030f092d2b33be23\txxx-xx-2077\t4.53xxxx+xx\tnull\t01-01-1940\nHelm\tnnnn Xxxxxxxx Xxx\tUS\t49\te528e36f31dc340769b73f6379646c5d76200651c59162cc1e537b516e5d63fc\txxx-xx-1168\t5.22xxxx+xx\tnull\t01-01-1966\nBrinegar\tnnnn Xxxxxxxxx Xxxxx\tUS\t30\te31baf36ea4d91b973a863593574e4e0a7a7adadb889e63edd2ac61727f3d4d4\txxx-xx-7445\t4.53xxxx+xx\tnull\t01-01-1994\nMcKinney\tnnnn Xxxxxxxxx Xxxxx\tUS\t66\tf4dfed8c41f5640f9ec0264e2dd46c826f03303382235d08014ee53a6d89c2b5\txxx-xx-9133\t5.59xxxx+xx\tnull\t01-01-1955\nBoehm\tnnnn Xxxxxx Xxxxxxx\tUS\t20\t3c2fd553dec4fa710e1b445a220dc76b47dcc18f77cf9a599dcabc2207d40cb4\txxx-xx-4169\t4.53xxxx+xx\tnull\t01-01-1997\nBaker\tnnnn Xxxxxxx Xxxxxx\tUS\t88\t762f655168838ae69adf4b471a1823b100c11e082061e2db2d3c8bf53dce4aa1\txxx-xx-1699\t5.57xxxx+xx\tnull\t01-01-1941\nSmith\tnnnn Xxxxxxxxxx Xxxx\tUS\t35\t2ead0d5117881b5094eab4e5ca286de9639d759e04ce8f5be872776df068c277\txxx-xx-3370\t5.11xxxx+xx\tnull\t01-01-1993\nDunton\tnnnn Xxxxxxxx Xxxxxx\tUS\t38\tb22d91263d20b0bf3b3ebc8babd541a210f528edf42eb99f326e3b38872b8bec\txxx-xx-9390\t4.53xxxx+xx\tnull\t01-01-1985\nWiley\tnnnn Xxxxxx Xxxxxx\tUS\t40\t1a0c997b2d497b6554f8c81ad58dde74f50f74c98f4a5201ef6f3a385fbb8a80\txxx-xx-3457\t5.41xxxx+xx\tnull\t01-01-1984\nWeatherholt\tnnnn Xxxxxxx Xxxxx\tUS\t19\ta7b6e81cea36db77f93deff33c614028fc63fa9b04fd9b21082644e6324edbfe\txxx-xx-1830\t4.48xxxx+xx\tnull\t01-01-1997\nJohnson\tnnnn Xxxx Xxx Xxxxx\tUS\t39\t22e86de151c60a38296d868e00a6fb9e298eabca8494357d9d3b06da7abcbc32\txxx-xx-5368\t5.18xxxx+xx\tnull\t01-01-1979\nKilgore\tnnnn Xxxxxxxxx Xxxxxx\tUS\t85\t36ccbc0e704f7c1253a914ed8baf6b6b7526ea0dfc18199a62e3d02c27448361\txxx-xx-6347\t4.48xxxx+xx\tnull\t01-01-2032\nMorgan\tnnnn Xxxxxxx Xxxx\tUS\t70\tc33cacde1277ab8851d23057b89ba3c46ffcad46a65323915004e6b1369191b0\txxx-xx-9265\t5.39xxxx+xx\tnull\t01-01-1958\nSmith\tnnn Xxxxxx Xxxxxx\tUS\t73\t5557e6078cc3d690d71da518d77f09519ed36b819fefbc1a9d9421f04df6d08a\txxx-xx-0793\t4.53xxxx+xx\tnull\t01-01-1945\nHarrison\tnnn Xxx Xxx\tUS\t55\tf75ca5486af8585a131fccf1a90ac6c52bb14e54576ba263698d0a1e79deae0e\txxx-xx-9518\t5.51xxxx+xx\tnull\t01-01-1968\nHall\tnnn Xxxxxx Xxxxxx\tUS\t33\t7020d631706397319c6f3412a3ed9df80a4b38bb2fe80a0dbde61b370d669040\txxx-xx-7908\t4.48xxxx+xx\tnull\t01-01-1989\nMunz\tnnnn Xxxxxxx Xxxxxx\tUS\t55\tbd0285f48c03e1f0c447e7a36963da1c7e228eaf4effa3159ffb0c6d934daecc\txxx-xx-4274\t5.33xxxx+xx\tnull\t01-01-1971\nMcNulty\tnnnn Xxxxxxxx Xxxx\tUS\t32\t724f1774f69978929883d1874e9712f2f5d9410c3cb5fd8ce735b5b5c8f772b6\txxx-xx-9733\t5.40xxxx+xx\tnull\t01-01-1989\nGriffith\tnnnn Xxxxxxxx Xxxxxx\tUS\t62\t08e9f45f7a8afd938fe7596e923f692a86d5feaccd21291d1114cd229ab20fbf\txxx-xx-4328\t5.47xxxx+xx\tnull\t01-01-1974\nHarris\tnnnn Xxxxxxx Xxxxxx\tUS\t82\t6fb058ffb311eb52392e15cb564fabee0dd80036f18ed225e2d250d447598ea2\txxx-xx-2228\t4.48xxxx+xx\tnull\t01-01-1939\nBaker\tnnn Xxxxxxxx Xxxxxx\tUS\t66\t5254702a4c903ab3aede64ab561cf4393590e12aab93e936b7016be8ed45cddd\txxx-xx-3961\t5.36xxxx+xx\tnull\t01-01-1955\nClark\tnnnn Xxxxx Xxx Xxxxx\tUS\t61\t6c008fcfff0dd7adb2af605c3f6ab1dc6034a4522551c958d59bffba34ba4acb\txxx-xx-8413\t5.23xxxx+xx\tnull\t01-01-1974\nHammonds\tnnnn Xxxxxx Xxxxxx\tUS\t87\tfd46c5b0d92d686b54cbbce3384e44bf410906992ce124c6467be96153be278e\txxx-xx-1898\t4.53xxxx+xx\tnull\t01-01-1943\nCruz\tnnn Xxxxxx Xxxx\tUS\t61\te3a032e9a9259c276e0cb824cc96c85959b0f81416fbf0606bd7947e0eccddab\txxx-xx-3563\t4.55xxx+xx\tnull\t01-01-1967\nLawrence\tnnnn Xxxxxxxxxxx Xxxx\tUS\t65\t40edbb47e0b77f48aa4fe1a909388667b5a724e14535ee7263ae350a5c30492a\txxx-xx-9699\t4.91xxxx+xx\tnull\t01-01-1959\nMarroquin\tnnnn Xxxxxxx Xxxxx\tUS\t51\t35beafe31e669c04fd284cc08f20de3309e470861f48dce214a49c0ec8af4135\txxx-xx-8286\t4.53xxxx+xx\tnull\t01-01-1972\nEide\tnnnn Xxxxxx Xxxxxx\tUS\t56\t428281e106e0d916ccdfa74e128373f4e1430d5069d643fe46812fd91bf67b8d\txxx-xx-6762\t4.71xxxx+xx\tnull\t01-01-1980\nMiller\tnnnn Xxxxxxx Xxxx\tUS\t30\t5f714bb3f7bf825e28e665d26a4713a0a39de7ff3e3807ed8e437cb8eb17da17\txxx-xx-2609\t4.71xxxx+xx\tnull\t01-01-1996\nFontenot\tnnnn Xxxxxxx Xxxxx\tUS\t88\tde18c44ed5da5fdf86c15202f9080c0162f1f04fb2928afc0f0cc00aa15ae869\txxx-xx-5867\t5.59xxxx+xx\tnull\t01-01-1949\n"
           }
         ]
       },
@@ -14611,11 +14679,11 @@
       "jobName": "paragraph_1480308629957_4078474",
       "id": "20160923-075335_1656987170",
       "dateCreated": "2016-11-28T04:50:29+0000",
-      "dateStarted": "2018-04-16T11:47:24+0000",
-      "dateFinished": "2018-04-16T11:47:24+0000",
+      "dateStarted": "2018-07-20T09:42:49+0000",
+      "dateFinished": "2018-07-20T09:42:53+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12817"
+      "$$hashKey": "object:375"
     },
     {
       "text": "%md\n### Prohibition policy to prevent toxic joins\nBelow policy prevents the combination of zipcode, bloodtype, insuranceid columns on ww_customers table\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-prohibition-policy.png)",
@@ -14630,7 +14698,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/text",
-        "editorHide": true
+        "editorHide": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -14653,13 +14722,13 @@
       "dateFinished": "2018-04-16T13:50:37+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12818"
+      "$$hashKey": "object:376"
     },
     {
       "title": "Prohibition policy: Prevent toxic joins (prevent join of Zipcode, Insuranceid, Blood group)",
-      "text": "%jdbc(hive_interactive)\nselect zipcode, insuranceid, bloodtype from hortoniabank.ww_customers\nlimit 10",
+      "text": "%jdbc(hive)\nselect zipcode, insuranceid, bloodtype from hortoniabank.ww_customers\nlimit 10",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T11:47:51+0000",
+      "dateUpdated": "2018-07-20T09:43:17+0000",
       "config": {
         "editorMode": "ace/mode/sql",
         "colWidth": 12,
@@ -14704,8 +14773,10 @@
         ],
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
-        }
+          "editOnDblClick": false,
+          "completionSupport": true
+        },
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -14733,23 +14804,54 @@
       "dateFinished": "2018-04-16T11:47:51+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12819"
+      "$$hashKey": "object:377"
     },
     {
       "title": "Prohibition policy - dropping insuranceid allows query to run",
-      "text": "%jdbc(hive_interactive)\nselect zipcode, bloodtype from hortoniabank.ww_customers\nlimit 10",
+      "text": "%jdbc(hive)\nselect zipcode, bloodtype from hortoniabank.ww_customers\nlimit 10",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T11:47:54+0000",
+      "dateUpdated": "2018-07-20T09:43:21+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "zipcode": "string",
+                      "bloodtype": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -14772,7 +14874,7 @@
       "dateFinished": "2018-04-16T11:47:55+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12820"
+      "$$hashKey": "object:378"
     },
     {
       "text": "%md\n### Leased Data Asset: Lifecycle controlled by Classification based policy \nColumns tagged with EXPIRED_ON are restricted\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-expiredon-policy.png)",
@@ -14788,7 +14890,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -14811,13 +14914,13 @@
       "dateFinished": "2018-04-16T13:57:14+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12821"
+      "$$hashKey": "object:379"
     },
     {
       "title": "Leased Data Asset: Lifecycle controlled by Classification based policy (fed_tax is tagged with EXPIRED_ON which is restricted to analysts)",
-      "text": "%jdbc(hive_interactive)\nselect fed_tax from finance.tax_2015",
+      "text": "%jdbc(hive)\nselect fed_tax from finance.tax_2015",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T13:55:35+0000",
+      "dateUpdated": "2018-07-20T09:43:26+0000",
       "config": {
         "colWidth": 12,
         "editorMode": "ace/mode/sql",
@@ -14860,9 +14963,11 @@
         ],
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -14989,7 +15094,7 @@
       "dateFinished": "2018-04-16T11:47:59+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12822"
+      "$$hashKey": "object:380"
     },
     {
       "text": "%md\n### Analyst prohibited from accessing personal data through Data Classification based policy\nColums tagged with PII cannot by accessed by analysts\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-PII-policy.png)",
@@ -15005,7 +15110,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15028,23 +15134,25 @@
       "dateFinished": "2018-04-16T14:00:14+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12823"
+      "$$hashKey": "object:381"
     },
     {
       "title": "Analyst prohibited from accessing personal data through Data Classification based policy (SSN column is tagged with PII which analysts cannot access)",
-      "text": "%jdbc(hive_interactive)\nselect ssn from finance.tax_2015",
+      "text": "%jdbc(hive)\nselect ssn from finance.tax_2015",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T13:59:46+0000",
+      "dateUpdated": "2018-07-20T09:43:29+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
         "results": {},
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15067,13 +15175,13 @@
       "dateFinished": "2018-04-16T11:48:04+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12824"
+      "$$hashKey": "object:382"
     },
     {
       "title": "Querying for columns other than fed_tax/ssn works",
-      "text": "%jdbc(hive_interactive)\nselect state_tax from finance.tax_2015",
+      "text": "%jdbc(hive)\nselect state_tax from finance.tax_2015",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T12:16:26+0000",
+      "dateUpdated": "2018-07-20T09:43:32+0000",
       "config": {
         "editorMode": "ace/mode/sql",
         "colWidth": 12,
@@ -15087,12 +15195,42 @@
           "groups": [],
           "scatter": {}
         },
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "state_tax": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionSupport": true
         },
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15115,23 +15253,25 @@
       "dateFinished": "2018-04-16T12:16:28+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12825"
+      "$$hashKey": "object:383"
     },
     {
       "title": "Data Quality annotation based policy: Don't waste time on poor quality datasets! (Analysts should not access table tagged with DATA_QUALITY score < 60%)",
-      "text": "%jdbc(hive_interactive)\nselect * from cost_savings.claim_savings limit 5",
+      "text": "%jdbc(hive)\nselect * from cost_savings.claim_savings limit 5",
       "user": "joe_analyst",
-      "dateUpdated": "2018-04-16T12:16:33+0000",
+      "dateUpdated": "2018-07-20T09:43:38+0000",
       "config": {
         "colWidth": 12,
         "enabled": true,
         "results": {},
         "editorSetting": {
           "language": "sql",
-          "editOnDblClick": false
+          "editOnDblClick": false,
+          "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15154,7 +15294,7 @@
       "dateFinished": "2018-04-16T12:16:33+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12826"
+      "$$hashKey": "object:384"
     },
     {
       "text": "%md\n### What about tag based policies on other components?\n\n#### Dynmaic tag based prohibition policies on Hbase, Kafka, HDFS",
@@ -15170,7 +15310,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15193,7 +15334,7 @@
       "dateFinished": "2018-06-20T01:26:39+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12827"
+      "$$hashKey": "object:385"
     },
     {
       "title": "HBase table tagged with SENSITIVE tag cannot be accessed by analysts ",
@@ -15209,7 +15350,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/sh",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15232,7 +15374,7 @@
       "dateFinished": "2018-04-16T12:55:20+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12828"
+      "$$hashKey": "object:386"
     },
     {
       "title": "Kafka topics tagged with SENSITIVE tag cannot be accessed by analysts ",
@@ -15248,7 +15390,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/sh",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15275,7 +15418,7 @@
       "dateFinished": "2018-04-16T12:56:24+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12829"
+      "$$hashKey": "object:387"
     },
     {
       "title": "HDFS dir/file tagged with SENSITIVE tag cannot be accessed by analysts ",
@@ -15291,7 +15434,8 @@
           "editOnDblClick": false
         },
         "editorMode": "ace/mode/sh",
-        "title": true
+        "title": true,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15318,7 +15462,240 @@
       "dateFinished": "2018-06-20T01:16:16+0000",
       "status": "ERROR",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12830"
+      "$$hashKey": "object:388"
+    },
+    {
+      "title": "HDP 3.0 Decrypt UDF: US employee sees decrypted versions of email and phone number",
+      "text": "%jdbc(hive)\nselect * from  hr.employees_encrypted;",
+      "user": "joe_analyst",
+      "dateUpdated": "2018-08-01T21:33:39+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "employees_encrypted.id": "string",
+                      "employees_encrypted.name": "string",
+                      "employees_encrypted.age": "string",
+                      "employees_encrypted.phone": "string",
+                      "employees_encrypted.email": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "employees_encrypted.id\temployees_encrypted.name\temployees_encrypted.age\temployees_encrypted.phone\temployees_encrypted.email\nnull\tName\tnull\tPhone\tEmail\n677509\tDonald Walker\t42\t303-572-8492\tlois.walker@hotmail.com\n940761\tRaymond Robinson\t41\t225-945-4954\tbrenda.robinson@gmail.com\n428945\tScott Robinson\t39\t219-904-2161\tjoe.robinson@gmail.com\n408351\tJason Evans\t20\t215-793-6791\tdiane.evans@yahoo.com\n193819\tGregory Russell\t78\t262-404-2252\tbenjamin.russell@charter.net\n499687\tRalph Bailey\t50\t319-812-6957\tpatrick.bailey@aol.com\n539712\tScott Baker\t22\t229-336-5117\tnancy.baker@bp.com\n380086\tEugene Murphy\t43\t216-336-0009\tcarol.murphy@gmail.com\n477616\tFred Young\t77\t210-819-9765\tfrances.young@gmail.com\n162402\tJonathan Peterson\t73\t479-783-5656\tdiana.peterson@hotmail.co.uk\n231469\tTerry Flores\t41\t316-280-2864\tralph.flores@yahoo.com\n153989\tSamuel Alexander\t60\t702-603-3769\tjack.alexander@gmail.com\n386158\tPhilip King\t42\t216-605-3731\tmelissa.king@comcast.net\n301576\tRonald Watson\t56\t701-231-9370\twayne.watson@gmail.com\n441771\tRichard Scott\t28\t215-288-9345\tcheryl.scott@gmail.com\n528509\tAlan Diaz\t20\t252-531-7641\tpaula.diaz@gmail.com\n912990\tTodd Stewart\t46\t217-279-9342\tjoshua.stewart@yahoo.ca\n214352\tJohn Lee\t40\t319-553-8919\ttheresa.lee@gmail.com\n890290\tLawrence Scott\t46\t423-939-1010\tjulia.scott@apple.com\n622406\tRyan Lewis\t52\t314-679-3697\tthomas.lewis@gmail.com\n979607\tShawn Edwards\t19\t225-283-4295\tcarol.edwards@msn.com\n969580\tJose Turner\t77\t236-972-7624\tmatthew.turner@gmail.com\n426038\tCharles Stewart\t49\t216-637-6800\tjoan.stewart@yahoo.com\n388642\tRonald Rogers\t22\t423-231-6507\truby.rogers@gmail.com\n560455\tJimmy Hayes\t61\t239-882-8784\tcarolyn.hayes@hotmail.co.uk\n477253\tJimmy Russell\t19\t605-635-1306\tanne.russell@ibm.com\n263480\tLouis Cooper\t76\t701-510-8162\tdaniel.cooper@yahoo.com\n683826\tAntonio Roberts\t23\t206-497-3141\troger.roberts@gmail.com\n474599\tRalph Walker\t31\t423-668-5506\tmaria.walker@microsoft.com\n335732\tPhillip Butler\t34\t480-814-8284\tbrenda.butler@gmail.com\n329752\tGary Brown\t19\t239-812-9041\tlillian.brown@aol.com\n893212\tJames Howard\t37\t803-613-3168\tamy.howard@aol.com\n621833\tJose Edwards\t84\t503-256-9654\tgregory.edwards@outlook.com\n456747\tBenjamin Griffin\t59\t219-506-9378\troy.griffin@yahoo.com\n278556\tPeter Mitchell\t71\t205-621-5884\trichard.mitchell@verizon.net\n333476\tRobert Wilson\t48\t423-937-8660\tmary.wilson@sbcglobal.net\n218791\tMichael Price\t27\t219-287-8926\taaron.price@bp.com\n134841\tAdam Brown\t46\t212-434-7910\tdonna.brown@aol.com\n726264\tGerald Collins\t27\t479-740-7633\tcarl.collins@yahoo.com\n766610\tEdward Jenkins\t43\t262-455-4187\tjoyce.jenkins@aol.com\n923947\tJoshua Bryant\t76\t319-827-3516\tmary.bryant@verizon.net\n227922\tRoy Hughes\t63\t225-544-9700\tamanda.hughes@rediffmail.com\n265813\tPhilip Campbell\t42\t316-499-5737\tjack.campbell@gmail.com\n247137\tBobby Rivera\t73\t423-277-6819\talan.rivera@apple.com\n407061\tScott Jackson\t49\t603-568-6118\telizabeth.jackson@aol.com\n226714\tBruce Davis\t57\t219-610-3067\tnancy.davis@ibm.com\n702813\tRyan Martinez\t44\t479-951-4138\ternest.martinez@gmail.com\n524896\tRalph Walker\t37\t316-736-6126\tjudy.hernandez@gmail.com\n363065\tPhillip Butler\t19\t212-825-1930\tnancy.jones@gmail.com\n227924\tGary Brown\t69\t307-329-8832\tpamela.wright@aol.com\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532074532019_-2033669101",
+      "id": "20180720-081532_1607285102",
+      "dateCreated": "2018-07-20T08:15:32+0000",
+      "dateStarted": "2018-08-01T21:33:40+0000",
+      "dateFinished": "2018-08-01T21:34:05+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:389"
+    },
+    {
+      "title": "HDP 3.0 Information Schema: Analyst does not have any privileges on UK_EMPLOYEES table (etl_user does)",
+      "text": "%jdbc(hive)\nselect * from information_schema.table_privileges where table_name='uk_employees';",
+      "user": "joe_analyst",
+      "dateUpdated": "2018-08-01T21:37:33+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "table_privileges.grantor": "string",
+                      "table_privileges.grantee": "string",
+                      "table_privileges.table_catalog": "string",
+                      "table_privileges.table_schema": "string",
+                      "table_privileges.table_name": "string",
+                      "table_privileges.privilege_type": "string",
+                      "table_privileges.is_grantable": "string",
+                      "table_privileges.with_hierarchy": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "table_privileges.grantor\ttable_privileges.grantee\ttable_privileges.table_catalog\ttable_privileges.table_schema\ttable_privileges.table_name\ttable_privileges.privilege_type\ttable_privileges.is_grantable\ttable_privileges.with_hierarchy\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532038862450_-845217292",
+      "id": "20180719-222102_575617788",
+      "dateCreated": "2018-07-19T22:21:02+0000",
+      "dateStarted": "2018-08-01T21:37:34+0000",
+      "dateFinished": "2018-08-01T21:37:45+0000",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:390"
+    },
+    {
+      "text": "%jdbc(hive)\nselect * from hr.uk_employees limit 5",
+      "user": "joe_analyst",
+      "dateUpdated": "2018-08-01T21:37:53+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:300)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:286)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:324)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:265)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:718)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:801)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:103)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:633)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:335)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:199)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:260)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:247)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:541)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:527)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1688)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy72.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:312)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:562)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1557)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1542)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.metastore.security.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:647)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:483)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:1306)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:1070)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:697)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1830)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1777)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1772)\n\tat org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:197)\n\t... 27 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532041607823_201173787",
+      "id": "20180719-230647_1943203914",
+      "dateCreated": "2018-07-19T23:06:47+0000",
+      "dateStarted": "2018-08-01T21:37:54+0000",
+      "dateFinished": "2018-08-01T21:37:54+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:391"
+    },
+    {
+      "title": "HDP 3.0 Schedulable policy: validity period of Ranger policy determines whether table can be accessed",
+      "text": "\n%jdbc(hive)\nselect * from hr.uk_employees limit 5",
+      "user": "joe_analyst",
+      "dateUpdated": "2018-08-01T21:39:10+0000",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:300)\n\tat org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:286)\n\tat org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:324)\n\tat org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:265)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:718)\n\tat org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:801)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:103)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:633)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:188)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)\n\tat java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)\n\tat java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:335)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:199)\n\tat org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:260)\n\tat org.apache.hive.service.cli.operation.Operation.run(Operation.java:247)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:541)\n\tat org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:527)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:78)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.access$000(HiveSessionProxy.java:36)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy$1.run(HiveSessionProxy.java:63)\n\tat java.security.AccessController.doPrivileged(Native Method)\n\tat javax.security.auth.Subject.doAs(Subject.java:422)\n\tat org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1688)\n\tat org.apache.hive.service.cli.session.HiveSessionProxy.invoke(HiveSessionProxy.java:59)\n\tat com.sun.proxy.$Proxy72.executeStatementAsync(Unknown Source)\n\tat org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:312)\n\tat org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:562)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1557)\n\tat org.apache.hive.service.rpc.thrift.TCLIService$Processor$ExecuteStatement.getResult(TCLIService.java:1542)\n\tat org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)\n\tat org.apache.thrift.TBaseProcessor.process(TBaseProcessor.java:39)\n\tat org.apache.hadoop.hive.metastore.security.HadoopThriftAuthBridge$Server$TUGIAssumingProcessor.process(HadoopThriftAuthBridge.java:647)\n\tat org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)\n\t... 3 more\nCaused by: java.lang.RuntimeException: org.apache.hadoop.hive.ql.security.authorization.plugin.HiveAccessControlException:Permission denied: user [joe_analyst] does not have [SELECT] privilege on [hr/uk_employees/*]\n\tat org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer.checkPrivileges(RangerHiveAuthorizer.java:483)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorizationV2(Driver.java:1306)\n\tat org.apache.hadoop.hive.ql.Driver.doAuthorization(Driver.java:1070)\n\tat org.apache.hadoop.hive.ql.Driver.compile(Driver.java:697)\n\tat org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1830)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1777)\n\tat org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1772)\n\tat org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)\n\tat org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:197)\n\t... 27 more\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1532074722233_2087248355",
+      "id": "20180720-081842_831763351",
+      "dateCreated": "2018-07-20T08:18:42+0000",
+      "dateStarted": "2018-08-01T21:39:10+0000",
+      "dateFinished": "2018-08-01T21:39:10+0000",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500,
+      "$$hashKey": "object:392"
     },
     {
       "text": "%md\n### Objective:Implement appropriate security controls to monitor access to data across the enterprise\n### Purpose: \n####  - Track user activity for personal/sensitive data to support both forensic auditing\n####  - Monitor and correlate data access via audits for breach forensics\n### Solution: \n####  - Ranger audits across Hadoop components (Hive, Hbase, Kafka etc) captured in Solr and HDFS\n\nLog into Ranger and navigate to Audit > Access. You will see a screen that looks like below:",
@@ -15334,7 +15711,8 @@
         },
         "editorHide": true,
         "editorMode": "ace/mode/markdown",
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15357,7 +15735,7 @@
       "dateFinished": "2018-04-19T00:38:27+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12831"
+      "$$hashKey": "object:393"
     },
     {
       "text": "%md\n![](https://github.com/abajwa-hw/masterclass/raw/master/ranger-atlas/media/screenshot-joe-audits.png)",
@@ -15373,7 +15751,8 @@
         },
         "editorMode": "ace/mode/markdown",
         "editorHide": true,
-        "tableHide": false
+        "tableHide": false,
+        "fontSize": 9
       },
       "settings": {
         "params": {},
@@ -15396,17 +15775,16 @@
       "dateFinished": "2018-04-16T13:00:50+0000",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500,
-      "$$hashKey": "object:12832"
+      "$$hashKey": "object:394"
     }
   ],
   "name": "Demos / Security / HortoniaBank / HortoniaBank - Joe Analyst",
   "id": "2C2HQQXVC",
+  "noteParams": {},
+  "noteForms": {},
   "angularObjects": {
-    "2CHS8UYQQ:shared_process": [],
-    "2CK8A9MEG:shared_process": [],
-    "2CKX8WPU1:shared_process": [],
-    "2CKAY1A8Y:shared_process": [],
-    "2CKEKWY8Z:shared_process": []
+    "md:shared_process": [],
+    "jdbc:shared_process": []
   },
   "config": {
     "looknfeel": "default",

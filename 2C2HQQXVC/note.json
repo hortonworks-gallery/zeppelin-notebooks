@@ -15378,7 +15378,7 @@
     },
     {
       "title": "Kafka topics tagged with SENSITIVE tag cannot be accessed by analysts ",
-      "text": "%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server  $(hostname -f):6667 --security-protocol SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
+      "text": "%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server  $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
       "user": "joe_analyst",
       "dateUpdated": "2018-06-20T01:28:15+0000",
       "config": {

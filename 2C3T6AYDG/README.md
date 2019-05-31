@@ -16,7 +16,7 @@
 `Password : 		admin`
 
 4. Enable all the Ranger plugins. This step creates the policy repo for each component. <br>
-#####But before running the setup disable the plugin again (to avoid permission issue enforced by Ranger).
+But before running the setup disable the plugin again (to avoid permission issue enforced by Ranger).
 
 5. Populate secondary fs url in /grid/0/hadoopqe/conf/suite.conf and do not put a "/" at end of the URI : <br>
 Format : 	[acronym]://[server]:[port] <br>

@@ -10,30 +10,30 @@
 - Kafka		`(One broker on the same node as appliance)`
 - Zeppelin	`(On the same node as appliance)`
 
-##### 3. Setup a KDC server (with default REALM as EXAMPLE.COM) and Enable kerberos in the cluster and have a admin principal created :
-`kadmin.local -q "addprinc -pw admin admin/admin"
-Principal : 	admin/admin@EXAMPLE.COM
+##### 3. Setup a KDC server (with default REALM as EXAMPLE.COM) and Enable kerberos in the cluster and have a admin principal created : <br>
+`kadmin.local -q "addprinc -pw admin admin/admin" <br>
+Principal : 	admin/admin@EXAMPLE.COM <br>
 Password : 		admin`
 
-##### 4. Enable all the Ranger plugins. This step creates the policy repo for each component.
+##### 4. Enable all the Ranger plugins. This step creates the policy repo for each component. <br>
 But before running the setup disable the plugin again (to avoid permission issue enforced by Ranger).
 
-##### 5. Populate secondary fs url in /grid/0/hadoopqe/conf/suite.conf and do not put a "/" at end of the URI
-Format : 	[acronym]://[server]:[port]
-E.g:
-`[secondaryfs]
-USE_SECONDARY_FS = True
+##### 5. Populate secondary fs url in /grid/0/hadoopqe/conf/suite.conf and do not put a "/" at end of the URI : <br>
+Format : 	[acronym]://[server]:[port] <br>
+E.g: <br>
+`[secondaryfs] <br>
+USE_SECONDARY_FS = True <br>
 SECONDARY_FS_URL = nfs://hdpserver:1228`
 
-##### 6. Data and Media files needed for the test are hosted in qe-repo bucket and referred again from above suite.conf file :
-`[hortoniabank]
-NOTEBOOK_MEDIA_URL = http://qe-repo.s3.amazonaws.com/partener-test-data/notebook-media.tgz
-RANGER_ATLAS_DATA_URL = http://qe-repo.s3.amazonaws.com/partener-test-data/ranger-atlas-data-csv.tgz
+##### 6. Data and Media files needed for the test are hosted in qe-repo bucket and referred again from above suite.conf file : <br>
+`[hortoniabank] <br>
+NOTEBOOK_MEDIA_URL = http://qe-repo.s3.amazonaws.com/partener-test-data/notebook-media.tgz <br>
+RANGER_ATLAS_DATA_URL = http://qe-repo.s3.amazonaws.com/partener-test-data/ranger-atlas-data-csv.tgz <br>
 HORTONIA_MUNICH_DATA_URL = http://qe-repo.s3.amazonaws.com/partener-test-data/HortoniaMunichSetup-data-csv.tgz`
 
-##### 7. To trigger the script SSH in to Ambari/appliance node as root and run below:
-`cd /grid/0/tools/hortoniabank
-chmod +x setup.sh
+##### 7. To trigger the script SSH in to Ambari/appliance node as root and run below: <br>
+`cd /grid/0/tools/hortoniabank <br>
+chmod +x setup.sh <br>
 ./setup.sh`
 
 #### P.S. : Run setup.sh in nohup or in screen

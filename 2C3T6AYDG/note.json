@@ -3375,7 +3375,7 @@
     },
     {
       "title": "HR analyst can access HBase table marked as SENSITIVE",
-      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@EXAMPLE.COM;\necho \"***Attempting to access T_FOREX as Ivanna***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Ivanna***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell",
+      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@"${realm=EXAMPLE.COM}";\necho \"***Attempting to access T_FOREX as Ivanna***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Ivanna***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell",
       "user": "ivanna_eu_hr",
       "dateUpdated": "2018-06-20T01:18:19+0000",
       "config": {
@@ -3415,7 +3415,7 @@
     },
     {
       "title": "HR Analyst can access Kafka topic marked SENSITIVE",
-      "text": "%sh\n\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@EXAMPLE.COM\necho \"***Attempting to access FOREX topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
+      "text": "%sh\n\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@"${realm=EXAMPLE.COM}"\necho \"***Attempting to access FOREX topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Ivanna***...\"\n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
       "user": "ivanna_eu_hr",
       "dateUpdated": "2018-06-20T01:18:23+0000",
       "config": {
@@ -3455,7 +3455,7 @@
     },
     {
       "title": "HR Analyst can access HDFS dir marked SENSITIVE",
-      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@EXAMPLE.COM\nhdfs dfs -cat /sensitive/private.csv",
+      "text": "%sh\nkinit -kt /etc/security/keytabs/ivanna_eu_hr.keytab ivanna_eu_hr/$(hostname -f)@"${realm=EXAMPLE.COM}"\nhdfs dfs -cat /sensitive/private.csv",
       "user": "ivanna_eu_hr",
       "dateUpdated": "2018-06-20T01:19:16+0000",
       "config": {

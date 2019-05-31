@@ -11,7 +11,7 @@
 - Zeppelin	`(On the same node as appliance)`
 
 ##### 3. Setup a KDC server (with default REALM as EXAMPLE.COM) and Enable kerberos in the cluster and have a admin principal created : <br>
-`kadmin.local -q "addprinc -pw admin admin/admin"`
+`kadmin.local -q "addprinc -pw admin admin/admin"` <br>
 `Principal : 	admin/admin@EXAMPLE.COM`
 `Password : 		admin`
 

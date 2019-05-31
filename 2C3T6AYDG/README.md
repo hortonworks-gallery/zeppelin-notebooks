@@ -1,6 +1,6 @@
 ## Do below steps to setup HortoniaBank tests for Ranger/Atlas :
 
-1. ##### Password less ssh across all nodes with gateway/ambari/appliance node (also needed password less ssh with self)
+1. Password less ssh across all nodes with gateway/ambari/appliance node (also needed password less ssh with self)
 
 ##### 2. Add below components if not present : <br>
 - Ranger 		`(Password to be set as Rangerpassword@123)`

@@ -15496,7 +15496,7 @@
       },
       {
          "title":"HBase table tagged with SENSITIVE tag cannot be accessed by analysts ",
-         "text":"%sh\n\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM;\necho \"***Attempting to access T_FOREX as Joe***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\necho \"****Attempting to access T_PRIVATE as Joe***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell\n",
+         "text":"%sh\n\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@${realm=EXAMPLE.COM};\necho \"***Attempting to access T_FOREX as Joe***...\"\necho \"scan 'T_FOREX'\" | hbase shell\n\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@${realm=EXAMPLE.COM};\necho \"****Attempting to access T_PRIVATE as Joe***...\"\necho \"scan 'T_PRIVATE'\" | hbase shell\n",
          "user":"joe_analyst",
          "dateUpdated":"2018-06-20T01:28:06+0000",
          "config":{
@@ -15545,7 +15545,7 @@
       },
       {
          "title":"Kafka topics tagged with SENSITIVE tag cannot be accessed by analysts ",
-         "text":"%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\necho \"***Attempting to access FOREX topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server  $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
+         "text":"%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@${realm=EXAMPLE.COM}\necho \"***Attempting to access FOREX topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic FOREX --from-beginning --max-messages 3\n\necho \"***Attempting to access PRIVATE topic as Joe***...\" \n/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server  $(hostname -f):6667 --consumer-property security.protocol=SASL_PLAINTEXT --topic PRIVATE --from-beginning --max-messages 3\n",
          "user":"joe_analyst",
          "dateUpdated":"2019-01-25T22:34:26+0000",
          "config":{
@@ -15598,7 +15598,7 @@
       },
       {
          "title":"HDFS dir/file tagged with SENSITIVE tag cannot be accessed by analysts ",
-         "text":"%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@HWX.COM\nhdfs dfs -cat /sensitive/private.csv",
+         "text":"%sh\nkinit -kt /etc/security/keytabs/joe_analyst.keytab joe_analyst/$(hostname -f)@${realm=EXAMPLE.COM}\nhdfs dfs -cat /sensitive/private.csv",
          "user":"joe_analyst",
          "dateUpdated":"2018-06-20T01:28:26+0000",
          "config":{
